@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   FONT SWITCH — one line to change the whole site's typeface.
+   'Urbanist'            -> pixel-identical to the reference design
+   'Plus Jakarta Sans'   -> G28 brand sans (default)
+   ========================================================================== */
+:root {
+  --font-sans: 'Plus Jakarta Sans';
+  --font-display: 'Plus Jakarta Sans';
+}
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #d49b35;
+    color: #08251c;
+  }
+
+  /* thin brand scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f5f0e8;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #08251c;
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  /* ---------- layout shell ---------- */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  /* ---------- typography primitives (mirrors reference scale) ---------- */
+  .h-section {
+    @apply font-display text-[34px] leading-[1.1] font-bold tracking-[-0.02em] sm:text-[40px] lg:text-[48px];
+  }
+  .h-card {
+    @apply font-display text-[26px] leading-[1.15] font-semibold tracking-[-0.01em] sm:text-[32px] lg:text-[38px];
+  }
+  .h-sub {
+    @apply font-display text-[20px] font-semibold sm:text-[24px];
+  }
+  .body-txt {
+    @apply text-[16px] leading-[1.6] font-medium;
+  }
+  .small-txt {
+    @apply text-[14px] leading-[1.55] font-medium;
+  }
+
+  /* ---------- pills & buttons ---------- */
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-pill px-5 py-2 text-[12px] font-semibold leading-none;
+  }
+  .btn {
+    @apply relative inline-flex items-center gap-2.5 overflow-hidden rounded-pill px-7 py-3.5 text-[14px] font-semibold leading-none transition-colors duration-500 ease-smooth;
+  }
+  .btn-accent {
+    @apply btn bg-gold text-ink hover:bg-gold-light;
+  }
+  .btn-solid {
+    @apply btn bg-ink text-cream hover:bg-ink-soft;
+  }
+  .btn-outline {
+    @apply btn border border-ink/15 bg-transparent text-ink hover:border-ink/40;
+  }
+  .btn-light {
+    @apply btn bg-white text-ink hover:bg-cream-dim;
+  }
+
+  /* ---------- surfaces ---------- */
+  .card-soft {
+    @apply rounded-card bg-cream-card;
+  }
+  .card-dark {
+    @apply rounded-tile bg-ink-card;
+  }
+  .panel {
+    @apply rounded-panel bg-cream-dim;
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-balance2 {
+    text-wrap: balance;
+  }
+}
+
+/* keep motion accessible */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>G28 INTERIORS | Interior Execution • Turnkey Solutions — Coimbatore</title>
+<meta name="description" content="G28 Interiors — Premium office interior works, corporate turnkey fit-outs, commercial spaces and bespoke interior execution in Coimbatore. Concept to handover." />
+<meta name="theme-color" content="#051812" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          forest: { DEFAULT: '#08251C', deep: '#051812', mid: '#0C3328', soft: '#0F3A2C' },
+          ivory:  { DEFAULT: '#FAF6F0', soft: '#F3ECE0', dim: '#E9DFCF' },
+          gold:   { DEFAULT: '#D49B35', light: '#E6C675', dark: '#A87724', pale: '#F2E2BE' }
+        },
+        fontFamily: {
+          serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          sans:  ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif']
+        },
+        letterSpacing: { widest2: '0.35em', widest3: '0.5em' }
+      }
+    }
+  }
+</script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@0.441.0/dist/umd/lucide.min.js"></script>
+
+<style>
+  :root{
+    --gold: #D49B35;
+    --gold-light: #E6C675;
+    --forest: #08251C;
+    --forest-deep: #051812;
+  }
+  html{ -webkit-font-smoothing: antialiased; }
+  body{
+    background: var(--forest-deep);
+    color: #FAF6F0;
+    overflow-x: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  body.locked{ overflow: hidden; height: 100vh; }
+
+  ::selection{ background: #D49B35; color: #051812; }
+
+  /* ---------- Scrollbar ---------- */
+  ::-webkit-scrollbar{ width: 10px; }
+  ::-webkit-scrollbar-track{ background: #051812; }
+  ::-webkit-scrollbar-thumb{ background: linear-gradient(#D49B35,#A87724); border-radius: 99px; }
+
+  /* ---------- Typography helpers ---------- */
+  .font-display{ font-family: 'Cormorant Garamond', serif; }
+  .kicker{ letter-spacing: .45em; text-transform: uppercase; font-size: .66rem; font-weight: 600; }
+  .gold-text{
+    background: linear-gradient(100deg,#A87724 0%,#D49B35 25%,#F2E2BE 50%,#E6C675 75%,#A87724 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .gold-line{ background: linear-gradient(90deg,transparent,#D49B35 20%,#E6C675 50%,#D49B35 80%,transparent); }
+
+  /* ---------- Reveal primitives ---------- */
+  .reveal-line{ display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+  .reveal-line > span{ display: block; will-change: transform; }
+  .fade-up{ opacity: 0; transform: translateY(34px); }
+
+  /* ---------- Isometric wireframe background ---------- */
+  .iso-bg{ position: absolute; inset: 0; pointer-events: none; opacity: .05; background-repeat: repeat; background-size: 190px 220px; }
+  .iso-grid{
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(212,155,53,.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,155,53,.35) 1px, transparent 1px);
+    background-size: 90px 90px;
+    mask-image: radial-gradient(ellipse at 60% 40%, #000 10%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 10%, transparent 78%);
+  }
+
+  /* ---------- Diagonal dividers ---------- */
+  .diag{ position: relative; height: 7vw; min-height: 46px; width: 100%; }
+  .diag svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .diag-to-light{ background:#FAF6F0; clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%); }
+  .diag-to-dark { background:#051812; clip-path: polygon(0 0, 100% 0, 0 100%); }
+  .diag-to-light-soft{ background:#F3ECE0; clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%); }
+
+  /* ---------- Cursor ---------- */
+  #cursor-ring, #cursor-dot{ position: fixed; top:0; left:0; z-index: 9998; pointer-events:none; border-radius:9999px; }
+  #cursor-ring{
+    width: 38px; height:38px; border:1px solid rgba(212,155,53,.75);
+    transition: width .35s cubic-bezier(.2,.9,.3,1), height .35s cubic-bezier(.2,.9,.3,1), background-color .35s, border-color .35s, opacity .3s;
+  }
+  #cursor-dot{ width:5px; height:5px; background:#E6C675; }
+  #cursor-ring.is-hover{ width: 74px; height:74px; background: rgba(212,155,53,.12); border-color: rgba(230,198,117,.95); }
+  #cursor-ring.is-drag{ width: 90px; height:90px; background: rgba(212,155,53,.18); border-style: dashed; }
+  @media (hover: none), (max-width: 900px){ #cursor-ring, #cursor-dot{ display:none !important; } }
+
+  /* ---------- Preloader ---------- */
+  #preloader{ position: fixed; inset:0; z-index: 10000; }
+  .pre-panel{ position:absolute; inset:0; }
+  #pre-l{ clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%); background:#051812; }
+  #pre-r{ clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%); background:#08251C; }
+  .pre-edge{ position:absolute; top:-10%; bottom:-10%; left:50%; width:2px; background:linear-gradient(180deg,transparent,#D49B35,#E6C675,transparent); transform: rotate(11.3deg); }
+
+  /* ---------- Marquee ---------- */
+  .marquee{ display:flex; white-space:nowrap; animation: marquee 34s linear infinite; }
+  @keyframes marquee{ from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
+
+  /* ---------- Bento glow cards ---------- */
+  .bento{
+    position: relative; overflow: hidden; isolation: isolate;
+    background: linear-gradient(160deg, rgba(12,51,40,.92) 0%, rgba(5,24,18,.96) 100%);
+    border: 1px solid rgba(212,155,53,.18);
+    transition: transform .6s cubic-bezier(.2,.9,.3,1), border-color .6s, box-shadow .6s;
+  }
+  .bento::before{
+    content:''; position:absolute; inset:0; z-index:-1; opacity:0; transition:opacity .6s;
+    background: radial-gradient(520px circle at var(--mx,50%) var(--my,50%), rgba(212,155,53,.28), transparent 62%);
+  }
+  .bento:hover::before{ opacity:1; }
+  .bento:hover{ transform: translateY(-8px); border-color: rgba(230,198,117,.55); box-shadow: 0 34px 70px -30px rgba(212,155,53,.45); }
+  .bento-num{ transition: color .5s, transform .6s; }
+  .bento:hover .bento-num{ color: rgba(230,198,117,.9); transform: translateY(-4px); }
+  .bento-ico{
+    width:58px;height:58px; border:1px solid rgba(212,155,53,.35); display:grid;place-items:center;
+    transition: background .5s, border-color .5s, transform .6s;
+  }
+  .bento:hover .bento-ico{ background: linear-gradient(135deg,#D49B35,#E6C675); border-color:transparent; transform: rotate(-6deg); }
+  .bento:hover .bento-ico i{ color:#051812 !important; }
+
+  /* ---------- Portfolio ---------- */
+  .pf-item{ opacity: 0; transform: translateY(38px) scale(.97); transition: opacity .7s cubic-bezier(.2,.9,.3,1), transform .7s cubic-bezier(.2,.9,.3,1), box-shadow .6s; }
+  .pf-item.shown{ opacity:1; transform:none; }
+  .pf-media img{ transition: transform 1.1s cubic-bezier(.2,.9,.3,1), filter .8s; }
+  .pf-item:hover .pf-media img{ transform: scale(1.09); filter: saturate(1.08); }
+  .pf-cap{ transform: translateY(18px); opacity:0; transition: transform .6s cubic-bezier(.2,.9,.3,1), opacity .5s; }
+  .pf-item:hover .pf-cap{ transform:none; opacity:1; }
+
+  /* ---------- Compare slider ---------- */
+  #compare{ user-select:none; touch-action: pan-y; }
+  .cmp-wire{ filter: grayscale(1) sepia(1) hue-rotate(-14deg) saturate(5.2) brightness(.55) contrast(1.45); }
+  .cmp-grid{
+    background-image: linear-gradient(rgba(230,198,117,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(230,198,117,.5) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+  .cmp-handle{ transition: transform .25s ease; }
+  #compare:hover .cmp-handle{ transform: scale(1.08); }
+
+  /* ---------- Nav ---------- */
+  #nav{ transition: background-color .5s, backdrop-filter .5s, border-color .5s, padding .5s; }
+  .nav-link{ position:relative; }
+  .nav-link::after{ content:''; position:absolute; left:0; bottom:-6px; height:1px; width:0; background:linear-gradient(90deg,#D49B35,#E6C675); transition: width .45s cubic-bezier(.2,.9,.3,1); }
+  .nav-link:hover::after{ width:100%; }
+
+  /* ---------- Buttons ---------- */
+  .btn-gold{ position:relative; overflow:hidden; background: linear-gradient(120deg,#A87724,#D49B35 35%,#F2E2BE 52%,#D49B35 68%,#A87724); color:#051812; }
+  .btn-gold span{ position:relative; z-index:2; }
+  .btn-gold::after{ content:''; position:absolute; inset:0; background: linear-gradient(120deg,#E6C675,#FFF1CE,#E6C675); transform: translateY(101%); transition: transform .5s cubic-bezier(.2,.9,.3,1); }
+  .btn-gold:hover::after{ transform: translateY(0); }
+  .btn-ghost{ border:1px solid rgba(212,155,53,.5); transition: background .45s, border-color .45s, color .45s; }
+  .btn-ghost:hover{ background: rgba(212,155,53,.12); border-color:#E6C675; }
+
+  /* ---------- Lamp ---------- */
+  .lamp-glow{
+    position:absolute; width: 520px; height:520px; border-radius:9999px; pointer-events:none;
+    background: radial-gradient(circle, rgba(230,198,117,.42) 0%, rgba(212,155,35,.16) 32%, transparent 66%);
+    filter: blur(12px); opacity:.5; transition: opacity .6s;
+  }
+  .sway{ transform-origin: 50% 0%; }
+
+  /* ---------- Inputs ---------- */
+  .field{ background: transparent; border:0; border-bottom:1px solid rgba(8,37,28,.22); padding: 14px 2px; width:100%; color:#08251C; outline:none; transition: border-color .4s; font-size:.95rem; }
+  .field::placeholder{ color: rgba(8,37,28,.35); }
+  .field:focus{ border-color:#D49B35; }
+  .field-dark{ border-bottom:1px solid rgba(250,246,240,.2); color:#FAF6F0; }
+  .field-dark::placeholder{ color: rgba(250,246,240,.35); }
+  .field-dark:focus{ border-color:#D49B35; }
+  select.field option{ color:#08251C; }
+
+  /* ---------- Process rail ---------- */
+  .pcard{ transition: transform .6s cubic-bezier(.2,.9,.3,1), border-color .5s, background .5s; }
+  .pcard:hover{ transform: translateY(-10px); border-color: rgba(230,198,117,.6); }
+
+  /* ---------- Misc ---------- */
+  .glass{ background: rgba(5,24,18,.72); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); }
+  .img-frame{ box-shadow: 0 60px 120px -50px rgba(0,0,0,.85); }
+  .whatsapp-pulse::after{ content:''; position:absolute; inset:0; border-radius:9999px; background:#25D366; animation: pulseRing 2.4s cubic-bezier(.3,.7,.4,1) infinite; z-index:-1; }
+  @keyframes pulseRing{ 0%{ transform: scale(1); opacity:.6 } 100%{ transform: scale(1.85); opacity:0 } }
+  .hairline{ height:1px; background: linear-gradient(90deg, transparent, rgba(212,155,53,.45), transparent); }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    .marquee{ animation: none; }
+  }
+</style>
+</head>
+
+<body class="locked bg-forest-deep font-sans antialiased">
+
+<!-- ============ SVG DEFS (shared gradients) ============ -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A87724"/>
+      <stop offset="35%" stop-color="#D49B35"/>
+      <stop offset="60%" stop-color="#F2E2BE"/>
+      <stop offset="100%" stop-color="#D49B35"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F2E2BE" stop-opacity=".95"/>
+      <stop offset="45%" stop-color="#D49B35" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#D49B35" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Isometric cube wireframe tile -->
+    <pattern id="isoCubes" width="190" height="220" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#E6C675" stroke-width="1" stroke-linejoin="round">
+        <path d="M95 20 L175 66 L95 112 L15 66 Z"/>
+        <path d="M95 20 L95 112"/>
+        <path d="M15 66 L15 158 L95 204 L175 158 L175 66"/>
+        <path d="M95 112 L95 204"/>
+        <path d="M52 44 L132 90 L132 150"/>
+      </g>
+    </pattern>
+  </defs>
+</svg>
+
+<!-- ============ CUSTOM CURSOR ============ -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader">
+  <div id="pre-l" class="pre-panel"></div>
+  <div id="pre-r" class="pre-panel"></div>
+  <div class="pre-edge"></div>
+  <div id="pre-center" class="absolute inset-0 flex flex-col items-center justify-center gap-7 px-6 text-center">
+    <div class="flex flex-col items-center gap-5">
+      <svg width="132" height="120" viewBox="0 0 132 120" fill="none" class="pre-draw">
+        <path class="pre-path" d="M14 44 L66 14 L118 44" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <line class="pre-path" x1="66" y1="14" x2="66" y2="78" stroke="#D49B35" stroke-width="1.5"/>
+        <path class="pre-path" d="M50 80 L82 80 L90 100 L42 100 Z" stroke="url(#goldGrad)" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="66" cy="106" r="3.5" fill="#E6C675" opacity="0"/>
+      </svg>
+      <div class="overflow-hidden">
+        <h1 id="pre-title" class="font-display text-3xl sm:text-5xl tracking-[0.28em] text-ivory">G28 INTERIORS</h1>
+      </div>
+      <p id="pre-sub" class="kicker text-gold/70">Interior Execution • Turnkey Solutions</p>
+    </div>
+    <div class="w-52 h-[2px] bg-white/10 overflow-hidden">
+      <div id="pre-bar" class="h-full w-0 bg-gradient-to-r from-gold-dark via-gold to-gold-light"></div>
+    </div>
+    <span id="pre-pct" class="text-[10px] tracking-widest3 text-ivory/35">00</span>
+  </div>
+</div>
+
+<!-- ============ FLOATING GLASS NAVBAR ============ -->
+<header id="nav" class="fixed top-0 left-0 right-0 z-[900]">
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 pt-4">
+    <nav class="glass rounded-2xl border border-gold/25 px-4 sm:px-6 py-3 flex items-center justify-between shadow-[0_24px_60px_-30px_rgba(0,0,0,.9)]">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-3 group" data-magnetic data-cursor>
+        <svg width="40" height="40" viewBox="0 0 132 120" fill="none" class="shrink-0">
+          <path d="M14 44 L66 14 L118 44" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="66" y1="14" x2="66" y2="74" stroke="#D49B35" stroke-width="3"/>
+          <path d="M50 78 L82 78 L90 98 L42 98 Z" fill="url(#goldGrad)" opacity=".92"/>
+          <circle cx="66" cy="106" r="4" fill="#E6C675"/>
+        </svg>
+        <span class="leading-none">
+          <span class="block font-display text-xl sm:text-[1.6rem] tracking-[0.22em] gold-text">G28</span>
+          <span class="block text-[9px] tracking-widest3 text-ivory/55 mt-[3px]">INTERIORS</span>
+        </span>
+      </a>
+
+      <!-- Links -->
+      <ul class="hidden lg:flex items-center gap-9 text-[13px] tracking-[0.16em] uppercase text-ivory/75">
+        <li><a href="#about" class="nav-link hover:text-gold transition-colors" data-cursor>About</a></li>
+        <li><a href="#expertise" class="nav-link hover:text-gold transition-colors" data-cursor>Office Interiors</a></li>
+        <li><a href="#process" class="nav-link hover:text-gold transition-colors" data-cursor>Turnkey Process</a></li>
+        <li><a href="#portfolio" class="nav-link hover:text-gold transition-colors" data-cursor>Portfolio</a></li>
+        <li><a href="#contact" class="nav-link hover:text-gold transition-colors" data-cursor>Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <a href="tel:+919080204473" class="hidden xl:flex items-center gap-2 text-[12px] tracking-widest text-ivory/70 hover:text-gold transition-colors" data-cursor>
+          <i data-lucide="phone" class="w-3.5 h-3.5"></i> +91 90802 04473
+        </a>
+        <a href="#contact" class="btn-gold hidden sm:inline-flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-bold uppercase tracking-[0.18em]" data-magnetic data-cursor>
+          <span>Book Consultation</span>
+        </a>
+        <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-xl border border-gold/30 text-gold" aria-label="Menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden hidden mx-4 mt-3 glass rounded-2xl border border-gold/25 p-6">
+    <ul class="flex flex-col gap-5 text-sm tracking-[0.18em] uppercase text-ivory/80">
+      <li><a href="#about" class="hover:text-gold transition-colors">About</a></li>
+      <li><a href="#expertise" class="hover:text-gold transition-colors">Office Interiors</a></li>
+      <li><a href="#process" class="hover:text-gold transition-colors">Turnkey Process</a></li>
+      <li><a href="#portfolio" class="hover:text-gold transition-colors">Portfolio</a></li>
+      <li><a href="#contact" class="hover:text-gold transition-colors">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-gold mt-6 inline-flex w-full justify-center px-5 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-[0.18em]"><span>Book Consultation</span></a>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="relative min-h-[100svh] overflow-hidden bg-forest-deep pt-28 pb-16 lg:pt-32">
+    <!-- background layers -->
+    <div class="iso-bg" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><rect width=%22190%22 height=%22220%22 fill=%22none%22/><g fill=%22none%22 stroke=%22%23E6C675%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/><path d=%22M52 44 L132 90 L132 150%22/></g></svg>')"></div>
+    <div class="iso-grid"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_30%,rgba(12,51,40,.9),transparent_60%)]"></div>
+
+    <!-- right diagonal panel -->
+    <div class="absolute inset-0 hidden lg:block pointer-events-none">
+      <div class="absolute inset-y-0 right-0 w-[46%]" style="clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%); background:linear-gradient(160deg, rgba(15,58,44,.85), rgba(5,24,18,.98));"></div>
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="55.6" y1="0" x2="45.6" y2="100" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke" opacity=".65"/>
+      </svg>
+    </div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
+      <!-- LEFT -->
+      <div class="relative z-10">
+        <div class="hero-eyebrow flex items-center gap-4 mb-7">
+          <span class="w-12 h-[1px] bg-gold"></span>
+          <span class="kicker text-gold">Interior Execution • Turnkey Solutions</span>
+        </div>
+
+        <h1 class="font-display text-[13vw] leading-[0.86] sm:text-7xl lg:text-[5.4rem] xl:text-[6.2rem] tracking-tight">
+          <span class="reveal-line"><span class="hero-line block">Elevating</span></span>
+          <span class="reveal-line"><span class="hero-line block italic gold-text">Workspaces.</span></span>
+          <span class="reveal-line"><span class="hero-line block">Mastering</span></span>
+          <span class="reveal-line"><span class="hero-line block">Execution.</span></span>
+        </h1>
+
+        <p class="hero-sub mt-8 max-w-xl text-ivory/60 text-[15px] sm:text-base leading-relaxed">
+          End-to-end corporate &amp; office interior works and complete turnkey solutions in Coimbatore —
+          from concept, civil &amp; MEP to bespoke carpentry and final handover. One team, one accountability.
+        </p>
+
+        <div class="hero-cta mt-10 flex flex-wrap items-center gap-4">
+          <a href="#portfolio" class="btn-gold px-8 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.2em]" data-magnetic data-cursor>
+            <span>Explore Our Work</span>
+          </a>
+          <a href="#process" class="btn-ghost px-8 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] text-ivory/85 flex items-center gap-3" data-magnetic data-cursor>
+            <i data-lucide="play-circle" class="w-4 h-4 text-gold"></i> The Turnkey Process
+          </a>
+        </div>
+
+        <div class="hero-stats mt-14 grid grid-cols-3 max-w-lg gap-6">
+          <div class="border-l border-gold/25 pl-4">
+            <div class="font-display text-3xl gold-text">150+</div>
+            <div class="text-[10px] tracking-[0.2em] uppercase text-ivory/45 mt-1">Projects</div>
+          </div>
+          <div class="border-l border-gold/25 pl-4">
+            <div class="font-display text-3xl gold-text">100%</div>
+            <div class="text-[10px] tracking-[0.2em] uppercase text-ivory/45 mt-1">On-Time</div>
+          </div>
+          <div class="border-l border-gold/25 pl-4">
+            <div class="font-display text-3xl gold-text">1.2M</div>
+            <div class="text-[10px] tracking-[0.2em] uppercase text-ivory/45 mt-1">Sq. Ft. Built</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — architectural showcase + hanging lamp -->
+      <div class="relative z-10 hero-visual">
+        <!-- Lamp rig -->
+        <div class="absolute -top-6 left-[8%] w-[86%] h-[62%] pointer-events-none z-20">
+          <div class="lamp-glow" id="lamp-glow" style="left:50%; top:34%; transform:translate(-50%,-50%)"></div>
+          <svg viewBox="0 0 400 380" fill="none" class="w-full h-full overflow-visible">
+            <!-- roofline -->
+            <path d="M40 92 L200 14 L360 92" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M74 108 L200 46 L326 108" stroke="#D49B35" stroke-width="1" opacity=".35"/>
+            <!-- vertical hangers -->
+            <line x1="90" y1="100" x2="90" y2="118" stroke="#D49B35" stroke-width="1" opacity=".5"/>
+            <line x1="310" y1="100" x2="310" y2="118" stroke="#D49B35" stroke-width="1" opacity=".5"/>
+            <g class="sway" id="lamp-sway">
+              <line x1="200" y1="14" x2="200" y2="196" stroke="#D49B35" stroke-width="1.6"/>
+              <ellipse cx="200" cy="200" rx="16" ry="5" fill="#E6C675" opacity=".35"/>
+              <path d="M172 202 L228 202 L244 250 L156 250 Z" fill="url(#goldGrad)" opacity=".95"/>
+              <path d="M172 202 L228 202 L232 214 L168 214 Z" fill="#051812" opacity=".35"/>
+              <circle cx="200" cy="260" r="7" fill="#F2E2BE"/>
+              <circle cx="200" cy="260" r="16" fill="url(#lampGlow)" opacity=".85"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Image stack -->
+        <div class="relative mt-24 lg:mt-28 ml-auto w-[92%] sm:w-[80%] lg:w-full">
+          <div class="hero-img relative rounded-[3px] overflow-hidden img-frame border border-gold/20">
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80"
+                 alt="Premium corporate office interior by G28 Interiors" loading="eager"
+                 class="w-full h-[46vh] sm:h-[54vh] lg:h-[62vh] object-cover scale-110" id="hero-img" />
+            <div class="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/25 to-transparent"></div>
+            <div class="absolute inset-0 border border-gold/15 m-4 pointer-events-none"></div>
+            <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
+              <div>
+                <div class="kicker text-gold/80">Featured Fit-Out</div>
+                <div class="font-display text-2xl mt-1">Corporate HQ · Coimbatore</div>
+              </div>
+              <div class="text-right text-[10px] tracking-widest text-ivory/50 hidden sm:block">
+                6,400 SQ.FT<br/>TURNKEY
+              </div>
+            </div>
+          </div>
+          <!-- floating badge -->
+          <div class="hero-badge absolute -left-4 sm:-left-8 top-10 glass border border-gold/30 rounded-2xl px-5 py-4 shadow-2xl">
+            <div class="flex items-center gap-3">
+              <i data-lucide="shield-check" class="w-5 h-5 text-gold"></i>
+              <div>
+                <div class="text-[11px] tracking-[0.16em] uppercase text-ivory/80">In-House Team</div>
+                <div class="text-[10px] text-ivory/45">Civil · MEP · Carpentry</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- scroll hint -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-ivory/35">
+      <span class="text-[9px] tracking-widest3 uppercase">Scroll</span>
+      <span class="w-[1px] h-10 bg-gradient-to-b from-gold to-transparent"></span>
+    </div>
+  </section>
+
+  <!-- Gold marquee -->
+  <div class="relative bg-gradient-to-r from-gold-dark via-gold to-gold-dark py-3 overflow-hidden">
+    <div class="marquee text-forest-deep font-bold text-[11px] tracking-[0.35em] uppercase">
+      <span class="flex shrink-0">
+        <span class="px-8">Office Interiors</span><span class="px-8">•</span>
+        <span class="px-8">Turnkey Fit-Outs</span><span class="px-8">•</span>
+        <span class="px-8">Corporate HQs</span><span class="px-8">•</span>
+        <span class="px-8">MEP &amp; HVAC</span><span class="px-8">•</span>
+        <span class="px-8">Custom Carpentry</span><span class="px-8">•</span>
+        <span class="px-8">Commercial Spaces</span><span class="px-8">•</span>
+      </span>
+      <span class="flex shrink-0" aria-hidden="true">
+        <span class="px-8">Office Interiors</span><span class="px-8">•</span>
+        <span class="px-8">Turnkey Fit-Outs</span><span class="px-8">•</span>
+        <span class="px-8">Corporate HQs</span><span class="px-8">•</span>
+        <span class="px-8">MEP &amp; HVAC</span><span class="px-8">•</span>
+        <span class="px-8">Custom Carpentry</span><span class="px-8">•</span>
+        <span class="px-8">Commercial Spaces</span><span class="px-8">•</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ==================== ABOUT / MANIFESTO ==================== -->
+  <section id="about" class="relative bg-forest-deep py-24 sm:py-32 overflow-hidden">
+    <div class="iso-bg" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><g fill=%22none%22 stroke=%22%23E6C675%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/></g></svg>')"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6 grid lg:grid-cols-[0.85fr_1.15fr] gap-14 lg:gap-20">
+      <div class="fade-up">
+        <span class="kicker text-gold">Who We Are</span>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.02] mt-5">
+          A studio built on<br/> <span class="italic gold-text">precision, not promises.</span>
+        </h2>
+        <div class="hairline my-8"></div>
+        <p class="text-ivory/55 leading-relaxed text-sm sm:text-[15px]">
+          G28 Interiors is a Coimbatore-based interior execution firm specialising in premium office
+          interior works and corporate turnkey fit-outs. We own the entire chain — design intent,
+          civil work, MEP, HVAC coordination, site supervision and custom carpentry — so nothing is
+          lost between the drawing and the delivered space.
+        </p>
+        <a href="#contact" class="mt-9 inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-gold group" data-magnetic data-cursor>
+          Start a Project
+          <span class="w-9 h-9 rounded-full border border-gold/40 grid place-items-center group-hover:bg-gold group-hover:text-forest transition-all duration-500">
+            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="fade-up bento p-8 rounded-[3px]">
+          <i data-lucide="ruler" class="w-6 h-6 text-gold"></i>
+          <h3 class="font-display text-2xl mt-6">Design Integrity</h3>
+          <p class="text-ivory/50 text-sm mt-3 leading-relaxed">3D-visualised, buildable drawings. What you approve is what gets built — down to the millimetre.</p>
+        </div>
+        <div class="fade-up bento p-8 rounded-[3px] sm:mt-8">
+          <i data-lucide="hard-hat" class="w-6 h-6 text-gold"></i>
+          <h3 class="font-display text-2xl mt-6">Execution Mastery</h3>
+          <p class="text-ivory/50 text-sm mt-3 leading-relaxed">Dedicated site engineers, documented checklists and daily progress reporting on every project.</p>
+        </div>
+        <div class="fade-up bento p-8 rounded-[3px]">
+          <i data-lucide="shield-check" class="w-6 h-6 text-gold"></i>
+          <h3 class="font-display text-2xl mt-6">Single Accountability</h3>
+          <p class="text-ivory/50 text-sm mt-3 leading-relaxed">One contract, one point of contact, zero blame games. Turnkey means turnkey.</p>
+        </div>
+        <div class="fade-up bento p-8 rounded-[3px] sm:mt-8">
+          <i data-lucide="gem" class="w-6 h-6 text-gold"></i>
+          <h3 class="font-display text-2xl mt-6">Material Honesty</h3>
+          <p class="text-ivory/50 text-sm mt-3 leading-relaxed">Curated, brand-verified finishes and transparent BOQs. Premium quality, no substitutions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- diagonal to ivory -->
+    <div class="diag diag-to-light absolute -bottom-px left-0 right-0">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+  </section>
+
+  <!-- ==================== CORE EXPERTISE (BENTO) ==================== -->
+  <section id="expertise" class="relative bg-ivory text-forest pt-28 sm:pt-36 pb-24 sm:pb-32">
+    <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><g fill=%22none%22 stroke=%22%2308251C%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/></g></svg>')"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6">
+      <div class="max-w-3xl fade-up">
+        <span class="kicker text-gold-dark">Core Expertise</span>
+        <h2 class="font-display text-4xl sm:text-6xl leading-[1.02] mt-5 text-forest">
+          Four pillars of <span class="italic text-gold-dark">executed</span> excellence.
+        </h2>
+        <p class="text-forest/55 mt-6 text-sm sm:text-base leading-relaxed">
+          Every engagement — whether a 900 sq.ft. executive cabin or a 40,000 sq.ft. corporate floor —
+          runs through the same uncompromising standards.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-5 mt-14">
+        <!-- 01 -->
+        <article class="fade-up bento rounded-[3px] p-9 lg:col-span-7 lg:row-span-2 flex flex-col justify-between min-h-[340px]" data-glow>
+          <div class="flex items-start justify-between gap-6">
+            <div class="bento-ico"><i data-lucide="building-2" class="w-6 h-6 text-gold"></i></div>
+            <span class="bento-num font-display text-6xl text-ivory/10 leading-none">01</span>
+          </div>
+          <div class="mt-10">
+            <h3 class="font-display text-3xl sm:text-4xl text-ivory">Corporate &amp; Office Interiors</h3>
+            <p class="text-ivory/50 mt-4 text-sm leading-relaxed max-w-lg">
+              Ergonomic workspaces, executive cabins, boardrooms and acoustic solutions engineered for
+              focus and brand presence.
+            </p>
+            <ul class="mt-7 flex flex-wrap gap-2.5">
+              <li class="text-[10px] tracking-[0.18em] uppercase border border-gold/25 px-3.5 py-2 text-ivory/60 rounded-full">Workstations</li>
+              <li class="text-[10px] tracking-[0.18em] uppercase border border-gold/25 px-3.5 py-2 text-ivory/60 rounded-full">Cabins</li>
+              <li class="text-[10px] tracking-[0.18em] uppercase border border-gold/25 px-3.5 py-2 text-ivory/60 rounded-full">Conference</li>
+              <li class="text-[10px] tracking-[0.18em] uppercase border border-gold/25 px-3.5 py-2 text-ivory/60 rounded-full">Acoustics</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="fade-up bento rounded-[3px] p-9 lg:col-span-5 flex flex-col justify-between min-h-[260px]" data-glow>
+          <div class="flex items-start justify-between gap-6">
+            <div class="bento-ico"><i data-lucide="layers" class="w-6 h-6 text-gold"></i></div>
+            <span class="bento-num font-display text-6xl text-ivory/10 leading-none">02</span>
+          </div>
+          <div class="mt-8">
+            <h3 class="font-display text-3xl text-ivory">Turnkey Interior Execution</h3>
+            <p class="text-ivory/50 mt-4 text-sm leading-relaxed">
+              Concept to handover — civil, MEP, HVAC, electrical, false ceiling and custom carpentry under one roof.
+            </p>
+          </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="fade-up bento rounded-[3px] p-9 lg:col-span-5 flex flex-col justify-between min-h-[260px]" data-glow>
+          <div class="flex items-start justify-between gap-6">
+            <div class="bento-ico"><i data-lucide="store" class="w-6 h-6 text-gold"></i></div>
+            <span class="bento-num font-display text-6xl text-ivory/10 leading-none">03</span>
+          </div>
+          <div class="mt-8">
+            <h3 class="font-display text-3xl text-ivory">Commercial &amp; Retail Spaces</h3>
+            <p class="text-ivory/50 mt-4 text-sm leading-relaxed">
+              Showrooms, hospitality venues and modern reception lounges designed to convert footfall into loyalty.
+            </p>
+          </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="fade-up bento rounded-[3px] p-9 lg:col-span-12 grid md:grid-cols-[1fr_auto] items-center gap-10" data-glow>
+          <div class="flex items-start gap-7">
+            <div class="bento-ico shrink-0"><i data-lucide="home" class="w-6 h-6 text-gold"></i></div>
+            <div>
+              <div class="flex items-baseline gap-5">
+                <span class="bento-num font-display text-6xl text-ivory/10 leading-none">04</span>
+                <h3 class="font-display text-3xl sm:text-4xl text-ivory">Bespoke Residential Interiors</h3>
+              </div>
+              <p class="text-ivory/50 mt-4 text-sm leading-relaxed max-w-2xl">
+                Luxury villas and modern apartments detailed with the same execution discipline we bring to corporate floors.
+              </p>
+            </div>
+          </div>
+          <a href="#portfolio" class="btn-ghost rounded-full px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] text-ivory/80 whitespace-nowrap" data-cursor>View Projects</a>
+        </article>
+      </div>
+    </div>
+
+    <div class="diag diag-to-dark absolute -bottom-px left-0 right-0">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+  </section>
+
+  <!-- ==================== BEFORE / AFTER ==================== -->
+  <section class="relative bg-forest-deep pt-24 sm:pt-32 pb-24 sm:pb-32 overflow-hidden">
+    <div class="iso-grid"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 fade-up">
+        <div class="max-w-2xl">
+          <span class="kicker text-gold">Wireframe to Reality</span>
+          <h2 class="font-display text-4xl sm:text-6xl leading-[1.02] mt-5">
+            Drag to watch a <span class="italic gold-text">drawing</span> become a delivered floor.
+          </h2>
+        </div>
+        <p class="text-ivory/50 text-sm max-w-sm leading-relaxed">
+          Our site teams work directly off dimensioned gold-line drawings. Slide across to see the same
+          view before and after G28 execution.
+        </p>
+      </div>
+
+      <div class="mt-14 fade-up">
+        <div id="compare" class="relative w-full h-[52vh] sm:h-[64vh] lg:h-[76vh] overflow-hidden rounded-[3px] border border-gold/25 img-frame cursor-ew-resize" style="--pos:48%">
+          <!-- AFTER (base) -->
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80"
+               alt="Finished luxury corporate office interior" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-transparent to-transparent pointer-events-none"></div>
+
+          <!-- BEFORE (clipped) -->
+          <div class="absolute inset-0" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0)">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80"
+                 alt="Gold architectural wireframe layout drawing" class="absolute inset-0 w-full h-full object-cover cmp-wire" />
+            <div class="absolute inset-0 bg-forest-deep/65"></div>
+            <div class="absolute inset-0 cmp-grid opacity-45"></div>
+            <div class="absolute inset-0 pointer-events-none">
+              <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <g fill="none" stroke="#E6C675" stroke-width=".35" opacity=".85">
+                  <rect x="10" y="16" width="34" height="30"/>
+                  <rect x="16" y="22" width="10" height="8"/>
+                  <rect x="30" y="22" width="10" height="8"/>
+                  <rect x="16" y="34" width="24" height="8"/>
+                  <rect x="54" y="16" width="36" height="52"/>
+                  <circle cx="72" cy="42" r="9"/>
+                  <rect x="10" y="56" width="34" height="26"/>
+                  <path d="M10 52 H90"/>
+                  <path d="M50 16 V84"/>
+                  <path d="M0 8 H100" stroke-dasharray="3 3"/>
+                </g>
+              </svg>
+            </div>
+            <span class="absolute top-6 left-6 text-[10px] tracking-widest3 uppercase text-gold-light/90">Wireframe</span>
+          </div>
+
+          <span class="absolute top-6 right-6 text-[10px] tracking-widest3 uppercase text-ivory/80">Reality</span>
+
+          <!-- Handle -->
+          <div class="absolute top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-gold to-transparent" style="left: var(--pos)"></div>
+          <div class="cmp-handle absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-16 h-16 rounded-full border border-gold/70 bg-forest-deep/60 backdrop-blur-md grid place-items-center" style="left: var(--pos)">
+            <div class="flex items-center gap-1 text-gold">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-6 mt-8">
+          <div class="flex items-center gap-3 text-ivory/45 text-[11px] tracking-[0.2em] uppercase">
+            <i data-lucide="move-horizontal" class="w-4 h-4 text-gold"></i> Drag the handle • Click anywhere to jump
+          </div>
+          <div class="flex flex-wrap gap-x-10 gap-y-3 text-[11px] tracking-[0.18em] uppercase text-ivory/45">
+            <span><b class="text-gold font-semibold">01</b> Site Measurement</span>
+            <span><b class="text-gold font-semibold">02</b> Line Drawing</span>
+            <span><b class="text-gold font-semibold">03</b> Execution</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TURNKEY PROCESS ==================== -->
+  <section id="process" class="relative bg-forest py-24 sm:py-28 overflow-hidden">
+    <div class="iso-bg" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><g fill=%22none%22 stroke=%22%23E6C675%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/></g></svg>')"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-2xl fade-up">
+          <span class="kicker text-gold">The Turnkey Execution Process</span>
+          <h2 class="font-display text-4xl sm:text-6xl leading-[1.02] mt-5">
+            Four stages. <span class="italic gold-text">Zero surprises.</span>
+          </h2>
+        </div>
+        <div class="w-64 hidden lg:block">
+          <div class="flex items-center justify-between text-[10px] tracking-[0.2em] uppercase text-ivory/40 mb-3">
+            <span>Progress</span><span id="proc-count">01 / 04</span>
+          </div>
+          <div class="h-[2px] bg-white/10 w-full overflow-hidden">
+            <div id="proc-bar" class="h-full w-[5%] bg-gradient-to-r from-gold-dark to-gold-light"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative mt-16 py-4 overflow-x-auto lg:overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div id="process-track" class="flex gap-5 px-5 sm:px-6 lg:pl-[max(1.5rem,calc((100vw_-_1400px)/2_+_1.5rem))] lg:pr-24 w-max items-stretch snap-x snap-mandatory lg:snap-none">
+        <!-- STEP 1 -->
+        <article class="pcard snap-start w-[86vw] sm:w-[62vw] lg:w-[440px] shrink-0 bg-gradient-to-b from-forest-mid/60 to-forest-deep/90 border border-gold/20 rounded-[3px] p-9 sm:p-11 flex flex-col">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-7xl gold-text leading-none">01</span>
+            <i data-lucide="scan-line" class="w-7 h-7 text-gold/70"></i>
+          </div>
+          <h3 class="font-display text-3xl mt-9">Space Planning &amp; 3D Visualization</h3>
+          <p class="text-ivory/50 text-sm mt-4 leading-relaxed flex-1">
+            Site survey, measured drawings, zoning and photorealistic 3D walkthroughs. You approve the
+            exact space before a single nail is driven.
+          </p>
+          <ul class="mt-8 space-y-2.5 text-[11px] tracking-[0.14em] uppercase text-ivory/45">
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Measured Site Survey</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Layout &amp; Zoning</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> 3D Render Approvals</li>
+          </ul>
+        </article>
+
+        <!-- STEP 2 -->
+        <article class="pcard snap-start w-[86vw] sm:w-[62vw] lg:w-[440px] shrink-0 bg-gradient-to-b from-forest-mid/60 to-forest-deep/90 border border-gold/20 rounded-[3px] p-9 sm:p-11 flex flex-col">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-7xl gold-text leading-none">02</span>
+            <i data-lucide="swatch-book" class="w-7 h-7 text-gold/70"></i>
+          </div>
+          <h3 class="font-display text-3xl mt-9">Material Curation &amp; Budgeting</h3>
+          <p class="text-ivory/50 text-sm mt-4 leading-relaxed flex-1">
+            Curated finish palettes, brand-verified specifications and a transparent, itemised BOQ with
+            locked timelines.
+          </p>
+          <ul class="mt-8 space-y-2.5 text-[11px] tracking-[0.14em] uppercase text-ivory/45">
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Finish &amp; Material Boards</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Itemised BOQ</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Locked Timeline</li>
+          </ul>
+        </article>
+
+        <!-- STEP 3 -->
+        <article class="pcard snap-start w-[86vw] sm:w-[62vw] lg:w-[440px] shrink-0 bg-gradient-to-b from-forest-mid/60 to-forest-deep/90 border border-gold/20 rounded-[3px] p-9 sm:p-11 flex flex-col">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-7xl gold-text leading-none">03</span>
+            <i data-lucide="hammer" class="w-7 h-7 text-gold/70"></i>
+          </div>
+          <h3 class="font-display text-3xl mt-9">Precision On-Site Execution</h3>
+          <p class="text-ivory/50 text-sm mt-4 leading-relaxed flex-1">
+            Civil, MEP, HVAC coordination, false ceiling, flooring and in-house custom carpentry — managed
+            by dedicated site engineers.
+          </p>
+          <ul class="mt-8 space-y-2.5 text-[11px] tracking-[0.14em] uppercase text-ivory/45">
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Civil &amp; MEP Works</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Custom Carpentry</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Daily Progress Reports</li>
+          </ul>
+        </article>
+
+        <!-- STEP 4 -->
+        <article class="pcard snap-start w-[86vw] sm:w-[62vw] lg:w-[440px] shrink-0 bg-gradient-to-b from-gold/20 to-forest-deep/95 border border-gold/45 rounded-[3px] p-9 sm:p-11 flex flex-col">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-7xl gold-text leading-none">04</span>
+            <i data-lucide="key-round" class="w-7 h-7 text-gold"></i>
+          </div>
+          <h3 class="font-display text-3xl mt-9">Turnkey Handover</h3>
+          <p class="text-ivory/50 text-sm mt-4 leading-relaxed flex-1">
+            Snag-free checklist, deep clean, warranty documentation and a done-by-deadline handover —
+            ready to occupy on day one.
+          </p>
+          <ul class="mt-8 space-y-2.5 text-[11px] tracking-[0.14em] uppercase text-ivory/45">
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Snagging &amp; QC</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Warranty Docs</li>
+            <li class="flex items-center gap-3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> On-Time Handover</li>
+          </ul>
+          <a href="#contact" class="btn-gold mt-9 inline-flex justify-center px-7 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em]" data-cursor><span>Get a Quotation</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- diagonal to ivory -->
+  <div class="diag diag-to-light-soft">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+  </div>
+
+  <!-- ==================== PORTFOLIO ==================== -->
+  <section id="portfolio" class="relative bg-ivory-soft text-forest pt-24 sm:pt-32 pb-24 sm:pb-32">
+    <div class="absolute inset-0 opacity-[0.045] pointer-events-none" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><g fill=%22none%22 stroke=%22%2308251C%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/></g></svg>')"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div class="fade-up max-w-2xl">
+          <span class="kicker text-gold-dark">Featured Portfolio</span>
+          <h2 class="font-display text-4xl sm:text-6xl leading-[1.02] mt-5 text-forest">
+            Spaces we <span class="italic text-gold-dark">delivered.</span>
+          </h2>
+        </div>
+        <div class="flex flex-wrap gap-2.5" id="pf-filters">
+          <button data-filter="all" class="pf-btn px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] border border-forest/20 text-forest/60 transition-all duration-300" data-cursor>All</button>
+          <button data-filter="corporate" class="pf-btn px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] border border-forest/20 text-forest/60 transition-all duration-300" data-cursor>Corporate Offices</button>
+          <button data-filter="executive" class="pf-btn px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] border border-forest/20 text-forest/60 transition-all duration-300" data-cursor>Executive Suites</button>
+          <button data-filter="turnkey" class="pf-btn px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] border border-forest/20 text-forest/60 transition-all duration-300" data-cursor>Turnkey Projects</button>
+        </div>
+      </div>
+
+      <div id="pf-grid" class="mt-14 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+        <!-- items injected below via markup -->
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="corporate">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Corporate office fit-out" class="w-full h-[330px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Corporate Offices</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Corporate HQ · Peelamedu</h3>
+            <p class="text-ivory/50 text-xs mt-1">12,000 sq.ft · Turnkey Fit-Out</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="executive">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Executive suite interior" class="w-full h-[420px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Executive Suites</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">MD's Suite · RS Puram</h3>
+            <p class="text-ivory/50 text-xs mt-1">2,400 sq.ft · Bespoke Joinery</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="turnkey">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Turnkey office project" class="w-full h-[300px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Turnkey Projects</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Fintech Floor · Saravanampatti</h3>
+            <p class="text-ivory/50 text-xs mt-1">18,000 sq.ft · Civil + MEP</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="corporate">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80" alt="Modern office lounge" class="w-full h-[380px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Corporate Offices</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Reception Lounge · Avinashi Rd</h3>
+            <p class="text-ivory/50 text-xs mt-1">3,200 sq.ft · Retail + Office</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="executive">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Executive cabin detail" class="w-full h-[300px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Executive Suites</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Boardroom · Gandhipuram</h3>
+            <p class="text-ivory/50 text-xs mt-1">1,800 sq.ft · Acoustic Ceiling</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="turnkey">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=80" alt="Minimal turnkey interior" class="w-full h-[420px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Turnkey Projects</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Villa Turnkey · Thudiyalur</h3>
+            <p class="text-ivory/50 text-xs mt-1">4,600 sq.ft · Full Handover</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="corporate">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=80" alt="Open plan corporate workspace" class="w-full h-[340px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Corporate Offices</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Open Plan Floor · Hope College</h3>
+            <p class="text-ivory/50 text-xs mt-1">9,500 sq.ft · Ergonomic Fit-Out</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="turnkey">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="Turnkey commercial interior" class="w-full h-[300px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Turnkey Projects</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Showroom · Trichy Road</h3>
+            <p class="text-ivory/50 text-xs mt-1">6,000 sq.ft · Retail Turnkey</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="executive">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80" alt="Luxury executive lounge" class="w-full h-[390px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Executive Suites</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Director's Lounge · Saibaba Colony</h3>
+            <p class="text-ivory/50 text-xs mt-1">2,100 sq.ft · Bespoke Furniture</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="corporate">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Corporate collaboration space" class="w-full h-[300px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Corporate Offices</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Coworking Hub · Singanallur</h3>
+            <p class="text-ivory/50 text-xs mt-1">7,800 sq.ft · Acoustic Zones</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="turnkey">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=900&q=80" alt="Turnkey commercial space" class="w-full h-[360px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Turnkey Projects</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Hospitality Fit-Out · Race Course</h3>
+            <p class="text-ivory/50 text-xs mt-1">5,200 sq.ft · Civil + Interior</p>
+          </div>
+        </article>
+
+        <article class="pf-item break-inside-avoid mb-5 group relative overflow-hidden rounded-[3px] cursor-pointer" data-cat="executive">
+          <div class="pf-media overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=900&q=80" alt="Executive workspace detail" class="w-full h-[320px] object-cover" loading="lazy"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/20 to-transparent"></div>
+          <div class="pf-cap absolute bottom-0 left-0 right-0 p-6">
+            <div class="kicker text-gold/85">Executive Suites</div>
+            <h3 class="font-display text-2xl text-ivory mt-2">Private Office · Ramanathapuram</h3>
+            <p class="text-ivory/50 text-xs mt-1">1,200 sq.ft · Premium Finishes</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-14 flex justify-center fade-up">
+        <a href="#contact" class="btn-gold px-9 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.2em]" data-magnetic data-cursor><span>Request Full Portfolio</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- diagonal to dark -->
+  <div class="diag diag-to-dark">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+  </div>
+
+  <!-- ==================== FOUNDER SPOTLIGHT + TRUST ==================== -->
+  <section class="relative bg-forest-deep pb-24 sm:pb-32 overflow-hidden">
+    <div class="iso-bg" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><g fill=%22none%22 stroke=%22%23E6C675%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/></g></svg>')"></div>
+    <div class="absolute -left-40 top-1/4 w-[520px] h-[520px] rounded-full bg-gold/10 blur-[130px] pointer-events-none"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6 pt-8 grid lg:grid-cols-[0.95fr_1.05fr] gap-14 lg:gap-20 items-center">
+      <!-- Portrait -->
+      <div class="fade-up relative">
+        <div class="relative rounded-[3px] overflow-hidden border border-gold/25 img-frame">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1000&q=80"
+               alt="Goutham Arivalagan, Founder &amp; Interior Consultant" class="w-full h-[52vh] lg:h-[66vh] object-cover" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/10 to-transparent"></div>
+          <div class="absolute inset-0 border border-gold/15 m-4 pointer-events-none"></div>
+        </div>
+        <div class="absolute -bottom-6 -right-3 sm:right-6 bg-gradient-to-br from-gold to-gold-light text-forest rounded-[3px] px-7 py-5 shadow-2xl">
+          <div class="font-display text-2xl leading-none">Goutham Arivalagan</div>
+          <div class="text-[10px] tracking-[0.24em] uppercase mt-2 opacity-80">Founder &amp; Interior Consultant</div>
+        </div>
+      </div>
+
+      <!-- Quote + trust -->
+      <div>
+        <div class="fade-up">
+          <span class="kicker text-gold">Founder Spotlight</span>
+          <i data-lucide="quote" class="w-9 h-9 text-gold/45 block mt-6"></i>
+          <blockquote class="font-display text-2xl sm:text-4xl lg:text-[2.6rem] leading-[1.18] mt-6 text-ivory/95">
+            “Precision is not a finishing touch — it is the <span class="italic gold-text">whole method.</span>
+            We measure twice, build once, and hand over on the date we promised.”
+          </blockquote>
+          <p class="text-ivory/50 text-sm leading-relaxed mt-7 max-w-xl">
+            Under Goutham's direct supervision, every G28 project is treated as a signature build —
+            detailed drawings, curated materials and an execution team that stays accountable until the
+            keys are handed over.
+          </p>
+        </div>
+
+        <div class="hairline my-10"></div>
+
+        <div class="grid grid-cols-2 gap-x-8 gap-y-10">
+          <div class="fade-up">
+            <div class="font-display text-5xl sm:text-6xl gold-text"><span class="counter" data-target="150">0</span><span>+</span></div>
+            <div class="text-[10px] tracking-[0.24em] uppercase text-ivory/45 mt-2">Turnkey Projects Delivered</div>
+          </div>
+          <div class="fade-up">
+            <div class="font-display text-5xl sm:text-6xl gold-text"><span class="counter" data-target="100">0</span><span>%</span></div>
+            <div class="text-[10px] tracking-[0.24em] uppercase text-ivory/45 mt-2">On-Time Handover</div>
+          </div>
+          <div class="fade-up">
+            <div class="font-display text-5xl sm:text-6xl gold-text"><span class="counter" data-target="100">0</span><span>%</span></div>
+            <div class="text-[10px] tracking-[0.24em] uppercase text-ivory/45 mt-2">End-to-End Turnkey Mastery</div>
+          </div>
+          <div class="fade-up">
+            <div class="font-display text-5xl sm:text-6xl gold-text"><span class="counter" data-target="12">0</span><span>+</span></div>
+            <div class="text-[10px] tracking-[0.24em] uppercase text-ivory/45 mt-2">Years Premium Standards</div>
+          </div>
+        </div>
+
+        <div class="fade-up mt-12 flex flex-wrap items-center gap-x-10 gap-y-4">
+          <div class="flex items-center gap-3 text-ivory/45 text-[11px] tracking-[0.18em] uppercase"><i data-lucide="award" class="w-4 h-4 text-gold"></i> Premium Quality Standards</div>
+          <div class="flex items-center gap-3 text-ivory/45 text-[11px] tracking-[0.18em] uppercase"><i data-lucide="users" class="w-4 h-4 text-gold"></i> In-House Execution Team</div>
+          <div class="flex items-center gap-3 text-ivory/45 text-[11px] tracking-[0.18em] uppercase"><i data-lucide="file-check" class="w-4 h-4 text-gold"></i> Transparent BOQ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diag diag-to-light absolute -bottom-px left-0 right-0">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="relative bg-ivory text-forest pt-24 sm:pt-32 overflow-hidden">
+    <!-- right diagonal emerald panel with gold wireframe furniture -->
+    <div class="absolute inset-0 hidden lg:block pointer-events-none">
+      <div class="absolute inset-y-0 right-0 w-[52%]" style="clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); background: linear-gradient(155deg,#0C3328 0%, #051812 70%);"></div>
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="52.3" y1="0" x2="44" y2="100" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke" opacity=".7"/>
+      </svg>
+      <!-- furniture wireframe art -->
+      <div class="absolute right-0 inset-y-0 w-[52%] flex items-center justify-center opacity-[0.5]">
+        <svg viewBox="0 0 420 420" fill="none" class="w-[74%] max-w-[420px]">
+          <g stroke="#E6C675" stroke-width="1.1" fill="none" opacity=".9">
+            <!-- sofa -->
+            <path d="M60 240 H340"/>
+            <path d="M60 240 V300 H340 V240"/>
+            <path d="M60 300 L40 330 H360 L340 300"/>
+            <path d="M100 240 V200 H300 V240"/>
+            <path d="M140 240 V300 M220 240 V300 M300 240 V300"/>
+            <path d="M100 200 L80 172 H320 L300 200"/>
+            <!-- side table -->
+            <path d="M350 320 H418 L400 372 H368 Z"/>
+            <ellipse cx="384" cy="316" rx="34" ry="9"/>
+            <!-- floor lamp -->
+            <path d="M22 110 V300"/><path d="M2 110 H42"/><path d="M22 300 H-6 M22 300 H50"/>
+            <path d="M-6 140 L22 110 L50 140"/>
+            <!-- rug -->
+            <ellipse cx="210" cy="360" rx="150" ry="26" stroke-dasharray="5 5"/>
+            <path d="M60 372 H340" stroke-width=".8"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6 pb-24 sm:pb-32 grid lg:grid-cols-2 gap-16 lg:gap-24">
+      <!-- LEFT: details -->
+      <div>
+        <div class="fade-up">
+          <span class="kicker text-gold-dark">Get In Touch</span>
+          <h2 class="font-display text-4xl sm:text-6xl leading-[1.02] mt-5 text-forest">
+            Let's build your <span class="italic text-gold-dark">workspace.</span>
+          </h2>
+          <p class="text-forest/55 text-sm sm:text-base mt-6 max-w-md leading-relaxed">
+            Share your space, your headcount and your timeline. We'll come back with a concept direction
+            and a transparent turnkey quotation.
+          </p>
+        </div>
+
+        <div class="mt-11 space-y-7">
+          <a href="tel:+919080204473" class="fade-up flex items-start gap-5 group" data-cursor>
+            <span class="w-12 h-12 shrink-0 rounded-full border border-forest/15 grid place-items-center group-hover:bg-gold group-hover:border-gold transition-all duration-500">
+              <i data-lucide="phone" class="w-4 h-4 text-forest transition-colors"></i>
+            </span>
+            <span>
+              <span class="block text-[10px] tracking-[0.24em] uppercase text-forest/40">Phone</span>
+              <span class="block font-display text-xl mt-1 group-hover:text-gold-dark transition-colors">+91 90802 04473</span>
+              <span class="block font-display text-xl text-forest/70">+91 97900 75736</span>
+            </span>
+          </a>
+
+          <a href="mailto:g28interiors@gmail.com" class="fade-up flex items-start gap-5 group" data-cursor>
+            <span class="w-12 h-12 shrink-0 rounded-full border border-forest/15 grid place-items-center group-hover:bg-gold group-hover:border-gold transition-all duration-500">
+              <i data-lucide="mail" class="w-4 h-4 text-forest"></i>
+            </span>
+            <span>
+              <span class="block text-[10px] tracking-[0.24em] uppercase text-forest/40">Email</span>
+              <span class="block font-display text-xl mt-1 group-hover:text-gold-dark transition-colors">g28interiors@gmail.com</span>
+            </span>
+          </a>
+
+          <div class="fade-up flex items-start gap-5">
+            <span class="w-12 h-12 shrink-0 rounded-full border border-forest/15 grid place-items-center">
+              <i data-lucide="map-pin" class="w-4 h-4 text-forest"></i>
+            </span>
+            <span>
+              <span class="block text-[10px] tracking-[0.24em] uppercase text-forest/40">Studio Address</span>
+              <span class="block text-sm leading-relaxed mt-1.5 text-forest/75 max-w-xs">
+                No. 1, Ramaiya Nagar, Trichy Main Road, Pappampatti Pirivu, Coimbatore – 641402
+              </span>
+            </span>
+          </div>
+
+          <div class="fade-up flex items-start gap-5">
+            <span class="w-12 h-12 shrink-0 rounded-full border border-forest/15 grid place-items-center">
+              <i data-lucide="user-round" class="w-4 h-4 text-forest"></i>
+            </span>
+            <span>
+              <span class="block text-[10px] tracking-[0.24em] uppercase text-forest/40">Founder</span>
+              <span class="block font-display text-xl mt-1">Goutham Arivalagan</span>
+              <span class="block text-[11px] tracking-[0.14em] uppercase text-forest/45">Founder &amp; Interior Consultant</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="fade-up mt-11 flex flex-wrap gap-3">
+          <a href="https://wa.me/919080204473" target="_blank" rel="noopener" class="flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#25D366] text-white text-[11px] font-bold uppercase tracking-[0.16em] hover:brightness-110 transition" data-magnetic data-cursor>
+            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+          </a>
+          <a href="tel:+919080204473" class="flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-forest/20 text-forest text-[11px] font-bold uppercase tracking-[0.16em] hover:bg-forest hover:text-ivory transition-colors" data-cursor>
+            <i data-lucide="phone-call" class="w-4 h-4"></i> Call Now
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="fade-up">
+        <div class="glass rounded-[3px] border border-gold/25 p-8 sm:p-11 shadow-[0_50px_110px_-50px_rgba(0,0,0,.9)]">
+          <div class="flex items-center justify-between gap-6">
+            <div>
+              <h3 class="font-display text-3xl text-ivory">Project Inquiry</h3>
+              <p class="text-ivory/45 text-xs mt-2 tracking-wide">Typical response within 24 working hours.</p>
+            </div>
+            <span class="hidden sm:grid w-12 h-12 rounded-full border border-gold/35 place-items-center">
+              <i data-lucide="send" class="w-4 h-4 text-gold"></i>
+            </span>
+          </div>
+
+          <form id="inquiry-form" class="mt-9 space-y-6" novalidate>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="text-[10px] tracking-[0.22em] uppercase text-gold/70" for="f-name">Name *</label>
+                <input id="f-name" name="name" required type="text" placeholder="Your full name" class="field field-dark mt-1"/>
+              </div>
+              <div>
+                <label class="text-[10px] tracking-[0.22em] uppercase text-gold/70" for="f-company">Company / Project Type</label>
+                <input id="f-company" name="company" type="text" placeholder="e.g. Corporate Office" class="field field-dark mt-1"/>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="text-[10px] tracking-[0.22em] uppercase text-gold/70" for="f-sqft">Approx. Sq. Ft.</label>
+                <input id="f-sqft" name="sqft" type="text" placeholder="e.g. 4,500" class="field field-dark mt-1"/>
+              </div>
+              <div>
+                <label class="text-[10px] tracking-[0.22em] uppercase text-gold/70" for="f-phone">Phone *</label>
+                <input id="f-phone" name="phone" required type="tel" placeholder="+91 00000 00000" class="field field-dark mt-1"/>
+              </div>
+            </div>
+
+            <div>
+              <label class="text-[10px] tracking-[0.22em] uppercase text-gold/70" for="f-message">Message</label>
+              <textarea id="f-message" name="message" rows="3" placeholder="Tell us about the space, scope and timeline…" class="field field-dark mt-1 resize-none"></textarea>
+            </div>
+
+            <button type="submit" class="btn-gold w-full py-4 px-8 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mt-2" data-magnetic data-cursor>
+              <span>Submit Inquiry</span>
+            </button>
+
+            <p id="form-note" class="text-center text-xs text-ivory/45 hidden"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="diag diag-to-dark absolute -bottom-px left-0 right-0">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" stroke="#D49B35" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="relative bg-forest-deep pt-24 pb-10 overflow-hidden">
+    <div class="iso-bg" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22190%22 height=%22220%22><g fill=%22none%22 stroke=%22%23E6C675%22 stroke-width=%221%22><path d=%22M95 20 L175 66 L95 112 L15 66 Z%22/><path d=%22M95 20 L95 112%22/><path d=%22M15 66 L15 158 L95 204 L175 158 L175 66%22/><path d=%22M95 112 L95 204%22/></g></svg>')"></div>
+
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-6">
+      <div class="grid lg:grid-cols-[1.4fr_1fr_1fr_1.1fr] gap-12 lg:gap-10">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg width="46" height="46" viewBox="0 0 132 120" fill="none">
+              <path d="M14 44 L66 14 L118 44" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="66" y1="14" x2="66" y2="74" stroke="#D49B35" stroke-width="3"/>
+              <path d="M50 78 L82 78 L90 98 L42 98 Z" fill="url(#goldGrad)"/>
+              <circle cx="66" cy="106" r="4" fill="#E6C675"/>
+            </svg>
+            <span>
+              <span class="block font-display text-2xl tracking-[0.22em] gold-text">G28</span>
+              <span class="block text-[9px] tracking-widest3 text-ivory/50">INTERIORS</span>
+            </span>
+          </div>
+          <p class="text-ivory/45 text-sm mt-6 leading-relaxed max-w-xs">
+            Interior Execution • Turnkey Solutions. Premium office interior works, corporate turnkey
+            fit-outs and bespoke interior execution in Coimbatore.
+          </p>
+          <div class="flex gap-3 mt-7">
+            <a href="https://wa.me/919080204473" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-gold/25 grid place-items-center text-gold hover:bg-gold hover:text-forest transition-all duration-300" data-cursor><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+            <a href="mailto:g28interiors@gmail.com" aria-label="Email" class="w-10 h-10 rounded-full border border-gold/25 grid place-items-center text-gold hover:bg-gold hover:text-forest transition-all duration-300" data-cursor><i data-lucide="mail" class="w-4 h-4"></i></a>
+            <a href="tel:+919080204473" aria-label="Phone" class="w-10 h-10 rounded-full border border-gold/25 grid place-items-center text-gold hover:bg-gold hover:text-forest transition-all duration-300" data-cursor><i data-lucide="phone" class="w-4 h-4"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-full border border-gold/25 grid place-items-center text-gold hover:bg-gold hover:text-forest transition-all duration-300" data-cursor><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.26em] uppercase text-gold/80">Explore</h4>
+          <ul class="mt-6 space-y-3.5 text-sm text-ivory/55">
+            <li><a href="#about" class="hover:text-gold transition-colors" data-cursor>About the Studio</a></li>
+            <li><a href="#expertise" class="hover:text-gold transition-colors" data-cursor>Office Interiors</a></li>
+            <li><a href="#process" class="hover:text-gold transition-colors" data-cursor>Turnkey Process</a></li>
+            <li><a href="#portfolio" class="hover:text-gold transition-colors" data-cursor>Portfolio</a></li>
+            <li><a href="#contact" class="hover:text-gold transition-colors" data-cursor>Book Consultation</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.26em] uppercase text-gold/80">Services</h4>
+          <ul class="mt-6 space-y-3.5 text-sm text-ivory/55">
+            <li>Corporate Fit-Outs</li>
+            <li>Turnkey Execution</li>
+            <li>MEP &amp; HVAC Coordination</li>
+            <li>Custom Carpentry</li>
+            <li>Retail &amp; Hospitality</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[10px] tracking-[0.26em] uppercase text-gold/80">Studio</h4>
+          <ul class="mt-6 space-y-4 text-sm text-ivory/55">
+            <li class="flex gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-gold shrink-0 mt-0.5"></i><span>No. 1, Ramaiya Nagar, Trichy Main Road, Pappampatti Pirivu, Coimbatore – 641402</span></li>
+            <li class="flex gap-3"><i data-lucide="phone" class="w-4 h-4 text-gold shrink-0 mt-0.5"></i><a href="tel:+919080204473" class="hover:text-gold transition-colors">+91 90802 04473</a></li>
+            <li class="flex gap-3"><i data-lucide="phone" class="w-4 h-4 text-gold shrink-0 mt-0.5"></i><a href="tel:+919790075736" class="hover:text-gold transition-colors">+91 97900 75736</a></li>
+            <li class="flex gap-3"><i data-lucide="mail" class="w-4 h-4 text-gold shrink-0 mt-0.5"></i><a href="mailto:g28interiors@gmail.com" class="hover:text-gold transition-colors break-all">g28interiors@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hairline mt-14"></div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-ivory/35 tracking-wide">
+        <p>© <span id="year">2026</span> G28 INTERIORS. All rights reserved.</p>
+        <p class="text-center sm:text-right">Goutham Arivalagan · Founder &amp; Interior Consultant · Coimbatore, Tamil Nadu</p>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="https://wa.me/919080204473" target="_blank" rel="noopener"
+   class="whatsapp-pulse fixed bottom-6 right-6 z-[880] w-14 h-14 rounded-full bg-[#25D366] grid place-items-center shadow-[0_18px_40px_-12px_rgba(37,211,102,.85)] hover:scale-105 transition-transform"
+   aria-label="Chat on WhatsApp" data-cursor>
+  <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+</a>
+
+<!-- ============ SCRIPT ============ -->
+<script>
+(function () {
+  'use strict';
+
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  if (window.lucide) window.lucide.createIcons();
+
+  if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------------------------------------------------------
+     PRELOADER
+  --------------------------------------------------------- */
+  function runPreloader() {
+    const pre = document.getElementById('preloader');
+    const paths = document.querySelectorAll('.pre-path');
+    paths.forEach(p => {
+      const len = p.getTotalLength ? p.getTotalLength() : 200;
+      gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+    });
+
+    const bar = document.getElementById('pre-bar');
+    const pct = document.getElementById('pre-pct');
+    const counter = { v: 0 };
+
+    const tl = gsap.timeline({
+      onComplete() {
+        pre.style.display = 'none';
+        document.body.classList.remove('locked');
+        heroIntro();
+      }
+    });
+
+    tl.to(paths, { strokeDashoffset: 0, duration: 1.15, ease: 'power2.inOut', stagger: 0.14 })
+      .fromTo('#pre-title', { opacity: 0, letterSpacing: '0.5em' }, { opacity: 1, letterSpacing: '0.28em', duration: 0.9, ease: 'power2.out' }, '-=0.7')
+      .to('.pre-draw circle', { opacity: 1, duration: 0.4 }, '-=0.5')
+      .fromTo('#pre-sub', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+      .to(counter, {
+        v: 100, duration: 1.5, ease: 'power1.inOut',
+        onUpdate() {
+          const val = Math.round(counter.v);
+          bar.style.width = val + '%';
+          pct.textContent = String(val).padStart(2, '0');
+        }
+      }, '-=0.6')
+      .to('#pre-center', { opacity: 0, y: -24, duration: 0.55, ease: 'power2.in' })
+      .to('#pre-l', { xPercent: -102, duration: 1.0, ease: 'power4.inOut' }, '-=0.15')
+      .to('#pre-r', { xPercent: 102, duration: 1.0, ease: 'power4.inOut' }, '<')
+      .to('.pre-edge', { opacity: 0, scaleY: 0.4, duration: 0.5 }, '<');
+  }
+
+  /* ---------------------------------------------------------
+     HERO INTRO
+  --------------------------------------------------------- */
+  function heroIntro() {
+    if (!window.gsap) return;
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    tl.from('.hero-eyebrow', { opacity: 0, y: 18, duration: 0.7 })
+      .from('.hero-line', { yPercent: 118, duration: 1.15, stagger: 0.11 }, '-=0.4')
+      .from('.hero-sub', { opacity: 0, y: 26, duration: 0.9 }, '-=0.75')
+      .from('.hero-cta > *', { opacity: 0, y: 22, duration: 0.7, stagger: 0.1 }, '-=0.6')
+      .from('.hero-stats > *', { opacity: 0, y: 20, duration: 0.7, stagger: 0.09 }, '-=0.55')
+      .from('.hero-visual', { opacity: 0, x: 44, duration: 1.1 }, '-=1.0')
+      .from('.hero-badge', { opacity: 0, x: -26, duration: 0.8 }, '-=0.6');
+  }
+
+  /* ---------------------------------------------------------
+     CUSTOM CURSOR + MAGNETIC
+  --------------------------------------------------------- */
+  function initCursor() {
+    if (isTouch || prefersReduced) return;
+    const ring = document.getElementById('cursor-ring');
+    const dot = document.getElementById('cursor-dot');
+    const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const ringPos = { x: pos.x, y: pos.y };
+
+    window.addEventListener('mousemove', e => {
+      pos.x = e.clientX; pos.y = e.clientY;
+      gsap.set(dot, { x: pos.x, y: pos.y, xPercent: -50, yPercent: -50 });
+    });
+
+    gsap.ticker.add(() => {
+      ringPos.x += (pos.x - ringPos.x) * 0.16;
+      ringPos.y += (pos.y - ringPos.y) * 0.16;
+      gsap.set(ring, { x: ringPos.x, y: ringPos.y, xPercent: -50, yPercent: -50 });
+    });
+
+    const hoverTargets = 'a, button, [data-cursor], .bento, .pf-item, .pcard';
+    document.querySelectorAll(hoverTargets).forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
+    });
+    const cmp = document.getElementById('compare');
+    if (cmp) {
+      cmp.addEventListener('mouseenter', () => ring.classList.add('is-drag'));
+      cmp.addEventListener('mouseleave', () => ring.classList.remove('is-drag'));
+    }
+
+    document.querySelectorAll('[data-magnetic]').forEach(el => {
+      const strength = 0.3;
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        gsap.to(el, {
+          x: (e.clientX - (r.left + r.width / 2)) * strength,
+          y: (e.clientY - (r.top + r.height / 2)) * strength,
+          duration: 0.5, ease: 'power3.out'
+        });
+      });
+      el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.4)' }));
+    });
+  }
+
+  /* ---------------------------------------------------------
+     NAV + MOBILE MENU
+  --------------------------------------------------------- */
+  function initNav() {
+    const nav = document.getElementById('nav');
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    const shell = nav.querySelector('nav');
+    const wrap = shell.parentElement;
+
+    if (window.ScrollTrigger) {
+      ScrollTrigger.create({
+        start: 0,
+        end: 'max',
+        onUpdate: self => {
+          const scrolled = self.scroll() > 90;
+          wrap.classList.toggle('pt-4', !scrolled);
+          wrap.classList.toggle('pt-2.5', scrolled);
+          shell.classList.toggle('py-3', !scrolled);
+          shell.classList.toggle('py-2', scrolled);
+          shell.classList.toggle('border-gold/40', scrolled);
+          shell.classList.toggle('shadow-2xl', scrolled);
+        }
+      });
+    }
+
+    menuBtn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+  }
+
+  /* ---------------------------------------------------------
+     SCROLL REVEALS
+  --------------------------------------------------------- */
+  function initReveals() {
+    if (!window.gsap) return;
+
+    gsap.utils.toArray('.fade-up').forEach(el => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+
+    gsap.utils.toArray('.pcard').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, y: 50, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: '#process', start: 'top 80%' }
+      });
+    });
+
+    // Bento glow follows the pointer
+    document.querySelectorAll('[data-glow]').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      });
+    });
+
+    // Hero parallax
+    if (document.getElementById('hero-img') && !prefersReduced) {
+      gsap.to('#hero-img', {
+        yPercent: 12, ease: 'none',
+        scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true }
+      });
+      gsap.to('.hero-visual .lamp-glow', {
+        opacity: 0.95, ease: 'none',
+        scrollTrigger: { trigger: '#home', start: 'top top', end: '60% top', scrub: true }
+      });
+    }
+
+    // Preloader for the lamp glow following the cursor
+    const glow = document.getElementById('lamp-glow');
+    if (glow && !isTouch) {
+      window.addEventListener('mousemove', e => {
+        const nx = (e.clientX / window.innerWidth - 0.5);
+        gsap.to(glow, { x: nx * 90, duration: 1.1, ease: 'power2.out' });
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------
+     PROCESS — horizontal scroll
+  --------------------------------------------------------- */
+  function initProcess() {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    // Continuous lamp sway
+    if (!prefersReduced) {
+      gsap.to('#lamp-sway', {
+        rotation: 3.2, transformOrigin: '50% 0%',
+        duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1
+      });
+    }
+
+    const track = document.getElementById('process-track');
+    const bar = document.getElementById('proc-bar');
+    const count = document.getElementById('proc-count');
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 1024px)', () => {
+      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
+
+      const tween = gsap.to(track, {
+        x: () => -distance(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#process',
+          start: 'top top',
+          end: () => '+=' + (distance() + window.innerHeight * 0.4),
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          onUpdate(self) {
+            const p = Math.min(1, self.progress * 4);
+            bar.style.width = Math.max(5, p * 100) + '%';
+            const idx = Math.min(4, Math.floor(self.progress * 4) + 1);
+            count.textContent = '0' + idx + ' / 04';
+          }
+        }
+      });
+
+      return () => { if (tween.scrollTrigger) tween.scrollTrigger.kill(); tween.kill(); };
+    });
+  }
+
+  /* ---------------------------------------------------------
+     PORTFOLIO FILTER
+  --------------------------------------------------------- */
+  function initPortfolio() {
+    const items = Array.from(document.querySelectorAll('.pf-item'));
+    const btns = Array.from(document.querySelectorAll('.pf-btn'));
+
+    function applyFilter(filter) {
+      items.forEach((item, i) => {
+        const match = filter === 'all' || item.dataset.cat === filter;
+        if (match) {
+          item.style.display = '';
+          requestAnimationFrame(() => {
+            setTimeout(() => item.classList.add('shown'), i * 45);
+          });
+        } else {
+          item.classList.remove('shown');
+          setTimeout(() => { item.style.display = 'none'; }, 260);
+        }
+      });
+    }
+
+    function setActive(btn) {
+      btns.forEach(b => {
+        b.classList.remove('bg-forest', 'text-ivory', 'border-forest');
+        b.classList.add('text-forest/60', 'border-forest/20');
+      });
+      btn.classList.add('bg-forest', 'text-ivory', 'border-forest');
+      btn.classList.remove('text-forest/60', 'border-forest/20');
+    }
+
+    btns.forEach(btn => btn.addEventListener('click', () => {
+      setActive(btn);
+      applyFilter(btn.dataset.filter);
+    }));
+
+    setActive(btns[0]);
+    // reveal on scroll
+    items.forEach(item => {
+      if (window.ScrollTrigger) {
+        ScrollTrigger.create({
+          trigger: item, start: 'top 92%', once: true,
+          onEnter: () => item.classList.add('shown')
+        });
+      } else {
+        item.classList.add('shown');
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
+     COUNTERS
+  --------------------------------------------------------- */
+  function initCounters() {
+    if (!window.gsap) return;
+    document.querySelectorAll('.counter').forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const obj = { v: 0 };
+      gsap.to(obj, {
+        v: target, duration: 2.2, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+        onUpdate() { el.textContent = Math.round(obj.v); }
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     COMPARE SLIDER
+  --------------------------------------------------------- */
+  function initCompare() {
+    const box = document.getElementById('compare');
+    if (!box) return;
+    let dragging = false;
+
+    function setPos(clientX) {
+      const r = box.getBoundingClientRect();
+      let p = ((clientX - r.left) / r.width) * 100;
+      p = Math.max(2, Math.min(98, p));
+      box.style.setProperty('--pos', p + '%');
+    }
+
+    box.addEventListener('pointerdown', e => {
+      dragging = true;
+      box.setPointerCapture(e.pointerId);
+      setPos(e.clientX);
+    });
+    box.addEventListener('pointermove', e => { if (dragging) setPos(e.clientX); });
+    box.addEventListener('pointerup', e => { dragging = false; });
+    box.addEventListener('pointercancel', () => { dragging = false; });
+
+    // Intro animation when scrolled into view
+    if (window.gsap && window.ScrollTrigger) {
+      ScrollTrigger.create({
+        trigger: box, start: 'top 80%', once: true,
+        onEnter() {
+          gsap.fromTo(box, { '--pos': '7%' }, {
+            '--pos': '48%', duration: 1.8, ease: 'power3.inOut', delay: 0.15
+          });
+        }
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------
+     FORM
+  --------------------------------------------------------- */
+  function initForm() {
+    const form = document.getElementById('inquiry-form');
+    const note = document.getElementById('form-note');
+    if (!form) return;
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+
+      if (!name || !phone) {
+        note.textContent = 'Please share your name and phone number so we can reach you.';
+        note.className = 'text-center text-xs text-gold-light';
+        gsap.fromTo(note, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4 });
+        return;
+      }
+
+      const company = form.company.value.trim() || '—';
+      const sqft = form.sqft.value.trim() || '—';
+      const msg = form.message.value.trim() || '—';
+      const text =
+        'New Project Inquiry — G28 Interiors%0A' +
+        'Name: ' + encodeURIComponent(name) + '%0A' +
+        'Company / Project Type: ' + encodeURIComponent(company) + '%0A' +
+        'Approx. Sq. Ft.: ' + encodeURIComponent(sqft) + '%0A' +
+        'Phone: ' + encodeURIComponent(phone) + '%0A' +
+        'Message: ' + encodeURIComponent(msg);
+
+      note.textContent = 'Thank you, ' + name + '. Opening WhatsApp so we can respond immediately…';
+      note.className = 'text-center text-xs text-gold-light';
+      gsap.fromTo(note, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4 });
+
+      setTimeout(() => { window.open('https://wa.me/919080204473?text=' + text, '_blank', 'noopener'); }, 650);
+      form.reset();
+    });
+  }
+
+  /* ---------------------------------------------------------
+     BOOT
+  --------------------------------------------------------- */
+  function boot() {
+    initCursor();
+    initNav();
+    initPortfolio();
+    initCompare();
+    initForm();
+    initProcess();
+    initCounters();
+    initReveals();
+    runPreloader();
+
+    // Refresh ScrollTrigger once images settle
+    window.addEventListener('load', () => {
+      if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 350);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+<!-- safety net: never leave the page locked if a CDN fails -->
+<script>
+  setTimeout(function () {
+    var p = document.getElementById('preloader');
+    if (p && p.style.display !== 'none') {
+      p.style.transition = 'opacity .5s';
+      p.style.opacity = '0';
+      setTimeout(function () { p.style.display = 'none'; }, 520);
+      document.body.classList.remove('locked');
+      var c = document.getElementById('pre-center');
+      if (c) c.style.display = 'none';
+    }
+  }, 6500);
+</script>
+</body>
+</html>

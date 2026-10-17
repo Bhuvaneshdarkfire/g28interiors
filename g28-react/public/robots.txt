@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://g28interiors.com/sitemap.xml
