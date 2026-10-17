@@ -31,28 +31,58 @@ import {
   useTransform
 } from 'framer-motion'
 import {
+  Archive,
+  Armchair,
   ArrowRight,
   ArrowUpRight,
   Award,
+  BedDouble,
+  Blinds,
+  Boxes,
+  Briefcase,
   Building2,
   Check,
+  ChefHat,
   Clock,
+  Columns3,
+  DoorOpen,
+  Factory,
+  Flower2,
+  Frame,
   Gem,
+  GraduationCap,
+  Hammer,
   HardHat,
   Home,
+  Lamp,
+  Landmark,
   Layers,
+  LayoutGrid,
+  Lightbulb,
   Mail,
   MapPin,
   Menu,
   MessageCircle,
+  Package,
+  PanelsTopLeft,
   Phone,
+  PhoneCall,
   Plus,
   Quote,
   Ruler,
+  Scissors,
   ShieldCheck,
+  ShoppingBag,
+  Sofa,
   Sparkles,
+  SquareStack,
+  Stethoscope,
   Store,
+  Table,
+  UtensilsCrossed,
   Users,
+  Warehouse,
+  Wrench,
   X
 } from 'lucide-react'
 
@@ -210,7 +240,8 @@ const BRAND = {
   name: 'G28 INTERIORS',
   tagline: 'Interior Execution • Turnkey Solutions',
   year: '2026',
-  city: 'Coimbatore'
+  city: 'Coimbatore',
+  group: 'The Vinayaga Group'
 }
 
 const CONTACT = {
@@ -223,12 +254,15 @@ const CONTACT = {
   whatsapp: 'https://wa.me/919080204473'
 }
 
+/* Founder's Story link carries a gold badge in the navbar */
 const NAV = [
   { label: 'Services', href: '#services' },
+  { label: 'Scope of Work', href: '#scope' },
   { label: 'Process', href: '#process' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Values', href: '#values' },
-  { label: 'Packages', href: '#packages' },
+  { label: 'Projects', href: '#portfolio' },
+  { label: 'Materials & Brands', href: '#materials' },
+  { label: 'Group Companies', href: '#group' },
+  { label: 'Founder\u2019s Story', view: 'founder', badge: true },
   { label: 'Contact', href: '#contact' }
 ]
 
@@ -240,7 +274,13 @@ const IMG = {
   suite1: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80',
   suite2: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80',
   lounge: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80',
-  residence: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80'
+  residence: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80',
+  retail: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80',
+  cafe: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1400&q=80',
+  industrial: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80',
+  factory: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1400&q=80',
+  kitchen: 'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1400&q=80',
+  villa: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80'
 }
 
 const HERO = {
@@ -252,30 +292,37 @@ const HERO = {
     'Corporate Identity.'
   ],
   sub:
-    "We don't do generic spaces. Every corporate office, executive suite and commercial workspace we touch gets an architectural layout built from scratch and executed with turnkey precision.",
+    "We don't do generic spaces. Every corporate office, executive suite, retail store, industrial unit and residence we touch gets an architectural layout built from scratch and executed with turnkey precision.",
   primaryCta: 'Start Your Project',
   secondaryCta: 'View Our Portfolio',
   lampOn: 'Ambient lighting on',
   lampOff: 'Ambient lighting off',
   kpis: [
     { value: 100, suffix: '%', label: 'Turnkey Execution Precision', sub: 'Concept to key handover' },
-    { value: 150, suffix: 'K+', label: 'Sq. Ft. Transformed', sub: 'Office & commercial space' },
+    { value: 150, suffix: 'K+', label: 'Sq. Ft. Transformed', sub: 'Across every sector we serve' },
     { text: 'On-Time', label: 'Guaranteed Handover', sub: 'Locked programme dates' }
   ],
+  /* floating badge over the hero showcase */
+  showcaseBadge: {
+    line1: 'IN-HOUSE EXECUTION',
+    line2: 'Turnkey Interior Specialists',
+    foot: 'DIRECT MATERIAL SOURCING • Backed by Vinayaga Group'
+  },
   marquee: [
-    'CORPORATE OFFICE INTERIORS',
+    'CORPORATE INTERIORS',
     'TURNKEY EXECUTION',
-    'EXECUTIVE CABINS',
-    'ACOUSTIC WORKSPACES',
+    'FALSE CEILING & PARTITIONS',
     'MODULAR WORKSTATIONS',
-    'COMMERCIAL FIT-OUTS',
-    'BESPOKE INTERIORS'
+    'RETAIL & SHOWROOMS',
+    'INDUSTRIAL FIT-OUTS',
+    'MODULAR KITCHENS',
+    'DESIGNER METAL WORKS'
   ]
 }
 
 const CLIENTS = {
   heading: 'Our Clients',
-  sub: 'Trusted across corporate offices, IT parks, retail flagships and luxury residences.',
+  sub: 'Trusted across corporate offices, retail flagships, industrial units, healthcare, hospitality and luxury residences.',
   list: [
     'APEX TECHNOLOGIES',
     'VANGUARD CAPITAL',
@@ -290,48 +337,83 @@ const CLIENTS = {
   ]
 }
 
+/* --------------------------------------------------------------------------
+   THE 8-STEP TURNKEY PROCESS
+-------------------------------------------------------------------------- */
 const PROCESS = {
   heading: 'Our Process',
-  sub: 'A disciplined four-step execution framework that eliminates delays and delivers turnkey perfection.',
+  sub: 'A disciplined eight-step execution framework that removes guesswork and delivers turnkey perfection on the promised date.',
   steps: [
     {
       no: '01',
       icon: Ruler,
-      title: 'Discover & Space Audit',
+      title: 'Site Inspection',
       body:
-        'We walk your floorplate with your leadership team, mapping headcount growth, workflow adjacency, acoustic sensitivity and brand ambition into a single spatial brief.',
-      points: ['Site measurement & survey', 'Workflow & zoning study', 'Headcount capacity model']
+        'We walk the site with you and capture detailed laser measurements, assess structural conditions, service routing and daylight before anything is drawn.',
+      points: ['Laser measurement survey', 'Structural assessment', 'Space & service evaluation']
     },
     {
       no: '02',
-      icon: Layers,
-      title: '3D Spatial & Material Strategy',
+      icon: LayoutGrid,
+      title: 'Space Planning',
       body:
-        'Photorealistic 3D renders, an itemised Bill of Quantities, physical material boards and a locked milestone schedule — approved by you before a single nail is driven.',
-      points: ['Photoreal 3D walkthroughs', 'Itemised BOQ & budgeting', 'Material & finish boards']
+        'Ergonomic 2D layouts, workflow zoning and 3D visualisation — so you approve exactly how the finished space will look and feel before execution begins.',
+      points: ['Ergonomic 2D layouts', 'Workflow & zoning study', '3D visual conceptualisation']
     },
     {
       no: '03',
-      icon: HardHat,
-      title: 'Turnkey On-Site Execution',
+      icon: Package,
+      title: 'Quotation',
       body:
-        'Our in-house civil, MEP, HVAC, electrical and modular carpentry teams execute every square inch under one contract, with a dedicated site engineer and daily reporting.',
-      points: ['Civil, MEP & HVAC works', 'Modular carpentry & joinery', 'Daily progress reporting']
+        'A transparent, itemised Bill of Quantities with exact material specifications, brands and quantities — no lump sums, no vague line items.',
+      points: ['Itemised BOQ', 'Exact material specifications', 'Brand & finish schedule']
     },
     {
       no: '04',
-      icon: ShieldCheck,
-      title: 'Quality Audit & Handover',
+      icon: Gem,
+      title: 'Price Discussion',
       body:
-        'A rigorous joint snag-list inspection, lighting calibration, deep clean and documentation pack — then a ready-to-move-in turnkey key handover on the promised date.',
-      points: ['Joint snagging & QC', 'Lighting calibration', 'Warranty & as-built pack']
+        'Collaborative value engineering. We adjust materials and detailing with you until the specification matches your exact budget without cheapening the result.',
+      points: ['Value engineering', 'Material customisation', 'Budget alignment']
+    },
+    {
+      no: '05',
+      icon: ShieldCheck,
+      title: 'Payments',
+      body:
+        'A clear, milestone-linked payment structure tied to verified progress on site, with zero hidden costs and nothing payable outside the agreed schedule.',
+      points: ['Milestone-linked structure', 'Zero hidden costs', 'Documented approvals']
+    },
+    {
+      no: '06',
+      icon: Hammer,
+      title: 'Execution',
+      body:
+        'Precision on-site fabrication and installation — false ceiling, partitions, woodwork, metal works, flooring, lighting and every finishing trade, under one accountable team.',
+      points: ['On-site fabrication', 'False ceiling & partitions', 'Woodwork & metal works']
+    },
+    {
+      no: '07',
+      icon: Award,
+      title: 'Project Completion',
+      body:
+        'A rigorous quality inspection, deep clean, lighting calibration and joint snag walkthrough — followed by an on-time turnkey handover.',
+      points: ['Quality inspection', 'Deep cleaning & lighting checks', 'On-time handover']
+    },
+    {
+      no: '08',
+      icon: PhoneCall,
+      title: 'Post-Completion Services',
+      body:
+        'Dedicated after-handover support, maintenance assistance and warranty care. Our relationship starts at handover, it does not end there.',
+      points: ['After-handover support', 'Maintenance assistance', 'Warranty care']
     }
   ]
 }
 
 const VALUES = {
   heading: 'Our Values',
-  sub: 'We fuel bold architectural visions, driving them forward with turnkey engineering.',
+  sub: 'We fuel bold architectural visions, driving them forward with disciplined execution.',
   items: [
     {
       icon: Ruler,
@@ -349,73 +431,550 @@ const VALUES = {
       icon: Gem,
       title: 'Uncompromising Material Integrity',
       body:
-        'Brand-verified specifications, no silent substitutions and honest line items. Every rupee in the BOQ is accounted for, and every material on site can be traced back to the sample you signed off.'
+        'Because we are backed by our own building-material dealerships, every board, profile and section on your site is factory-sourced and traceable. Genuine material, honest pricing, no silent substitutions.'
     }
   ]
 }
 
-const SERVICES = {
-  heading: 'What We Offer',
-  sub: 'End-to-end capability to plan, execute and hand over a workspace that performs.',
+/* --------------------------------------------------------------------------
+   SCOPE OF WORKS — tabbed bento of spotlight tilt cards
+-------------------------------------------------------------------------- */
+const SCOPE = {
+  heading: 'Scope of Work',
+  sub: 'Every specialised execution capability we deliver in-house — from a single partition to a complete turnkey fit-out.',
+  tabs: [
+    {
+      key: 'corporate',
+      label: 'Commercial & Corporate',
+      icon: Building2,
+      intro: 'Entrances, cabins, ceilings, workstations and furniture — engineered for how teams actually work.',
+      items: [
+        {
+          icon: DoorOpen,
+          title: 'Entrance & Other Partitions',
+          body: 'Glass, aluminium, gypsum and acoustic partition systems that define zones without closing the space in.',
+          points: ['Toughened & fluted glass', 'Slim aluminium profiles', 'Gypsum dry-wall partitions', 'Acoustic privacy systems']
+        },
+        {
+          icon: Briefcase,
+          title: 'Executive Cabins',
+          body: 'Bespoke director suites and acoustic privacy cabins detailed in veneer, fluted glass and fabric panels.',
+          points: ['Director & MD suites', 'Acoustic privacy cabins', 'Bespoke joinery & storage', 'Integrated AV routing']
+        },
+        {
+          icon: Blinds,
+          title: 'False Ceiling',
+          body: 'Grid ceilings, gypsum designer ceilings, acoustic baffles and aluminium false ceiling sections.',
+          points: ['Grid & T-grid ceilings', 'Gypsum designer ceilings', 'Acoustic baffles', 'Aluminium ceiling sections']
+        },
+        {
+          icon: LayoutGrid,
+          title: 'Work Stations',
+          body: 'Modular linear and cluster workstations with integrated cable management and ergonomic clearances.',
+          points: ['Linear & cluster layouts', 'Integrated cable management', 'Ergonomic clearances', 'Screen & pedestal units']
+        },
+        {
+          icon: SquareStack,
+          title: 'Floor Mat & Flooring',
+          body: 'Commercial carpeting, vinyl, anti-skid and designer floor mats specified for heavy footfall.',
+          points: ['Commercial carpet tiles', 'Vinyl & LVT flooring', 'Anti-skid surfaces', 'Designer floor mats']
+        },
+        {
+          icon: Store,
+          title: 'Display Area',
+          body: 'Custom illuminated retail and showroom product display units built around sightlines and lighting.',
+          points: ['Illuminated display units', 'Sightline planning', 'Product wall systems', 'Brand lighting design']
+        },
+        {
+          icon: Archive,
+          title: 'Racks and Storages',
+          body: 'Heavy-duty commercial shelving, compactors and filing storage engineered for load and longevity.',
+          points: ['Heavy-duty shelving', 'Compactor & filing systems', 'Utility & archive storage', 'Load-rated fabrication']
+        },
+        {
+          icon: Armchair,
+          title: 'Furnitures',
+          body: 'Ergonomic seating, reception desks, conference tables and lounge furniture — sourced and installed.',
+          points: ['Ergonomic seating', 'Reception & conference tables', 'Lounge & breakout furniture', 'Complete installation']
+        }
+      ]
+    },
+    {
+      key: 'residential',
+      label: 'Residential',
+      icon: Home,
+      intro: 'Kitchens, wardrobes, ceilings, metal work and decor — detailed to villa standard.',
+      items: [
+        {
+          icon: ChefHat,
+          title: 'Modular Kitchen',
+          body: 'Ergonomic layouts using marine ply, PVC or aluminium profiles with soft-close hardware throughout.',
+          points: ['Ergonomic work triangles', 'Marine ply / PVC / aluminium', 'Soft-close hardware', 'Tall units & appliance housing']
+        },
+        {
+          icon: Columns3,
+          title: 'Partitions',
+          body: 'Living-dining dividers, CNC screens, glass and metal partitions that shape the plan elegantly.',
+          points: ['Living-dining dividers', 'CNC-cut screens', 'Glass & metal partitions', 'Sliding & folding systems']
+        },
+        {
+          icon: Blinds,
+          title: 'False Ceiling',
+          body: 'Cove lighting gypsum ceilings, wooden rafters and PVC ceiling designs for every room.',
+          points: ['Cove lighting gypsum', 'Wooden rafter ceilings', 'PVC ceiling designs', 'Perimeter & recessed lighting']
+        },
+        {
+          icon: DoorOpen,
+          title: 'Wardrobe & All Other Closets',
+          body: 'Walk-in closets, sliding and hinged wardrobes, loft and utility storage built to your exact inventory.',
+          points: ['Walk-in closets', 'Sliding & hinged wardrobes', 'Loft storage', 'Utility & pooja units']
+        },
+        {
+          icon: Layers,
+          title: 'Metal Stairs',
+          body: 'Custom fabricated structural and architectural indoor and outdoor metal staircases.',
+          points: ['Structural metal stairs', 'Architectural spiral & straight', 'Indoor & outdoor rated', 'Custom tread & railing']
+        },
+        {
+          icon: PanelsTopLeft,
+          title: 'Glass Railing',
+          body: 'Toughened glass balustrades with stainless steel or aluminium profiles for stairs, balconies and terraces.',
+          points: ['Toughened glass balustrades', 'SS & aluminium profiles', 'Balcony & terrace railing', 'Staircase glass railing']
+        },
+        {
+          icon: Frame,
+          title: 'Pergola and Elevation',
+          body: 'Exterior architectural pergolas, facade cladding and elevation works that transform the frontage.',
+          points: ['Architectural pergolas', 'Facade cladding', 'Elevation & entrance design', 'Weather-rated finishes']
+        },
+        {
+          icon: Sofa,
+          title: 'Furnitures',
+          body: 'Custom cots, TV units, crockery units, sofa frames and dining sets built to the millimetre.',
+          points: ['Custom cots & headboards', 'TV & crockery units', 'Sofa frames', 'Dining & centre tables']
+        },
+        {
+          icon: Lamp,
+          title: 'Buy and Fix Decors',
+          body: 'Curated lighting fixtures, wall art, mirrors and artifacts — delivered and fully installed.',
+          points: ['Curated lighting fixtures', 'Wall art & mirrors', 'Artifacts & accessories', 'Complete installation']
+        },
+        {
+          icon: Gem,
+          title: 'Designer Metal Works',
+          body: 'Bespoke PVD-coated metal arches, frames, gates and decorative architectural metal art.',
+          points: ['PVD-coated arches & frames', 'Designer gates', 'Decorative metal art', 'Custom architectural metal']
+        }
+      ]
+    }
+  ]
+}
+
+/* --------------------------------------------------------------------------
+   INDUSTRIES WE WORK WITH — 8 sectors
+-------------------------------------------------------------------------- */
+const INDUSTRIES = {
+  heading: 'Industries We Work With',
+  sub: 'Eight core sectors, one execution standard. Every environment has its own compliance, durability and hygiene demands — we build for them.',
   items: [
     {
-      no: '01',
-      type: 'Flagship Service',
-      title: 'Office & Corporate Interior Works',
-      body:
-        'Workstations, boardrooms, reception lounges, breakout zones and acoustic ceilings — planned around how your teams actually work, then detailed for brand presence.',
-      list: ['Modular Workstations', 'Boardrooms & Meeting Rooms', 'Reception Lounges', 'Breakout & Café Zones', 'Acoustic Ceilings'],
-      stat: { value: '150+', label: 'corporate floors delivered' },
-      image: IMG.office1
+      icon: GraduationCap,
+      title: 'Educational Institutes',
+      body: 'Schools, colleges and training centres — smart classrooms, laboratories, libraries and durable, low-maintenance circulation areas.',
+      tags: ['Smart Classrooms', 'Labs', 'Libraries']
     },
     {
-      no: '02',
-      type: 'Turnkey Service',
-      title: 'End-to-End Turnkey Execution',
-      body:
-        'One contract, one accountable team. Civil modifications, false ceiling, electrical, networking, HVAC coordination and custom joinery — all sequenced to a locked programme.',
-      list: ['Civil & Structural Modifications', 'False Ceiling & Flooring', 'Electrical & Networking', 'HVAC & Ventilation', 'Custom Joinery'],
-      stat: { value: '100%', label: 'single-point accountability' },
-      image: IMG.office2
+      icon: Stethoscope,
+      title: 'Hospitals & Healthcare',
+      body: 'Clinics, diagnostics and hospitals built around hygienic surfaces, easy-clean false ceilings and calm, legible reception zones.',
+      tags: ['Hygienic Ceilings', 'Reception Zones', 'Diagnostics']
     },
     {
-      no: '03',
-      type: 'Commercial Service',
-      title: 'Retail & Hospitality Fit-Outs',
-      body:
-        'Showrooms, clinics, cafés and customer-facing brand environments engineered for footfall, sightlines, dwell time and the lighting that makes product look expensive.',
-      list: ['Showrooms & Flagships', 'Clinics & Diagnostic Centres', 'Cafés & Restaurants', 'Lighting Design', 'Signage & Branding'],
-      stat: { value: '40+', label: 'retail & hospitality sites' },
-      image: IMG.lounge
+      icon: UtensilsCrossed,
+      title: 'Restaurants & Cafes',
+      body: 'Theme interiors with acoustic ceilings, pergolas and custom seating engineered for footfall, comfort and ambience.',
+      tags: ['Theme Interiors', 'Acoustic Ceilings', 'Pergolas']
     },
     {
-      no: '04',
-      type: 'Residential Service',
-      title: 'Bespoke Luxury Residential Interiors',
-      body:
-        'Villas and apartments detailed with the same execution discipline we bring to corporate floors — modular kitchens, designer wardrobes and turnkey villa handover.',
-      list: ['Modular Kitchens', 'Designer Wardrobes', 'Living & Dining Spaces', 'Villa Turnkey Execution', 'Custom Furniture'],
-      stat: { value: '60+', label: 'villas & apartments' },
-      image: IMG.residence
+      icon: ShoppingBag,
+      title: 'Retail Stores & Showrooms',
+      body: 'High-impact display areas, entrance partitions and lighting that make product look expensive and draw people in.',
+      tags: ['Display Areas', 'Entrance Partitions', 'Lighting']
+    },
+    {
+      icon: Factory,
+      title: 'Production Industries',
+      body: 'Industrial cabins, durable fibre cement partitions, heavy-duty racks and storages built for plant-floor conditions.',
+      tags: ['Industrial Cabins', 'Fibre Cement Partitions', 'Racks & Storages']
+    },
+    {
+      icon: Briefcase,
+      title: 'Service Sectors',
+      body: 'IT offices, banks, consultancies and corporate workspaces planned for density, acoustics and brand presence.',
+      tags: ['IT Offices', 'Banks', 'Consultancies']
+    },
+    {
+      icon: Scissors,
+      title: 'Parlors & Salons',
+      body: 'Luxury mirrors, ambient lighting, reception counters and styling stations designed around the customer journey.',
+      tags: ['Luxury Mirrors', 'Ambient Lighting', 'Styling Stations']
+    },
+    {
+      icon: Home,
+      title: 'Residentials',
+      body: 'Villas and apartments — modular kitchens, wardrobes, metal staircases and full exterior elevations.',
+      tags: ['Villas', 'Modular Kitchens', 'Metal Elevations']
     }
   ]
 }
 
+/* --------------------------------------------------------------------------
+   MATERIALS & PRODUCTS WE USE
+-------------------------------------------------------------------------- */
+const MATERIALS = {
+  heading: 'Materials & Products We Use',
+  sub: 'We are not a middleman. Because we run our own material dealerships, every specification below is sourced direct from the factory — genuine, traceable and priced without a layer of markup.',
+  items: [
+    {
+      icon: Layers,
+      name: 'Aluminium',
+      body: 'Heavy-duty and slim architectural aluminium profiles for partitions, ceilings, railings and window systems.',
+      swatch: 'linear-gradient(135deg,#D8DDE2 0%,#F2F5F7 28%,#A8B0B8 55%,#E4E9ED 78%,#B4BCC4 100%)',
+      tone: '#3A444C'
+    },
+    {
+      icon: Boxes,
+      name: 'Plywood',
+      body: 'Commercial and BWR / BWP marine-grade plywood for wet areas, wardrobes, kitchens and heavy structural joinery.',
+      swatch: 'linear-gradient(135deg,#C9A06A 0%,#E0BE8B 30%,#A97C46 62%,#D3AC79 100%)',
+      tone: '#5A3E1E'
+    },
+    {
+      icon: Frame,
+      name: 'Wood',
+      body: 'Seasoned timber and natural wood veneers for bespoke furniture, panelling and feature detailing.',
+      swatch: 'linear-gradient(135deg,#8A5A32 0%,#B07B47 32%,#5F3A1E 66%,#9A6738 100%)',
+      tone: '#3A2110'
+    },
+    {
+      icon: SquareStack,
+      name: 'MDF',
+      body: 'High-density moisture-resistant MDF and HDHMR boards for precision-machined, paint-finish joinery.',
+      swatch: 'linear-gradient(135deg,#E8DCC6 0%,#F5EEDD 34%,#CDBEA1 68%,#EDE3CE 100%)',
+      tone: '#6B5B3E'
+    },
+    {
+      icon: PanelsTopLeft,
+      name: 'Gypsum',
+      body: 'Premium gypsum boards and plastering systems for seamless designer ceilings and dry-wall partitions.',
+      swatch: 'linear-gradient(135deg,#F2F0EC 0%,#FFFFFF 34%,#DCD8D1 68%,#F6F4F1 100%)',
+      tone: '#5E5A52'
+    },
+    {
+      icon: Blinds,
+      name: 'Glass',
+      body: 'Toughened, frosted, fluted and acoustic glass panels for partitions, railings, cabins and facades.',
+      swatch: 'linear-gradient(135deg,#BFD8DC 0%,#E4F1F3 32%,#93B4BA 66%,#D2E6EA 100%)',
+      tone: '#2C4A50'
+    },
+    {
+      icon: Warehouse,
+      name: 'UPVC & PVC',
+      body: 'Waterproof UPVC windows and doors, plus PVC interior panels for wet areas and low-maintenance surfaces.',
+      swatch: 'linear-gradient(135deg,#E6E8EA 0%,#FAFBFC 34%,#C6CACE 68%,#EDEFF1 100%)',
+      tone: '#4A4F55'
+    }
+  ],
+  specialtyHeading: 'Specialised Supply & Dealer Products',
+  specialtySub: 'Stocked and supplied directly through our group companies — Vinayaga Traders and Vinayaga Aluminium Company.',
+  specialty: [
+    'Aluminium Profiles',
+    'Aluminium False Ceiling Sections',
+    'Fibre Cement Board',
+    'Calcium Silicate Dry Walls & Ceilings',
+    'Ladders',
+    'Particle Board',
+    'Thermocol',
+    'Grid Section'
+  ]
+}
+
+/* --------------------------------------------------------------------------
+   BRANDS WE DEAL WITH — 11 custom stylised logo marks
+-------------------------------------------------------------------------- */
+const BRANDS = {
+  heading: 'Brands We Deal With',
+  badge: 'Direct Dealership & Authentic Supply',
+  sub:
+    'Backed by Vinayaga Traders and Vinayaga Aluminium Company, every project is built using 100% genuine, factory-sourced boards, profiles and ceiling systems.',
+  marquee: [
+    'GYPROC SAINT-GOBAIN',
+    'KNAUF',
+    'GLOBE TECH',
+    'VNEXT BY VISAKA',
+    'RAMCO HICEM',
+    'RAMCO HILUX',
+    'ECOPRO',
+    'SONALI',
+    'EITI',
+    'BAYDEE',
+    'UNICELL'
+  ],
+  items: [
+    {
+      name: 'Gyproc Saint-Gobain',
+      category: 'Gypsum & Plasterboard Systems',
+      render: () => (
+        <div className="flex items-center gap-3">
+          <div className="relative flex h-12 w-10 items-center justify-center">
+            <div className="flex h-12 gap-1">
+              <span className="h-full w-1.5 rounded-[2px] bg-[#7A7D82]" />
+              <span className="h-full w-1.5 rounded-[2px] bg-[#7A7D82]" />
+              <span className="h-full w-1.5 rounded-[2px] bg-[#7A7D82]" />
+            </div>
+            <div className="absolute -left-2 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-[#1E4C8A] text-[8px] font-bold text-white">
+              &#127760;
+            </div>
+          </div>
+          <div className="text-left leading-none">
+            <div className="text-2xl font-extrabold italic tracking-tight text-[#1E4C8A]">Gyproc</div>
+            <div className="mt-0.5 text-[9px] font-bold tracking-[0.18em] text-neutral-800">SAINT-GOBAIN</div>
+          </div>
+        </div>
+      )
+    },
+    {
+      name: 'Knauf Ceiling Solutions',
+      category: 'Acoustic & Mineral Fibre Ceilings',
+      render: () => (
+        <div className="text-left leading-none">
+          <div className="flex items-baseline gap-1">
+            <span className="text-2xl font-black uppercase tracking-tighter text-[#2276B4]">KNAUF</span>
+            <span className="text-xl font-extrabold uppercase italic tracking-tight text-[#58595B]">CEILING</span>
+          </div>
+          <div className="text-right text-xs font-medium italic text-[#58595B]">Solutions</div>
+        </div>
+      )
+    },
+    {
+      name: 'Globe Tech',
+      category: 'Architectural & Interior Systems',
+      render: () => (
+        <div className="flex items-center gap-3">
+          <div className="relative h-8 w-10">
+            <div className="absolute left-0 top-2 h-5 w-6 -skew-x-12 rounded-[2px] bg-[#8AB8A8]" />
+            <div className="absolute left-1.5 top-1 h-5 w-6 -skew-x-12 rounded-[2px] bg-[#1D3549]" />
+            <div className="absolute left-3 top-0 h-5 w-6 -skew-x-12 rounded-[2px] bg-[#4D9B78]" />
+          </div>
+          <span className="text-lg font-black tracking-wider text-[#1D3549]">GLOBE TECH</span>
+        </div>
+      )
+    },
+    {
+      name: 'Vnext by Visaka',
+      category: 'Eco-Friendly Fibre Cement Boards',
+      render: () => (
+        <div className="flex flex-col items-center leading-none">
+          <div className="flex items-end">
+            <span className="-mb-1 text-2xl font-black text-[#D95B26]">&#10004;</span>
+            <span className="text-xl font-light tracking-tight text-neutral-900">
+              <strong className="font-extrabold">V</strong>next
+            </span>
+          </div>
+          <div className="mt-1 flex items-center gap-1 border-b border-t border-neutral-800 px-1.5 py-0.5 text-[9px] font-black tracking-wider text-neutral-900">
+            <span className="text-[#C8232C]">&#9650;</span> by VISAKA
+          </div>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco Hicem',
+      category: 'Fibre Cement Boards',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black tracking-wider text-[#262262]">RAMCO</span>
+              <div className="mt-0.5 grid grid-cols-3 gap-0.5">
+                {[...Array(9)].map((_, i) => (
+                  <span key={i} className="h-1 w-2 rounded-[1px] bg-[#669933]" />
+                ))}
+              </div>
+            </div>
+            <span className="text-2xl font-black tracking-tight text-[#322C7A]">HICEM</span>
+          </div>
+          <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-[#322C7A]">Fibre Cement Board</span>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco Hilux',
+      category: 'Calcium Silicate Dry Walls & Ceilings',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black tracking-wider text-[#1B3664]">RAMCO</span>
+              <div className="mt-0.5 grid grid-cols-4 gap-0.5">
+                {[...Array(12)].map((_, i) => (
+                  <span key={i} className="h-1 w-1.5 bg-[#1B3664]" />
+                ))}
+              </div>
+            </div>
+            <span className="text-2xl font-black tracking-tight text-[#D4441C]">HILUX</span>
+          </div>
+          <span className="mt-1 text-[8px] font-bold tracking-wider text-[#D4441C]">
+            CALCIUM SILICATE <span className="font-semibold text-neutral-800">Dry Walls &amp; Ceilings</span>
+          </span>
+        </div>
+      )
+    },
+    {
+      name: 'EcoPro',
+      category: 'Multi-Use Fibre Cement Boards',
+      render: () => (
+        <div className="flex items-center gap-2.5">
+          <div className="rounded-[2px] bg-[#182032] px-2.5 py-1.5 text-left font-mono text-xs font-bold leading-tight tracking-widest text-white">
+            <div>ECO</div>
+            <div>PRO</div>
+          </div>
+          <div className="text-left text-[9px] font-extrabold uppercase leading-tight tracking-wider text-[#182032]">
+            <div>Multi-Use Fibre</div>
+            <div>Cement Boards</div>
+          </div>
+        </div>
+      )
+    },
+    {
+      name: 'Sonali',
+      category: 'Aluminium & Interior Hardware',
+      render: () => (
+        <div className="text-center">
+          <div className="text-xl font-black uppercase tracking-[0.2em] text-[#08251C]">SONALI</div>
+          <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.25em] text-[#D49B35]">Premium Profiles</div>
+        </div>
+      )
+    },
+    {
+      name: 'Eiti',
+      category: 'Architectural Interior Solutions',
+      render: () => (
+        <div className="text-center">
+          <div className="g28-serif text-2xl font-bold uppercase tracking-[0.22em] text-[#08251C]">EITI</div>
+          <div className="text-[9px] font-semibold uppercase tracking-[0.2em] text-neutral-600">Interior Systems</div>
+        </div>
+      )
+    },
+    {
+      name: 'Baydee',
+      category: 'uPVC Profiles & Systems',
+      render: () => (
+        <div className="text-center">
+          <div className="text-xl font-black uppercase tracking-[0.18em] text-[#1A4B8C]">BAYDEE</div>
+          <div className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-neutral-600">uPVC Systems</div>
+        </div>
+      )
+    },
+    {
+      name: 'Unicell',
+      category: 'Ceiling & Partition Grids',
+      render: () => (
+        <div className="text-center">
+          <div className="text-xl font-extrabold uppercase tracking-[0.16em] text-[#08251C]">UNICELL</div>
+          <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.22em] text-[#D49B35]">Ceiling Grids</div>
+        </div>
+      )
+    }
+  ]
+}
+
+/* --------------------------------------------------------------------------
+   THE VINAYAGA GROUP LEGACY
+-------------------------------------------------------------------------- */
+const GROUP = {
+  heading: 'The Vinayaga Group Legacy',
+  sub: 'G28 Interiors is not a standalone contractor. It is the turnkey execution arm of a family ecosystem that has supplied Coimbatore with building materials and aluminium systems for decades — which is exactly why our pricing and material authenticity are hard to match.',
+  companies: [
+    {
+      icon: Store,
+      name: 'Vinayaga Traders',
+      role: 'Material Dealership',
+      body:
+        'Premier wholesale and retail dealers in false ceiling materials, fibre cement boards, particle boards, ladders, thermocol and grid sections.',
+      points: ['False ceiling materials', 'Fibre cement & particle boards', 'Ladders, thermocol & grid sections'],
+      accent: '#D49B35'
+    },
+    {
+      icon: Layers,
+      name: 'Vinayaga Aluminium Company',
+      role: 'Aluminium Systems',
+      body:
+        'Specialists in architectural aluminium profiles, aluminium false ceiling sections, partition systems and hardware.',
+      points: ['Architectural aluminium profiles', 'Aluminium false ceiling sections', 'Partition systems & hardware'],
+      accent: '#E6C675'
+    },
+    {
+      icon: Building2,
+      name: 'G28 Interiors',
+      role: 'Turnkey Execution & Design',
+      body:
+        'The turnkey interior execution and design arm — transforming residential, commercial, industrial and corporate spaces from concept to post-completion care.',
+      points: ['Turnkey interior execution', 'Design & 3D visualisation', 'Post-completion care'],
+      accent: '#D49B35'
+    }
+  ]
+}
+
+/* --------------------------------------------------------------------------
+   FOUNDER'S STORY
+-------------------------------------------------------------------------- */
+const FOUNDER = {
+  eyebrow: 'Founder\u2019s Story',
+  heading: 'From building materials\nto complete interiors.',
+  name: CONTACT.founder,
+  role: 'Founder & Interior Consultant, G28 Interiors',
+  quote:
+    'We grew up around boards, profiles and ceiling sections. That is why we can promise material authenticity and factory-direct pricing that most interior firms simply cannot.',
+  paragraphs: [
+    'G28 Interiors was not started from a blank page. It was born out of a strong foundation in building materials and aluminium supply — built over decades through Vinayaga Traders and Vinayaga Aluminium Company in Coimbatore.',
+    'Those two businesses taught us the fundamentals the hard way: what a genuine board feels like, which profile actually holds its line after five years, and how much of a project cost is pure middleman margin. We spent years supplying these materials to builders, contractors and other interior firms across the region.',
+    'The turning point was simple. We kept watching beautifully drawn interiors get compromised on site — specifications quietly swapped, timelines slipping, and clients left to chase contractors. We had the material knowledge, the dealership relationships and the fabrication capability. What was missing was a firm that would take single-point accountability for the whole thing.',
+    'So we built one. G28 Interiors is that turnkey interior execution and design arm — and it exists specifically so that material authenticity, factory-direct pricing and zero-compromise execution can sit inside one contract.',
+    'Today we execute residential, commercial, industrial and corporate interiors across Coimbatore and beyond — from a single partition or a modular kitchen, to a complete corporate floorplate handed over on a locked date.'
+  ],
+  pillars: [
+    { icon: ShieldCheck, title: 'Material Authenticity', body: 'Every board and profile is factory-sourced through our own dealerships — traceable, genuine, guaranteed.' },
+    { icon: Gem, title: 'Factory-Direct Pricing', body: 'No middleman layer on materials, which means more of your budget goes into the space itself.' },
+    { icon: Hammer, title: 'In-House Execution', body: 'Our own fabrication and installation teams. One accountable crew from first fix to final finish.' },
+    { icon: Award, title: 'Turnkey Accountability', body: 'One contract, one point of contact, one promised handover date — across every sector we serve.' }
+  ],
+  stats: [
+    { value: '3', label: 'Group Companies', sub: 'One ecosystem' },
+    { value: '100', suffix: '%', label: 'Genuine Materials', sub: 'Factory-sourced' },
+    { value: '8', label: 'Step Turnkey Process', sub: 'Concept to care' }
+  ],
+  cta: 'Book Consultation with Goutham',
+  back: 'Back to Main Site'
+}
+
+/* --------------------------------------------------------------------------
+   PROJECTS — 5 pillars
+-------------------------------------------------------------------------- */
 const PROJECTS = {
   heading: 'Work That Delivers Results',
-  sub: 'A closer look at how we solve spatial problems, lift workplace performance and hand over measurable outcomes.',
+  sub: 'A closer look at how we solve spatial problems, lift performance and hand over measurable outcomes — across every sector we serve.',
   filters: [
-    { key: 'all', label: 'All Projects' },
-    { key: 'corporate', label: 'Corporate Offices' },
-    { key: 'turnkey', label: 'Turnkey' },
-    { key: 'executive', label: 'Executive Suites' },
+    { key: 'all', label: 'All — Turnkey Interiors' },
+    { key: 'corporate', label: 'Corporate' },
+    { key: 'commercial', label: 'Commercial' },
+    { key: 'industrial', label: 'Industrial' },
     { key: 'residential', label: 'Residential' }
   ],
   items: [
     {
       name: 'Apex Tech Hub',
       client: 'IT Corporate Office',
-      service: 'Full Turnkey Office Interior',
+      service: 'Full Turnkey Corporate Fit-Out',
       area: '12,500 Sq. Ft.',
       cat: 'corporate',
       body:
@@ -425,22 +984,52 @@ const PROJECTS = {
     {
       name: 'Vanguard Executive Suites',
       client: 'Financial Advisory Firm',
-      service: 'Acoustic Boardrooms & Luxury Cabins',
+      service: 'Executive Cabins & Boardrooms',
       area: '4,200 Sq. Ft.',
-      cat: 'executive',
+      cat: 'corporate',
       body:
         'Nine partner cabins and two boardrooms detailed in walnut veneer, fluted glass and acoustic fabric — engineered so a confidential call never leaves the room.',
       image: IMG.suite1
     },
     {
       name: 'Aura Flagship Studio',
-      client: 'Commercial Showroom',
-      service: 'Lighting & Spatial Execution',
+      client: 'Retail Showroom',
+      service: 'Display Areas & Entrance Partitions',
       area: '6,800 Sq. Ft.',
-      cat: 'turnkey',
+      cat: 'commercial',
       body:
-        'A double-height retail flagship where we rebuilt the lighting grid, sightlines and circulation so every product wall performs from the entrance.',
-      image: IMG.lounge
+        'A double-height retail flagship where we rebuilt the lighting grid, sightlines and circulation so every product wall performs from the moment you walk in.',
+      image: IMG.retail
+    },
+    {
+      name: 'Harbour Café & Bistro',
+      client: 'Hospitality',
+      service: 'Theme Interiors & Acoustic Ceilings',
+      area: '3,100 Sq. Ft.',
+      cat: 'commercial',
+      body:
+        'A café interior built around acoustic baffle ceilings, custom banquette seating and a pergola-covered terrace that extended the usable floor by a third.',
+      image: IMG.cafe
+    },
+    {
+      name: 'Vertex Production Works',
+      client: 'Manufacturing Plant',
+      service: 'Industrial Cabins & Racks',
+      area: '9,400 Sq. Ft.',
+      cat: 'industrial',
+      body:
+        'Plant-floor offices, control cabins and heavy-duty racking in fibre cement and powder-coated steel — specified for dust, vibration and continuous shift use.',
+      image: IMG.industrial
+    },
+    {
+      name: 'Orbit Industrial Partitions',
+      client: 'Production Industry',
+      service: 'Fibre Cement Partitions & Storage',
+      area: '7,200 Sq. Ft.',
+      cat: 'industrial',
+      body:
+        'Durable fibre cement partitions dividing production bays from inspection zones, with load-rated storage and a fully sealed ceiling grid.',
+      image: IMG.factory
     },
     {
       name: 'The Crest Residence',
@@ -451,15 +1040,28 @@ const PROJECTS = {
       body:
         'A four-bedroom villa executed end to end — modular kitchen, walk-in wardrobes, a home theatre and imported stone detailing, handed over ahead of schedule.',
       image: IMG.residence
+    },
+    {
+      name: 'Meridian Villa',
+      client: 'Private Residence',
+      service: 'Metal Stairs, Pergola & Elevation',
+      area: '4,600 Sq. Ft.',
+      cat: 'residential',
+      body:
+        'A bespoke metal staircase with toughened glass railing, an architectural pergola and a full facade elevation that changed the entire street presence.',
+      image: IMG.villa
     }
   ]
 }
 
+/* --------------------------------------------------------------------------
+   PACKAGES — transparent execution packages
+-------------------------------------------------------------------------- */
 const PACKAGES = {
   heading: 'Transparent Execution Packages',
   sub:
-    'Clear scope, itemised BOQ, no hidden costs. Switch between a corporate fit-out and a full turnkey suite to compare what is included.',
-  toggle: { a: 'Corporate Office Fit-Out', b: 'Full Turnkey Suite' },
+    'Clear scope, itemised BOQ, no hidden costs. Switch between a corporate fit-out and a full turnkey suite to compare exactly what is included.',
+  toggle: { a: 'Corporate Fit-Out', b: 'Full Turnkey Suite' },
   plans: [
     {
       name: 'Essential Workspace',
@@ -480,76 +1082,79 @@ const PACKAGES = {
       cta: 'Request a Quote',
       popular: true,
       features: {
-        a: ['Full civil & MEP execution', 'Custom executive cabins', 'Acoustic conference rooms', 'Photoreal 3D visualisation', 'Itemised BOQ & schedule'],
-        b: ['Everything in Corporate Fit-Out', 'HVAC & fresh-air design', 'Boardroom AV & integration', 'Cafeteria & breakout zones', 'Dedicated project manager']
+        a: ['Complete turnkey execution', 'Custom executive cabins', 'Acoustic conference rooms', 'Photoreal 3D visualisation', 'Itemised BOQ & schedule'],
+        b: ['Everything in Corporate Fit-Out', 'Glass & acoustic partitions', 'Boardroom AV & integration', 'Cafeteria & breakout zones', 'Dedicated project manager']
       }
     },
     {
-      name: 'Bespoke Corporate HQ',
+      name: 'Bespoke Headquarters',
       note: 'Ideal for large floorplates & HQs',
       price: { a: '3,900', b: '4,750' },
       unit: '/sq.ft',
       cta: 'Request a Quote',
       features: {
-        a: ['Unlimited scope & zones', 'Premium imported finishes', 'Full MEP, HVAC & BMS', 'Custom furniture programme', 'Snagging, QC & warranty pack'],
-        b: ['Everything in Corporate Fit-Out', 'Workplace automation & access', 'Landscape & façade coordination', 'Brand experience design', 'Post-handover support plan']
+        a: ['Unlimited scope & zones', 'Premium imported finishes', 'Designer gypsum ceilings', 'Custom furniture programme', 'Snagging, QC & warranty pack'],
+        b: ['Everything in Corporate Fit-Out', 'Workplace automation & access', 'Landscape & facade coordination', 'Brand experience design', 'Post-completion support plan']
       }
     }
   ]
 }
 
+/* --------------------------------------------------------------------------
+   FAQ — category tabs + accordions
+-------------------------------------------------------------------------- */
 const FAQ = {
   heading: 'Frequently Asked Question',
-  sub: 'Straight answers on turnkey execution, timelines, budgets and what happens after handover.',
-  categories: ['General', 'Office Turnkey', 'Timelines & BOQ', 'Warranty & Support'],
+  sub: 'Straight answers on turnkey execution, timelines, budgets, materials and what happens after handover.',
+  categories: ['General', 'Execution', 'Materials & Pricing', 'Handover & Support'],
   items: [
     {
       cat: 'General',
       q: 'What exactly does "turnkey interior execution" mean at G28?',
       a:
-        'It means you sign one contract and deal with one team from the first site survey to the day you receive the keys. We handle space planning, 3D visualisation, civil modifications, false ceiling, flooring, painting, electrical, networking, HVAC coordination, custom joinery and final snagging — with a single point of accountability.'
+        'It means you sign one contract and deal with one team from the first site inspection to the day you receive the keys. We handle space planning, 3D visualisation, false ceiling, partitions, flooring, painting, electrical points, networking, custom joinery, furniture and final snagging — with a single point of accountability.'
     },
     {
       cat: 'General',
       q: 'Do you work outside Coimbatore?',
       a:
-        'Yes. Coimbatore is our base and where our workshop and core site teams operate, but we regularly execute projects across Tamil Nadu and into neighbouring states. For outstation sites we mobilise a dedicated site team and build a local procurement plan into the BOQ.'
+        'Yes. Coimbatore is our base and where our core teams operate, but we regularly execute projects across Tamil Nadu and into neighbouring states. For outstation sites we mobilise a dedicated site team and build a local logistics plan into the BOQ.'
     },
     {
-      cat: 'Office Turnkey',
-      q: 'How long does a complete turnkey office interior take?',
+      cat: 'Execution',
+      q: 'How long does a complete turnkey interior take?',
       a:
-        'A 3,000–6,000 sq.ft. office typically runs 8–10 weeks from approved drawings. A 10,000–20,000 sq.ft. floorplate runs 12–16 weeks. We lock the programme into the contract, publish a milestone tracker, and share weekly progress reports with photographs.'
+        'A 3,000–6,000 sq.ft. office typically runs 8–10 weeks from approved drawings. A 10,000–20,000 sq.ft. floorplate runs 12–16 weeks. Residential villas usually run 12–20 weeks depending on metal work and joinery scope. We lock the programme into the contract and share weekly progress reports.'
     },
     {
-      cat: 'Office Turnkey',
-      q: 'Do you handle electrical, networking and HVAC along with furniture?',
+      cat: 'Execution',
+      q: 'Who actually executes the work on site?',
       a:
-        'Yes — that is precisely what makes it turnkey. Our MEP team coordinates power distribution, data cabling, UPS routing, fresh-air and split or VRV HVAC, and we sequence it with the false ceiling and joinery so services are never exposed after handover.'
+        'Our own in-house teams. We do not sub-contract the core scope out to unknown parties — the same crew handles false ceiling, partitions, woodwork, metal works and installation, under a dedicated site engineer. That is what keeps quality consistent and accountability in one place.'
     },
     {
-      cat: 'Timelines & BOQ',
+      cat: 'Materials & Pricing',
+      q: 'Why are your material prices better than other interior firms?',
+      a:
+        'Because we are backed by our own dealerships — Vinayaga Traders and Vinayaga Aluminium Company. Boards, profiles, ceiling sections and grid systems come to your site directly from the factory through our own supply chain, so there is no middleman margin layered on top of your project cost.'
+    },
+    {
+      cat: 'Materials & Pricing',
       q: 'How do you prevent budget overruns during execution?',
       a:
-        'You approve an itemised BOQ before work starts, listing exact brands, specifications and quantities. Any variation is priced and approved in writing before it is executed. The final invoice therefore reconciles against the approved scope, not against a moving target.'
+        'You approve an itemised BOQ before work starts, listing exact brands, specifications and quantities. Any variation is priced and approved in writing before it is executed. The final invoice reconciles against the approved scope, not against a moving target.'
     },
     {
-      cat: 'Timelines & BOQ',
-      q: 'Can we supply our own materials or work with our existing contractor?',
-      a:
-        'Absolutely. You can supply specified materials, and we are happy to execute to another architect\'s drawings or coordinate with vendors you already trust. We will flag buildability, sequencing or cost risks during the review stage — before work begins, not after.'
-    },
-    {
-      cat: 'Warranty & Support',
+      cat: 'Handover & Support',
       q: 'What happens at handover?',
       a:
         'We run a joint snagging walkthrough with your team, rectify every item on the checklist, calibrate the lighting, deep-clean the site and hand over a documentation pack containing as-built drawings, warranty certificates and material guarantee records.'
     },
     {
-      cat: 'Warranty & Support',
+      cat: 'Handover & Support',
       q: 'Is there support after we move in?',
       a:
-        'Yes. Every project carries a written workmanship warranty, and our team stays reachable for servicing, adjustments and future phases of expansion. Many of our clients return to us two or three years later for their next floor.'
+        'Yes — it is step eight of our process. Every project carries a written workmanship warranty, and our team stays reachable for servicing, adjustments and future phases of expansion. Many clients return to us two or three years later for their next space.'
     }
   ]
 }
@@ -569,27 +1174,28 @@ const FORM = {
 
 const FOOTER = {
   blurb:
-    'G28 Interiors is a Coimbatore-based interior execution firm specialising in premium office interior works, corporate turnkey fit-outs and bespoke residential interiors.',
+    'G28 Interiors is the turnkey interior execution and design arm of the Vinayaga Group — delivering residential, commercial, industrial and corporate interiors across Coimbatore and beyond.',
   columns: [
     {
       title: 'Explore',
       links: [
         { label: 'Services', href: '#services' },
+        { label: 'Scope of Work', href: '#scope' },
         { label: 'Process', href: '#process' },
-        { label: 'Portfolio', href: '#portfolio' },
-        { label: 'Values', href: '#values' },
+        { label: 'Projects', href: '#portfolio' },
         { label: 'Packages', href: '#packages' },
         { label: 'Contact', href: '#contact' }
       ]
     },
     {
-      title: 'Services',
+      title: 'Capability',
       links: [
-        { label: 'Office Interiors', href: '#services' },
-        { label: 'Turnkey Execution', href: '#services' },
-        { label: 'Retail & Hospitality', href: '#services' },
-        { label: 'MEP & HVAC', href: '#services' },
-        { label: 'Bespoke Residential', href: '#services' }
+        { label: 'Corporate Interiors', href: '#scope' },
+        { label: 'Commercial Fit-Outs', href: '#scope' },
+        { label: 'Industrial Interiors', href: '#industries' },
+        { label: 'Residential Interiors', href: '#scope' },
+        { label: 'Materials & Brands', href: '#materials' },
+        { label: 'Group Companies', href: '#group' }
       ]
     }
   ],
@@ -1381,7 +1987,7 @@ function KeyRing() {
    7. NAVBAR
    ========================================================================== */
 
-function Navbar({ lampOn, toggleLamp }) {
+function Navbar({ lampOn, toggleLamp, view, onNavigate }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -1440,20 +2046,34 @@ function Navbar({ lampOn, toggleLamp }) {
               <KeyRing />
             </motion.div>
 
-            <a href="#top">
+            <a href="#top" onClick={() => onNavigate && onNavigate('main')}>
               <G28Logo />
             </a>
 
-            <nav className="hidden items-center gap-8 lg:flex">
-              {NAV.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="g28-underline text-[13px] font-semibold uppercase tracking-[0.12em] text-[#FAF6F0]/70 transition-colors duration-300 hover:text-[#E6C675]"
-                >
-                  {item.label}
-                </a>
-              ))}
+            <nav className="hidden items-center gap-6 xl:flex">
+              {NAV.map((item) => {
+                const isFounder = item.view === 'founder'
+                const cls = `g28-underline relative text-[12.5px] font-semibold uppercase tracking-[0.11em] transition-colors duration-300 ${
+                  isFounder ? 'text-[#E6C675]' : 'text-[#FAF6F0]/70 hover:text-[#E6C675]'
+                }`
+                return isFounder ? (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => onNavigate && onNavigate('founder')}
+                    className={cls}
+                  >
+                    {item.label}
+                    <span className="ml-2 inline-flex items-center rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-2 py-[3px] text-[8px] font-bold leading-none tracking-[0.12em] text-[#051812] align-middle">
+                      STORY
+                    </span>
+                  </button>
+                ) : (
+                  <a key={item.label} href={item.href} className={cls}>
+                    {item.label}
+                  </a>
+                )
+              })}
             </nav>
 
             <div className="flex items-center gap-3">
@@ -1506,20 +2126,36 @@ function Navbar({ lampOn, toggleLamp }) {
 
               <div className="mx-auto grid w-full max-w-[1400px] flex-1 content-center gap-12 px-6 pb-12">
                 <nav className="flex flex-col">
-                  {NAV.map((item, i) => (
-                    <motion.a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ ...SPRING, delay: 0.06 + i * 0.05 }}
-                      className="group flex items-baseline justify-between border-b border-[#FAF6F0]/10 py-4 text-[#FAF6F0] transition-colors hover:text-[#E6C675]"
-                    >
-                      <span className="g28-serif text-[34px] font-bold leading-none sm:text-[44px]">{item.label}</span>
-                      <span className="text-[12px] font-bold text-[#FAF6F0]/45">0{i + 1}</span>
-                    </motion.a>
-                  ))}
+                  {NAV.map((item, i) => {
+                    const isFounder = item.view === 'founder'
+                    const handle = () => {
+                      setOpen(false)
+                      if (isFounder && onNavigate) onNavigate('founder')
+                    }
+                    return (
+                      <motion.a
+                        key={item.label}
+                        href={isFounder ? '#founder' : item.href}
+                        onClick={handle}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ ...SPRING, delay: 0.06 + i * 0.05 }}
+                        className={`group flex items-baseline justify-between border-b border-[#FAF6F0]/10 py-4 transition-colors ${
+                          isFounder ? 'text-[#E6C675]' : 'text-[#FAF6F0] hover:text-[#E6C675]'
+                        }`}
+                      >
+                        <span className="g28-serif flex items-center gap-3 text-[30px] font-bold leading-none sm:text-[40px]">
+                          {item.label}
+                          {isFounder && (
+                            <span className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-[#051812]">
+                              Story
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-[12px] font-bold text-[#FAF6F0]/45">0{i + 1}</span>
+                      </motion.a>
+                    )
+                  })}
                 </nav>
 
                 <motion.div
@@ -1694,13 +2330,20 @@ function Hero({ lampOn, toggleLamp }) {
               style={{ background: 'radial-gradient(circle at 50% 6%, rgba(230,198,117,.4), transparent 58%)' }}
             />
 
-            {/* floating spec badge */}
-            <div className="absolute -left-3 bottom-6 z-20 rounded-2xl border border-[#D49B35]/30 bg-[#051812]/85 px-5 py-4 backdrop-blur-md sm:left-4">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="h-5 w-5 text-[#D49B35]" />
+            {/* floating capability badge */}
+            <div className="absolute -left-3 bottom-6 z-20 max-w-[300px] rounded-2xl border border-[#D49B35]/30 bg-[#051812]/88 px-5 py-4 backdrop-blur-md sm:left-4">
+              <div className="flex items-start gap-3">
+                <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#D49B35]" />
                 <div>
-                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#FAF6F0]/85">In-House Teams</div>
-                  <div className="text-[10px] text-[#FAF6F0]/60">Civil · MEP · Carpentry</div>
+                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#E6C675]">
+                    {HERO.showcaseBadge.line1}
+                  </div>
+                  <div className="mt-0.5 text-[12px] font-semibold text-[#FAF6F0]/90">
+                    {HERO.showcaseBadge.line2}
+                  </div>
+                  <div className="mt-2 border-t border-[#FAF6F0]/12 pt-2 text-[9.5px] font-bold uppercase leading-[1.5] tracking-[0.1em] text-[#B8B2A6]">
+                    {HERO.showcaseBadge.foot}
+                  </div>
                 </div>
               </div>
             </div>
@@ -2035,51 +2678,22 @@ function Values() {
 }
 
 /* ==========================================================================
-   12. SERVICES  —  numbered rows, hover image preview, dual-slide CTA
+   12. SCOPE OF WORKS  —  tabbed bento of spotlight tilt cards
    ========================================================================== */
 
-function Services() {
-  const [open, setOpen] = useState(0)
-  const [hover, setHover] = useState(null)
-  const wrapRef = useRef(null)
-  const reduce = useReducedMotion()
-
-  // cursor position (viewport coords) for the floating preview
-  const cx = useMotionValue(-600)
-  const cy = useMotionValue(-600)
-  const scx = useSpring(cx, { stiffness: 170, damping: 20, mass: 0.45 })
-  const scy = useSpring(cy, { stiffness: 170, damping: 20, mass: 0.45 })
-
-  // follow the pointer only while a row is hovered
-  useEffect(() => {
-    if (reduce || hover === null) return
-    const onMove = (e) => {
-      cx.set(e.clientX)
-      cy.set(e.clientY)
-    }
-    window.addEventListener('mousemove', onMove, { passive: true })
-    return () => window.removeEventListener('mousemove', onMove)
-  }, [hover, reduce, cx, cy])
-
-  // prime the spring so the preview appears under the cursor instead of flying in
-  function primeCursor(e) {
-    jump(cx, e.clientX)
-    jump(cy, e.clientY)
-    jump(scx, e.clientX)
-    jump(scy, e.clientY)
-  }
-
-  // never show the floating frame for the row that is already expanded
-  const showPreview = hover !== null && hover !== open
+function ScopeOfWork() {
+  const [tab, setTab] = useState(SCOPE.tabs[0].key)
+  const active = SCOPE.tabs.find((t) => t.key === tab) || SCOPE.tabs[0]
+  const ActiveIcon = active.icon
 
   return (
-    <section id="services" className="relative scroll-mt-24 overflow-hidden bg-[#051812] py-24 sm:py-28">
+    <section id="scope" className="relative scroll-mt-24 overflow-hidden bg-[#051812] py-24 sm:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: isoPattern() }} />
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-1/4 h-[520px] w-[520px] rounded-full bg-[#D49B35]/10 blur-[150px]" />
 
       <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHead tag="What we offer / Service" title={SERVICES.heading} sub={SERVICES.sub} className="max-w-[620px]" />
+          <SectionHead tag="What we offer / Scope" title={SCOPE.heading} sub={SCOPE.sub} className="max-w-[620px]" />
           <Reveal delay={0.1}>
             <RollButton href="#contact" tone="gold" className="lg:mb-2">
               Start Your Project
@@ -2087,168 +2701,422 @@ function Services() {
           </Reveal>
         </div>
 
-        <div ref={wrapRef} className="relative mt-14">
-          {/* floating magnetic preview — fixed, so it can never collide with the rows */}
-          <AnimatePresence>
-            {showPreview && (
-              <motion.div
-                style={{ left: scx, top: scy }}
-                className="pointer-events-none fixed z-40 hidden -translate-x-1/2 -translate-y-1/2 lg:block"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, ease: EASE }}
-              >
-                <motion.div
-                  initial={{ scale: 0.88, rotate: -6 }}
-                  animate={{ scale: 1, rotate: -3.5 }}
-                  exit={{ scale: 0.9, rotate: -8 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                  className="relative"
-                >
-                  <img
-                    src={SERVICES.items[hover].image}
-                    alt=""
-                    className="h-[300px] w-[400px] rounded-2xl border border-[#D49B35]/45 object-cover shadow-[0_60px_110px_-40px_rgba(0,0,0,.95)]"
-                  />
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#051812]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 rounded-full border border-[#D49B35]/40 bg-[#051812]/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#E6C675] backdrop-blur">
-                    {SERVICES.items[hover].no} · {SERVICES.items[hover].type}
-                  </span>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="flex flex-col border-t border-[#FAF6F0]/10">
-            {SERVICES.items.map((s, i) => {
-              const isOpen = open === i
-              const isHovered = hover === i
+        {/* ---------------- tabs ---------------- */}
+        <Reveal delay={0.14}>
+          <div className="mt-11 inline-flex flex-wrap items-center gap-1 rounded-full border border-[#FAF6F0]/12 bg-[#0D3528]/50 p-1.5">
+            {SCOPE.tabs.map((t) => {
+              const Icon = t.icon
+              const isActive = t.key === tab
               return (
-                <div
-                  key={s.no}
-                  className="border-b border-[#FAF6F0]/10"
-                  onMouseEnter={(e) => {
-                    setHover(i)
-                    primeCursor(e)
-                  }}
-                  onMouseLeave={() => setHover(null)}
+                <button
+                  key={t.key}
+                  type="button"
+                  onClick={() => setTab(t.key)}
+                  className={`relative inline-flex items-center gap-2.5 rounded-full px-5 py-3 text-[11px] font-bold uppercase tracking-[0.14em] transition-colors duration-500 ${
+                    isActive ? 'text-[#051812]' : 'text-[#FAF6F0]/65 hover:text-[#E6C675]'
+                  }`}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? -1 : i)}
-                    aria-expanded={isOpen}
-                    className="group flex w-full items-center justify-between gap-6 py-8 text-left"
-                  >
-                    <div className="flex flex-1 items-center gap-6 sm:gap-10">
-                      <span
-                        aria-hidden="true"
-                        className={`g28-serif text-[30px] font-bold leading-none transition-colors duration-500 sm:text-[40px] ${
-                          isOpen ? 'text-[#D49B35]' : 'text-[#FAF6F0]/20 group-hover:text-[#D49B35]/70'
-                        }`}
-                      >
-                        {s.no}
-                      </span>
-
-                      {/* inactive titles drift right on hover */}
-                      <motion.div
-                        animate={{ x: !isOpen && isHovered ? 8 : 0 }}
-                        transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-                      >
-                        <span className="block text-[10px] font-bold uppercase tracking-[0.26em] text-[#D49B35]/80">{s.type}</span>
-                        <h3
-                          className={`g28-serif mt-2 text-[24px] font-bold leading-tight transition-colors duration-500 sm:text-[32px] ${
-                            isOpen ? 'text-[#E6C675]' : 'text-[#FAF6F0] group-hover:text-[#E6C675]'
-                          }`}
-                        >
-                          {s.title}
-                        </h3>
-                      </motion.div>
-                    </div>
-
-                    {/* gold + → × rotation */}
+                  {isActive && (
                     <motion.span
-                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border transition-colors duration-500 ${
-                        isOpen
-                          ? 'border-[#D49B35] bg-[#D49B35] text-[#051812]'
-                          : 'border-[#FAF6F0]/20 text-[#FAF6F0]/60 group-hover:border-[#D49B35]/70 group-hover:text-[#E6C675]'
-                      }`}
-                      animate={{ rotate: isOpen ? 135 : 0 }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                    >
-                      <Plus className="h-4 w-4" />
-                    </motion.span>
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.55, ease: EASE }}
-                        className="overflow-hidden"
-                      >
-                        <div className="grid gap-8 pb-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
-                          <div className="lg:pl-[72px]">
-                            <motion.p
-                              className="max-w-[540px] text-[15px] font-medium leading-[1.7] text-[#B8B2A6]"
-                              initial={{ opacity: 0, y: 12 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ ...SPRING, delay: 0.05 }}
-                            >
-                              {s.body}
-                            </motion.p>
-
-                            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-                              {s.list.map((item, li) => (
-                                <motion.li
-                                  key={item}
-                                  className="flex items-center gap-3 text-[13px] font-semibold text-[#FAF6F0]/70"
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ ...SPRING, delay: 0.12 + li * 0.05 }}
-                                >
-                                  <Check className="h-3.5 w-3.5 shrink-0 text-[#D49B35]" />
-                                  {item}
-                                </motion.li>
-                              ))}
-                            </ul>
-
-                            <motion.div
-                              className="mt-9 flex flex-wrap items-center gap-8"
-                              initial={{ opacity: 0, y: 12 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ ...SPRING, delay: 0.28 }}
-                            >
-                              <RollButton href="#contact" tone="gold" className="!px-6 !py-3">
-                                Start your project
-                              </RollButton>
-                              <div>
-                                <div className="g28-serif text-[26px] font-bold leading-none text-[#E6C675]">{s.stat.value}</div>
-                                <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FAF6F0]/60">{s.stat.label}</div>
-                              </div>
-                            </motion.div>
-                          </div>
-
-                          {/* dedicated image column — expands inside the panel, never overlaps titles */}
-                          <motion.div
-                            className="overflow-hidden rounded-2xl border border-[#D49B35]/25 lg:h-[280px]"
-                            initial={{ opacity: 0, scale: 0.96, clipPath: 'inset(0% 0% 12% 0%)' }}
-                            animate={{ opacity: 1, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
-                            transition={{ ...SPRING, delay: 0.1 }}
-                          >
-                            <img src={s.image} alt={s.title} loading="lazy" className="h-[240px] w-full object-cover lg:h-full" />
-                          </motion.div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                      layoutId="scope-pill"
+                      transition={SPRING}
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675]"
+                    />
+                  )}
+                  <Icon className="relative h-3.5 w-3.5" />
+                  <span className="relative">{t.label}</span>
+                </button>
               )
             })}
           </div>
+        </Reveal>
+
+        {/* ---------------- panel ---------------- */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.4, ease: EASE }}
+          >
+            <div className="mt-8 flex items-start gap-4 rounded-2xl border border-[#D49B35]/25 bg-[#0D3528]/40 p-6">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#D49B35]/40 text-[#E6C675]">
+                <ActiveIcon className="h-4 w-4" />
+              </span>
+              <div>
+                <h3 className="g28-serif text-[22px] font-bold text-[#FAF6F0]">{active.label}</h3>
+                <p className="mt-1.5 max-w-[640px] text-[14px] font-medium leading-[1.7] text-[#B8B2A6]">{active.intro}</p>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {active.items.map((item, i) => {
+                const Icon = item.icon
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ ...SPRING, delay: 0.04 * i }}
+                  >
+                    <SpotlightTiltCard
+                      dark
+                      radius="rounded-2xl"
+                      glow={360}
+                      lift={5}
+                      className="h-full border border-[#FAF6F0]/[0.08] bg-[#0D3528]/55 p-6"
+                    >
+                      {({ hovered }) => (
+                        <>
+                          <span className="grid h-12 w-12 place-items-center rounded-full border border-[#D49B35]/40 bg-[#051812]/60 transition-colors duration-500">
+                            <Icon className={`h-5 w-5 transition-colors duration-500 ${hovered ? 'text-[#E6C675]' : 'text-[#D49B35]'}`} />
+                          </span>
+
+                          <h4 className="g28-serif mt-5 text-[20px] font-bold leading-tight text-[#FAF6F0]">{item.title}</h4>
+                          <p className="mt-2.5 text-[13px] font-medium leading-[1.65] text-[#B8B2A6]">{item.body}</p>
+
+                          <div className="relative mt-5 h-px w-full bg-[#FAF6F0]/10">
+                            <motion.div
+                              className="absolute inset-y-0 left-0 w-full origin-left bg-gradient-to-r from-[#D49B35] to-[#E6C675]"
+                              initial={{ scaleX: 0 }}
+                              animate={{ scaleX: hovered ? 1 : 0 }}
+                              transition={{ duration: 0.5, ease: EASE }}
+                            />
+                          </div>
+
+                          <ul className="mt-5 flex flex-1 flex-col gap-2.5">
+                            {item.points.map((pt) => (
+                              <li key={pt} className="flex items-start gap-2.5 text-[12px] font-medium leading-[1.5] text-[#FAF6F0]/70">
+                                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D49B35]" />
+                                {pt}
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                    </SpotlightTiltCard>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  )
+}
+
+/* ==========================================================================
+   12b. INDUSTRIES WE WORK WITH  —  8-card interactive bento
+   ========================================================================== */
+
+function Industries() {
+  return (
+    <section id="industries" className="relative scroll-mt-24 overflow-hidden bg-[#08251C] py-24 sm:py-28">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: isoPattern() }} />
+
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+        <SectionHead tag="Sectors we serve" title={INDUSTRIES.heading} sub={INDUSTRIES.sub} align="center" />
+
+        <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" step={0.07}>
+          {INDUSTRIES.items.map((ind) => {
+            const Icon = ind.icon
+            return (
+              <SpotlightTiltCard
+                key={ind.title}
+                dark
+                radius="rounded-2xl"
+                glow={340}
+                lift={6}
+                className="h-full border border-[#FAF6F0]/[0.08] bg-[#0D3528]/55 p-6"
+              >
+                {({ hovered }) => (
+                  <>
+                    <div className="flex items-start justify-between gap-4">
+                      <span className="grid h-12 w-12 place-items-center rounded-full border border-[#D49B35]/40 bg-[#051812]/60">
+                        <Icon className={`h-5 w-5 transition-colors duration-500 ${hovered ? 'text-[#E6C675]' : 'text-[#D49B35]'}`} />
+                      </span>
+                      <span aria-hidden="true" className="g28-serif text-[34px] font-bold leading-none text-[#FAF6F0]/10">
+                        {String(INDUSTRIES.items.indexOf(ind) + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    <h3 className="g28-serif mt-5 text-[19px] font-bold leading-tight text-[#FAF6F0]">{ind.title}</h3>
+                    <p className="mt-2.5 flex-1 text-[12.5px] font-medium leading-[1.65] text-[#B8B2A6]">{ind.body}</p>
+
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {ind.tags.map((tg) => (
+                        <span key={tg} className="rounded-full border border-[#D49B35]/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-[#E6C675]/80">
+                          {tg}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </SpotlightTiltCard>
+            )
+          })}
+        </Stagger>
+      </div>
+    </section>
+  )
+}
+
+/* ==========================================================================
+   12c. MATERIALS & PRODUCTS WE USE  —  swatches + dealer specialties
+   ========================================================================== */
+
+function Materials() {
+  return (
+    <section id="materials" className="relative scroll-mt-24 overflow-hidden bg-[#FAF6F0] py-24 sm:py-28">
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHead tag="Materials & Products" title={MATERIALS.heading} sub={MATERIALS.sub} tone="light" className="max-w-[680px]" />
         </div>
+
+        <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" step={0.06}>
+          {MATERIALS.items.map((m) => {
+            const Icon = m.icon
+            return (
+              <SpotlightTiltCard
+                key={m.name}
+                dark={false}
+                radius="rounded-2xl"
+                glow={340}
+                lift={5}
+                className="h-full overflow-hidden border border-[#08251C]/[0.07] bg-[#F2ECE1]"
+              >
+                {({ hovered }) => (
+                  <>
+                    {/* material swatch */}
+                    <div className="relative h-[92px] w-full" style={{ background: m.swatch }}>
+                      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,.45)_0%,transparent_38%,rgba(0,0,0,.14)_100%)]" />
+                      <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#F2ECE1] to-transparent" />
+                      <span className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/45 bg-white/25 backdrop-blur">
+                        <Icon className="h-4 w-4" style={{ color: m.tone }} />
+                      </span>
+                      <span
+                        className="absolute right-4 top-4 h-2 w-2 rounded-full transition-transform duration-500"
+                        style={{ background: m.tone, transform: hovered ? 'scale(1.6)' : 'scale(1)' }}
+                      />
+                    </div>
+
+                    <div className="flex flex-1 flex-col p-6">
+                      <h3 className="g28-serif text-[20px] font-bold text-[#08251C]">{m.name}</h3>
+                      <p className="mt-2.5 flex-1 text-[13px] font-medium leading-[1.65] text-[#5F6B64]">{m.body}</p>
+
+                      <div className="relative mt-5 h-px w-full bg-[#08251C]/10">
+                        <motion.div
+                          className="absolute inset-y-0 left-0 w-full origin-left bg-gradient-to-r from-[#D49B35] to-[#E6C675]"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: hovered ? 1 : 0 }}
+                          transition={{ duration: 0.5, ease: EASE }}
+                        />
+                      </div>
+                      <span className="mt-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#8F6218]">Factory sourced</span>
+                    </div>
+                  </>
+                )}
+              </SpotlightTiltCard>
+            )
+          })}
+        </Stagger>
+
+        {/* specialised dealer supply */}
+        <Reveal delay={0.1}>
+          <div className="mt-12 rounded-2xl border border-[#08251C]/[0.08] bg-[#F2ECE1] p-8 sm:p-10">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-[520px]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#D49B35]/45 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#8F6218]">
+                  <Package className="h-3 w-3" />
+                  Dealer Specialities
+                </span>
+                <h3 className="g28-serif mt-5 text-[26px] font-bold leading-tight text-[#08251C] sm:text-[30px]">
+                  {MATERIALS.specialtyHeading}
+                </h3>
+                <p className="mt-3 text-[14px] font-medium leading-[1.7] text-[#5F6B64]">{MATERIALS.specialtySub}</p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 lg:max-w-[520px] lg:justify-end">
+                {MATERIALS.specialty.map((sp, i) => (
+                  <motion.span
+                    key={sp}
+                    initial={{ opacity: 0, scale: 0.94 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={VIEWPORT}
+                    transition={{ ...SPRING, delay: i * 0.05 }}
+                    whileHover={{ y: -3 }}
+                    className="rounded-full border border-[#08251C]/12 bg-[#FAF6F0] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.1em] text-[#08251C]/75 transition-colors duration-400 hover:border-[#D49B35] hover:text-[#8F6218]"
+                  >
+                    {sp}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ==========================================================================
+   12d. BRANDS WE DEAL WITH  —  custom stylised logo marks
+   ========================================================================== */
+
+function Brands() {
+  return (
+    <section id="brands" className="relative scroll-mt-24 overflow-hidden bg-[#08251C] py-24 sm:py-28">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: isoPattern() }} />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 top-1/3 h-[520px] w-[520px] rounded-full bg-[#D49B35]/10 blur-[150px]" />
+
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-[620px]">
+            <Reveal>
+              <Tag tone="gold">
+                <Sparkles className="h-3 w-3" />
+                {BRANDS.badge}
+              </Tag>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h2 className="g28-serif mt-6 text-[34px] font-bold leading-[1.08] tracking-[-0.02em] text-[#FAF6F0] sm:text-[42px] lg:text-[52px]">
+                {BRANDS.heading}
+              </h2>
+            </Reveal>
+          </div>
+          <Reveal delay={0.12}>
+            <p className="max-w-[460px] text-[15px] font-medium leading-[1.65] text-[#B8B2A6] lg:pb-2">{BRANDS.sub}</p>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* infinite brand name marquee */}
+      <div className="relative mt-12 border-y border-[#FAF6F0]/10 py-5">
+        <Marquee speed={40}>
+          <div className="flex items-center">
+            {BRANDS.marquee.map((b) => (
+              <span key={b} className="flex items-center whitespace-nowrap">
+                <span className="px-6 text-[13px] font-bold uppercase tracking-[0.2em] text-[#FAF6F0]/45">{b}</span>
+                <span className="text-[#D49B35]">&#10022;</span>
+              </span>
+            ))}
+          </div>
+        </Marquee>
+      </div>
+
+      {/* logo grid */}
+      <div className="relative mx-auto mt-14 w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+        <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" step={0.05}>
+          {BRANDS.items.map((brand) => (
+            <SpotlightTiltCard
+              key={brand.name}
+              dark={false}
+              radius="rounded-2xl"
+              glow={320}
+              lift={6}
+              className="min-h-[152px] bg-white"
+            >
+              {({ hovered }) => (
+                <div className="flex h-full flex-col justify-between p-6">
+                  <div className="flex flex-1 items-center justify-center py-2">{brand.render()}</div>
+                  <div className="flex items-center justify-between gap-3 border-t border-neutral-100 pt-3">
+                    <span className="truncate text-[11px] text-neutral-500">{brand.category}</span>
+                    <motion.span
+                      className="shrink-0 text-[11px] font-bold text-[#D49B35]"
+                      initial={false}
+                      animate={{ opacity: hovered ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      &#10003; Genuine
+                    </motion.span>
+                  </div>
+                </div>
+              )}
+            </SpotlightTiltCard>
+          ))}
+        </Stagger>
+      </div>
+    </section>
+  )
+}
+
+/* ==========================================================================
+   12e. GROUP OF COMPANIES  —  the Vinayaga Group legacy
+   ========================================================================== */
+
+function GroupCompanies() {
+  return (
+    <section id="group" className="relative scroll-mt-24 overflow-hidden bg-[#FAF6F0] py-24 sm:py-28">
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+        <SectionHead tag="The ecosystem behind us" title={GROUP.heading} sub={GROUP.sub} tone="light" align="center" />
+
+        <Stagger className="mt-14 grid gap-5 lg:grid-cols-3" step={0.1}>
+          {GROUP.companies.map((c, i) => {
+            const Icon = c.icon
+            return (
+              <SpotlightTiltCard
+                key={c.name}
+                dark={i === 2}
+                radius="rounded-2xl"
+                glow={400}
+                lift={7}
+                className={`h-full border p-8 ${
+                  i === 2 ? 'border-[#D49B35]/45 bg-[#08251C]' : 'border-[#08251C]/[0.08] bg-[#F2ECE1]'
+                }`}
+              >
+                {({ hovered }) => (
+                  <>
+                    <div className="flex items-start justify-between gap-4">
+                      <span
+                        className={`grid h-14 w-14 place-items-center rounded-full border transition-colors duration-500 ${
+                          i === 2 ? 'border-[#D49B35]/45 bg-[#0D3528]' : 'border-[#D49B35]/40 bg-[#FAF6F0]'
+                        }`}
+                      >
+                        <Icon className={`h-5 w-5 ${i === 2 ? 'text-[#E6C675]' : 'text-[#8F6218]'}`} />
+                      </span>
+                      <span
+                        className="rounded-full px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em]"
+                        style={{ background: `${c.accent}22`, color: i === 2 ? '#E6C675' : '#8F6218' }}
+                      >
+                        {c.role}
+                      </span>
+                    </div>
+
+                    <h3 className={`g28-serif mt-7 text-[26px] font-bold leading-tight ${i === 2 ? 'text-[#FAF6F0]' : 'text-[#08251C]'}`}>
+                      {c.name}
+                    </h3>
+                    <p className={`mt-3.5 flex-1 text-[13.5px] font-medium leading-[1.75] ${i === 2 ? 'text-[#B8B2A6]' : 'text-[#5F6B64]'}`}>
+                      {c.body}
+                    </p>
+
+                    <div className="relative mt-6 h-px w-full" style={{ background: i === 2 ? 'rgba(250,246,240,.12)' : 'rgba(8,37,28,.1)' }}>
+                      <motion.div
+                        className="absolute inset-y-0 left-0 w-full origin-left bg-gradient-to-r from-[#D49B35] to-[#E6C675]"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: hovered ? 1 : 0 }}
+                        transition={{ duration: 0.55, ease: EASE }}
+                      />
+                    </div>
+
+                    <ul className="mt-5 flex flex-col gap-2.5">
+                      {c.points.map((p) => (
+                        <li
+                          key={p}
+                          className={`flex items-start gap-2.5 text-[12.5px] font-medium leading-[1.55] ${i === 2 ? 'text-[#FAF6F0]/75' : 'text-[#08251C]/75'}`}
+                        >
+                          <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D49B35]" />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </SpotlightTiltCard>
+            )
+          })}
+        </Stagger>
       </div>
     </section>
   )
@@ -2905,7 +3773,7 @@ function Field({ name, label, type, placeholder, required }) {
    17. FOOTER
    ========================================================================== */
 
-function Footer() {
+function Footer({ onNavigate }) {
   return (
     <footer className="relative overflow-hidden bg-[#051812] pt-20 pb-10">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: isoPattern() }} />
@@ -2941,6 +3809,20 @@ function Footer() {
                     </a>
                   </li>
                 ))}
+                {col.title === 'Explore' && (
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => onNavigate && onNavigate('founder')}
+                      className="group inline-flex items-center gap-2 text-[14px] font-semibold text-[#E6C675] transition-colors duration-300 hover:text-[#F2E2BE]"
+                    >
+                      Founder&rsquo;s Story
+                      <span className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-2 py-[3px] text-[8px] font-bold uppercase leading-none tracking-[0.12em] text-[#051812]">
+                        Story
+                      </span>
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           ))}
@@ -3017,12 +3899,307 @@ function WhatsAppFab() {
    19. APP  —  composition + global ambient lighting
    ========================================================================== */
 
+/* ==========================================================================
+   19b. FOUNDER'S STORY  —  dedicated full page view
+   ========================================================================== */
+
+function FounderStory({ onBack, lampOn, toggleLamp }) {
+  const reduce = useReducedMotion()
+
+  return (
+    <div className="relative min-h-screen bg-[#051812]">
+      {/* ---------------- hero ---------------- */}
+      <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-24">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: isoPattern() }} />
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          animate={{ opacity: lampOn ? 1 : 0.2 }}
+          transition={{ duration: 1.1, ease: EASE }}
+          style={{ background: 'radial-gradient(900px 620px at 78% 4%, rgba(230,198,117,.22), transparent 66%)' }}
+        />
+
+        <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+          <Reveal>
+            <button
+              type="button"
+              onClick={onBack}
+              className="group inline-flex items-center gap-2.5 rounded-full border border-[#FAF6F0]/18 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#FAF6F0]/70 transition-colors duration-400 hover:border-[#D49B35] hover:text-[#E6C675]"
+            >
+              <ArrowRight className="h-3.5 w-3.5 rotate-180 transition-transform duration-400 group-hover:-translate-x-1" />
+              {FOUNDER.back}
+            </button>
+          </Reveal>
+
+          <div className="mt-12 grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+            <div>
+              <Reveal delay={0.05}>
+                <Tag tone="gold">
+                  <Sparkles className="h-3 w-3" />
+                  {FOUNDER.eyebrow}
+                </Tag>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <h1 className="g28-serif mt-7 text-[38px] font-bold leading-[1.04] tracking-[-0.03em] text-[#FAF6F0] sm:text-[52px] lg:text-[62px]">
+                  {FOUNDER.heading.split('\n').map((line, i) => (
+                    <span key={line} className="block overflow-hidden pb-[0.06em]">
+                      <motion.span
+                        className={`block ${i === 1 ? 'g28-gold-text' : ''}`}
+                        initial={reduce ? false : { y: '110%' }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 1, delay: 0.15 + i * 0.1, ease: EASE }}
+                      >
+                        {line}
+                      </motion.span>
+                    </span>
+                  ))}
+                </h1>
+              </Reveal>
+
+              <Reveal delay={0.22}>
+                <div className="mt-10 border-l-2 border-[#D49B35]/50 pl-6">
+                  <p className="g28-serif text-[20px] font-semibold italic leading-[1.5] text-[#E6C675] sm:text-[24px]">
+                    &ldquo;{FOUNDER.quote}&rdquo;
+                  </p>
+                  <div className="mt-5">
+                    <div className="text-[15px] font-bold text-[#FAF6F0]">{FOUNDER.name}</div>
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#B8B2A6]">{FOUNDER.role}</div>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.28}>
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <RollButton href="#contact" tone="gold" onClick={onBack}>
+                    {FOUNDER.cta}
+                  </RollButton>
+                  <RollButton href={CONTACT.whatsapp} tone="ghostDark" icon={MessageCircle}>
+                    WhatsApp
+                  </RollButton>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* stats column */}
+            <div className="flex flex-col gap-4">
+              {FOUNDER.stats.map((s, i) => (
+                <Reveal key={s.label} delay={0.15 + i * 0.08}>
+                  <div className="rounded-2xl border border-[#FAF6F0]/[0.08] bg-[#0D3528]/55 p-7">
+                    <div className="g28-serif text-[40px] font-bold leading-none text-[#E6C675]">
+                      {s.suffix ? <Counter to={Number(s.value)} suffix={s.suffix} /> : s.value}
+                    </div>
+                    <div className="mt-3 text-[12px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/85">{s.label}</div>
+                    <div className="mt-1 text-[11px] font-medium text-[#B8B2A6]">{s.sub}</div>
+                  </div>
+                </Reveal>
+              ))}
+              <Reveal delay={0.4}>
+                <div className="flex items-center gap-4 rounded-2xl border border-[#D49B35]/30 bg-[#0D3528]/70 p-5">
+                  <PendantLamp on={lampOn} onToggle={toggleLamp} compact className="relative h-[110px] w-[96px] shrink-0" />
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]">Ambient Lighting</div>
+                    <div className="mt-1.5 text-[12px] font-medium leading-[1.6] text-[#B8B2A6]">
+                      Tap the pendant to preview how calibrated lighting changes a finished floor.
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- narrative ---------------- */}
+      <section className="relative bg-[#FAF6F0] py-20 sm:py-28">
+        <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+          <div className="grid gap-14 lg:grid-cols-[0.32fr_0.68fr] lg:gap-20">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <Reveal>
+                <Tag tone="light">The Narrative</Tag>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="g28-serif mt-6 text-[30px] font-bold leading-[1.1] text-[#08251C] sm:text-[36px]">
+                  Built on materials,
+                  <br />
+                  <span className="text-[#8F6218]">not on drawings alone.</span>
+                </h2>
+              </Reveal>
+            </div>
+
+            <div className="flex flex-col gap-6">
+              {FOUNDER.paragraphs.map((p, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <p className="max-w-[680px] text-[15px] font-medium leading-[1.85] text-[#5F6B64] sm:text-[16px]">{p}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- pillars ---------------- */}
+      <section className="relative bg-[#FAF6F0] pb-24 sm:pb-28">
+        <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+          <Reveal>
+            <h2 className="g28-serif text-[30px] font-bold leading-tight text-[#08251C] sm:text-[38px]">
+              What that foundation gives you
+            </h2>
+          </Reveal>
+
+          <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" step={0.08}>
+            {FOUNDER.pillars.map((p) => {
+              const Icon = p.icon
+              return (
+                <SpotlightTiltCard
+                  key={p.title}
+                  dark={false}
+                  radius="rounded-2xl"
+                  glow={340}
+                  lift={6}
+                  className="h-full border border-[#08251C]/[0.07] bg-[#F2ECE1] p-7"
+                >
+                  {({ hovered }) => (
+                    <>
+                      <span className="grid h-12 w-12 place-items-center rounded-full border border-[#D49B35]/40 bg-[#FAF6F0]">
+                        <Icon className={`h-5 w-5 transition-colors duration-500 ${hovered ? 'text-[#D49B35]' : 'text-[#8F6218]'}`} />
+                      </span>
+                      <h3 className="g28-serif mt-6 text-[21px] font-bold leading-tight text-[#08251C]">{p.title}</h3>
+                      <p className="mt-3 flex-1 text-[13px] font-medium leading-[1.7] text-[#5F6B64]">{p.body}</p>
+                      <div className="relative mt-6 h-px w-full bg-[#08251C]/10">
+                        <motion.div
+                          className="absolute inset-y-0 left-0 w-full origin-left bg-gradient-to-r from-[#D49B35] to-[#E6C675]"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: hovered ? 1 : 0 }}
+                          transition={{ duration: 0.5, ease: EASE }}
+                        />
+                      </div>
+                    </>
+                  )}
+                </SpotlightTiltCard>
+              )
+            })}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ---------------- group heritage strip ---------------- */}
+      <section className="relative bg-[#08251C] py-20 sm:py-24">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: isoPattern() }} />
+        <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHead tag="The Group" title="One family, three companies." sub={GROUP.sub} className="max-w-[620px]" />
+            <Reveal delay={0.1}>
+              <RollButton href="#group" tone="gold" onClick={onBack}>
+                See Group Companies
+              </RollButton>
+            </Reveal>
+          </div>
+
+          <Stagger className="mt-12 grid gap-4 lg:grid-cols-3" step={0.1}>
+            {GROUP.companies.map((c) => {
+              const Icon = c.icon
+              return (
+                <SpotlightTiltCard
+                  key={c.name}
+                  dark
+                  radius="rounded-2xl"
+                  glow={380}
+                  lift={6}
+                  className="h-full border border-[#FAF6F0]/[0.08] bg-[#0D3528]/55 p-7"
+                >
+                  {({ hovered }) => (
+                    <>
+                      <div className="flex items-start justify-between gap-4">
+                        <span className="grid h-12 w-12 place-items-center rounded-full border border-[#D49B35]/40 bg-[#051812]/60">
+                          <Icon className={`h-5 w-5 transition-colors duration-500 ${hovered ? 'text-[#E6C675]' : 'text-[#D49B35]'}`} />
+                        </span>
+                        <span className="rounded-full px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#E6C675]" style={{ background: `${c.accent}22` }}>
+                          {c.role}
+                        </span>
+                      </div>
+                      <h3 className="g28-serif mt-6 text-[22px] font-bold leading-tight text-[#FAF6F0]">{c.name}</h3>
+                      <p className="mt-3 flex-1 text-[13px] font-medium leading-[1.7] text-[#B8B2A6]">{c.body}</p>
+                    </>
+                  )}
+                </SpotlightTiltCard>
+              )
+            })}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ---------------- closing cta ---------------- */}
+      <section className="relative overflow-hidden bg-[#051812] py-20 sm:py-24">
+        <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#D49B35]/18 blur-[150px]" />
+        <div className="relative mx-auto max-w-[900px] px-5 text-center sm:px-6">
+          <Reveal>
+            <h2 className="g28-serif text-[32px] font-bold leading-[1.08] tracking-[-0.02em] text-[#FAF6F0] sm:text-[44px]">
+              Let&apos;s build something that actually works.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-5 max-w-[460px] text-[15px] font-medium leading-[1.7] text-[#B8B2A6]">
+              Speak directly with {FOUNDER.name} about your space, your budget and your timeline.
+            </p>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+              <RollButton href="#contact" tone="gold" onClick={onBack}>
+                {FOUNDER.cta}
+              </RollButton>
+              <RollButton href="#top" tone="ghostDark" onClick={onBack} icon={ArrowRight}>
+                {FOUNDER.back}
+              </RollButton>
+            </div>
+          </Reveal>
+          <Reveal delay={0.22}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[13px] font-medium text-[#B8B2A6]">
+              <a href={`tel:${CONTACT.tel[0]}`} className="inline-flex items-center gap-2 transition-colors hover:text-[#E6C675]">
+                <Phone className="h-3.5 w-3.5 text-[#D49B35]" />
+                {CONTACT.phones[0]}
+              </a>
+              <a href={`mailto:${CONTACT.email}`} className="inline-flex items-center gap-2 transition-colors hover:text-[#E6C675]">
+                <Mail className="h-3.5 w-3.5 text-[#D49B35]" />
+                {CONTACT.email}
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 export default function App() {
   const [lampOn, setLampOn] = useState(true)
   const toggleLamp = () => setLampOn((v) => !v)
 
   /* one global pointer listener feeds every hanging object's pendulum */
   usePointerImpulse()
+
+  /* ---------------- view routing: main site <-> founder's story ---------------- */
+  const [view, setView] = useState('main')
+
+  const navigate = (next) => {
+    setView(next)
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }
+
+  /* keep the hash in sync so the founder page is shareable / back-button friendly */
+  useEffect(() => {
+    const onHash = () => setView(window.location.hash === '#founder' ? 'founder' : 'main')
+    onHash()
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  useEffect(() => {
+    const target = view === 'founder' ? '#founder' : '#'
+    if (window.location.hash !== target) {
+      history.replaceState(null, '', view === 'founder' ? '#founder' : window.location.pathname + window.location.search)
+    }
+  }, [view])
 
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
@@ -3072,33 +4249,49 @@ export default function App() {
         }}
       />
 
-      <Navbar lampOn={lampOn} toggleLamp={toggleLamp} />
+      <Navbar lampOn={lampOn} toggleLamp={toggleLamp} view={view} onNavigate={navigate} />
 
-      <main>
-        <Hero lampOn={lampOn} toggleLamp={toggleLamp} />
+      {view === 'founder' ? (
+        <FounderStory onBack={() => navigate('main')} lampOn={lampOn} toggleLamp={toggleLamp} />
+      ) : (
+        <main>
+          <Hero lampOn={lampOn} toggleLamp={toggleLamp} />
 
-        <Clients />
+          <Clients />
 
-        {/* dark #08251C → ivory #FAF6F0 */}
-        <Slash from="#08251C" to="#FAF6F0" />
-        <Process />
-        <Values />
+          {/* dark #08251C → ivory #FAF6F0 */}
+          <Slash from="#08251C" to="#FAF6F0" />
+          <Process />
+          <Values />
 
-        {/* ivory → dark #051812 */}
-        <Slash from="#FAF6F0" to="#051812" />
-        <Services />
+          {/* ivory → dark #051812 */}
+          <Slash from="#FAF6F0" to="#051812" />
+          <ScopeOfWork />
 
-        {/* dark → ivory */}
-        <Slash from="#051812" to="#FAF6F0" />
-        <Projects />
-        <Packages />
-        <Faq />
-        <Contact lampOn={lampOn} toggleLamp={toggleLamp} />
+          {/* dark #051812 → dark #08251C */}
+          <Industries />
 
-        {/* contact banner → footer */}
-        <FooterSlash />
-        <Footer />
-      </main>
+          {/* dark → ivory */}
+          <Slash from="#08251C" to="#FAF6F0" />
+          <Materials />
+          <GroupCompanies />
+
+          {/* ivory → dark #051812 */}
+          <Slash from="#FAF6F0" to="#051812" />
+          <Brands />
+
+          {/* dark → ivory */}
+          <Slash from="#051812" to="#FAF6F0" />
+          <Projects />
+          <Packages />
+          <Faq />
+          <Contact lampOn={lampOn} toggleLamp={toggleLamp} />
+
+          {/* contact banner → footer */}
+          <FooterSlash />
+          <Footer onNavigate={navigate} />
+        </main>
+      )}
 
       <WhatsAppFab />
     </div>

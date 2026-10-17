@@ -73,16 +73,42 @@ The static `index.html` needs no build — just open it in a browser.
 
 ## Sections
 
-1. Floating glass navbar (with hanging objects)
+1. Floating glass navbar (with hanging objects + Founder's Story badge)
 2. Hero — headline reveal, split-frame showcase, pendant lamp, KPI counters, service ticker
 3. Client trust marquee
-4. Our Process — sticky stacking cards with auto-highlighting step pills
+4. Our Process — **8-step** sticky stacking cards with auto-highlighting step pills
 5. Our Values — 3-column bento with cursor spotlight + tilt
-6. What We Offer — numbered accordion with a cursor-following image preview
-7. Work That Delivers Results — filterable case studies with a magnetic gold badge
-8. Transparent Execution Packages — conic gold shimmer + slot-machine price roll
-9. FAQ — category tabs + accordions
-10. Get In Touch — split-diagonal banner, inquiry form, footer
+6. **Scope of Work** — tabbed bento (Commercial & Corporate / Residential) of spotlight tilt cards with full checklists
+7. **Industries We Work With** — 8-sector interactive bento grid
+8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags
+9. **The Vinayaga Group Legacy** — 3-company architectural showcase
+10. **Brands We Deal With** — 11 custom stylised logo marks + infinite brand marquee
+11. Work That Delivers Results — 5-pillar filterable case studies with magnetic gold badge
+12. Transparent Execution Packages — conic gold shimmer + slot-machine price roll
+13. FAQ — category tabs + accordions
+14. Get In Touch — split-diagonal banner, inquiry form, footer
+
+### Founder's Story page
+
+A dedicated full-page view (routed via `#founder`, shareable and back-button friendly)
+covering Goutham Arivalagan's narrative, the four pillars the material-dealership
+foundation gives clients, and the three group companies.
+
+---
+
+## Brand positioning
+
+G28 Interiors is positioned as the **turnkey interior execution and design arm of the
+Vinayaga Group** — backed by Vinayaga Traders and Vinayaga Aluminium Company.
+
+The differentiator is **direct material dealership**: because the group supplies
+aluminium profiles, gypsum, fibre cement boards, ceiling sections and grid systems,
+G28 delivers material authenticity and factory-direct pricing that a pure contractor
+cannot match.
+
+**Note:** the scope is deliberately interior execution only. There are no civil, MEP or
+HVAC claims anywhere in the site — the capability story is built on in-house interior
+execution, partitions, false ceilings, joinery, metal works and finish.
 
 ---
 
