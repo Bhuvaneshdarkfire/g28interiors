@@ -256,14 +256,14 @@ const CONTACT = {
 
 /* Founder's Story link carries a gold badge in the navbar */
 const NAV = [
-  { label: 'Services', href: '#services' },
-  { label: 'Scope of Work', href: '#scope' },
-  { label: 'Process', href: '#process' },
-  { label: 'Projects', href: '#portfolio' },
-  { label: 'Materials & Brands', href: '#materials' },
-  { label: 'Group Companies', href: '#group' },
-  { label: 'Founder\u2019s Story', view: 'founder', badge: true },
-  { label: 'Contact', href: '#contact' }
+  { label: 'Services', href: '#services', tier: 1 },
+  { label: 'Scope of Work', short: 'Scope', href: '#scope', tier: 1 },
+  { label: 'Process', href: '#process', tier: 1 },
+  { label: 'Projects', href: '#portfolio', tier: 1 },
+  { label: 'Materials & Brands', short: 'Materials', href: '#materials', tier: 2 },
+  { label: 'Group Companies', short: 'Group', href: '#group', tier: 2 },
+  { label: 'Founder\u2019s Story', short: 'Founder', view: 'founder', badge: true, tier: 1 },
+  { label: 'Contact', href: '#contact', tier: 1 }
 ]
 
 const IMG = {
@@ -1215,46 +1215,107 @@ const FOOTER = {
 const isoPattern = (stroke = '%23E6C675') =>
   `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='190' height='220'><g fill='none' stroke='${stroke}' stroke-width='1' stroke-linejoin='round'><path d='M95 20 L175 66 L95 112 L15 66 Z'/><path d='M95 20 L95 112'/><path d='M15 66 L15 158 L95 204 L175 158 L175 66'/><path d='M95 112 L95 204'/><path d='M52 44 L132 90 L132 150'/></g></svg>")`
 
-/* G28 logomark — roofline + pendant lamp ---------------------------------- */
-function G28Mark({ className = 'h-9 w-9' }) {
+/* ---------------------------------------------------------------------------
+   G28 ROOF — the brand mark: angular gold roofline (short left cap → apex →
+   right slope → vertical drop) with a pendant lamp hanging from the apex.
+   Matches the identity exactly.
+--------------------------------------------------------------------------- */
+function G28Roof({ className = '', style, strokeWidth = 6, glow = true }) {
   return (
-    <svg viewBox="0 0 132 120" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 100 130" fill="none" className={className} style={style} aria-hidden="true">
       <defs>
-        <linearGradient id="g28g" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="g28RoofGold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#A87724" />
-          <stop offset="34%" stopColor="#D49B35" />
-          <stop offset="62%" stopColor="#F2E2BE" />
+          <stop offset="38%" stopColor="#D49B35" />
+          <stop offset="68%" stopColor="#F2E2BE" />
           <stop offset="100%" stopColor="#D49B35" />
         </linearGradient>
-        <radialGradient id="g28lamp" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#F2E2BE" stopOpacity="0.95" />
-          <stop offset="48%" stopColor="#D49B35" stopOpacity="0.3" />
+        <radialGradient id="g28RoofGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FFF6E2" stopOpacity="0.95" />
+          <stop offset="45%" stopColor="#E6C675" stopOpacity="0.3" />
           <stop offset="100%" stopColor="#D49B35" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <path d="M14 44 L66 14 L118 44" stroke="url(#g28g)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      <line x1="66" y1="14" x2="66" y2="74" stroke="#D49B35" strokeWidth="3" />
-      <path d="M50 78 L82 78 L90 98 L42 98 Z" fill="url(#g28g)" />
-      <circle cx="66" cy="106" r="4" fill="#E6C675" />
-      <circle cx="66" cy="104" r="20" fill="url(#g28lamp)" opacity="0.85" />
+
+      {/* roofline */}
+      <path
+        d="M6 9 L24 9 L94 45 L94 122"
+        stroke="url(#g28RoofGold)"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* pendant cord from the apex */}
+      <line x1="24" y1="9" x2="24" y2="58" stroke="#D49B35" strokeWidth={strokeWidth * 0.4} />
+
+      {/* shade */}
+      <path d="M10 60 L38 60 L44 78 L4 78 Z" fill="url(#g28RoofGold)" />
+      <path d="M10 60 L38 60 L39 65 L9 65 Z" fill="#051812" opacity="0.28" />
+
+      {/* bulb + warm glow */}
+      {glow && <circle cx="24" cy="84" r="15" fill="url(#g28RoofGlow)" opacity="0.85" />}
+      <circle cx="24" cy="84" r="4.4" fill="#F2E2BE" />
     </svg>
   )
 }
 
-/* full logo lockup --------------------------------------------------------- */
-function G28Logo({ tone = 'light', className = '' }) {
-  const cream = tone === 'light'
+/* square app-icon version of the mark (used where a tile is needed) -------- */
+function G28Mark({ className = 'h-9 w-9', tone = 'dark' }) {
+  const dark = tone === 'dark'
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <G28Mark className="h-9 w-9 shrink-0" />
-      <span className="leading-none">
-        <span className={`g28-serif block text-[26px] font-bold leading-none tracking-[0.02em] ${cream ? 'g28-gold-text' : 'text-[#08251C]'}`}>
+    <span
+      className={`inline-grid shrink-0 place-items-center rounded-[22%] ${className}`}
+      style={{ background: dark ? '#08251C' : '#FAF6F0' }}
+    >
+      <G28Roof className="h-[82%] w-[82%]" strokeWidth={7} />
+    </span>
+  )
+}
+
+/* full lockup — G28 with the roof over the "2" and — I N T E R I O R S — below */
+function G28Logo({ tone = 'light', className = '', size = 30, showTagline = false }) {
+  const cream = tone === 'light'
+  const roofW = size * 0.94
+  const roofH = roofW * 1.3
+  const ruleW = size * 0.34
+  const subSize = Math.max(8, Math.round(size * 0.3))
+
+  return (
+    <span className={`inline-flex flex-col items-center ${className}`}>
+      <span className="relative inline-block" style={{ fontSize: `${size}px` }}>
+        <span
+          className={`g28-serif block font-bold leading-[0.76] tracking-[0.01em] ${
+            cream ? 'g28-gold-text' : 'text-[#08251C]'
+          }`}
+        >
           G28
         </span>
-        <span className={`mt-[3px] block text-[9px] font-bold uppercase tracking-[0.34em] ${cream ? 'text-[#FAF6F0]/55' : 'text-[#5F6B64]'}`}>
+        <G28Roof
+          className="pointer-events-none absolute"
+          style={{ left: '57%', top: '-0.66em', width: `${roofW}px`, height: `${roofH}px` }}
+          strokeWidth={5.5}
+        />
+      </span>
+
+      <span className="mt-[5px] flex items-center gap-[6px]" style={{ fontSize: `${subSize}px` }}>
+        <span className="block h-px" style={{ width: `${ruleW}px`, background: cream ? '#D49B35' : '#8F6218', opacity: 0.75 }} />
+        <span
+          className={`font-bold uppercase leading-none tracking-[0.3em] ${cream ? 'text-[#D49B35]' : 'text-[#8F6218]'}`}
+        >
           Interiors
         </span>
+        <span className="block h-px" style={{ width: `${ruleW}px`, background: cream ? '#D49B35' : '#8F6218', opacity: 0.75 }} />
       </span>
+
+      {showTagline && (
+        <span
+          className={`mt-[6px] font-medium leading-none ${cream ? 'text-[#FAF6F0]/60' : 'text-[#5F6B64]'}`}
+          style={{ fontSize: `${Math.max(8, Math.round(size * 0.28))}px` }}
+        >
+          Interior Execution &bull; Turnkey Solutions
+        </span>
+      )}
     </span>
   )
 }
@@ -2014,9 +2075,9 @@ function Navbar({ lampOn, toggleLamp, view, onNavigate }) {
   return (
     <>
       <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? 'py-2' : 'py-4'}`}>
-        <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6">
+        <div className="mx-auto w-full max-w-[1560px] px-4 sm:px-6">
           <div
-            className={`relative flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500 sm:px-5 ${
+            className={`relative flex items-center gap-4 rounded-full px-4 py-2.5 transition-all duration-500 sm:px-5 lg:px-7 ${
               scrolled
                 ? 'border border-[#D49B35]/25 bg-[#051812]/85 shadow-[0_24px_60px_-34px_rgba(0,0,0,.95)] backdrop-blur-xl'
                 : 'border border-transparent bg-transparent'
@@ -2046,40 +2107,40 @@ function Navbar({ lampOn, toggleLamp, view, onNavigate }) {
               <KeyRing />
             </motion.div>
 
-            <a href="#top" onClick={() => onNavigate && onNavigate('main')}>
-              <G28Logo />
+            <a href="#top" className="shrink-0" onClick={() => onNavigate && onNavigate('main')}>
+              <G28Logo size={scrolled ? 24 : 27} />
             </a>
 
-            <nav className="hidden items-center gap-6 xl:flex">
+            <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex xl:gap-9">
               {NAV.map((item) => {
                 const isFounder = item.view === 'founder'
-                const cls = `g28-underline relative text-[12.5px] font-semibold uppercase tracking-[0.11em] transition-colors duration-300 ${
+                const cls = `g28-underline relative whitespace-nowrap text-[12px] font-semibold uppercase tracking-[0.1em] transition-colors duration-300 xl:text-[12.5px] ${
                   isFounder ? 'text-[#E6C675]' : 'text-[#FAF6F0]/70 hover:text-[#E6C675]'
-                }`
+                } ${item.tier === 2 ? 'hidden xl:inline-block' : ''}`
                 return isFounder ? (
                   <button
                     key={item.label}
                     type="button"
                     onClick={() => onNavigate && onNavigate('founder')}
-                    className={cls}
+                    className={`${cls} inline-flex items-center gap-2`}
                   >
-                    {item.label}
-                    <span className="ml-2 inline-flex items-center rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-2 py-[3px] text-[8px] font-bold leading-none tracking-[0.12em] text-[#051812] align-middle">
+                    {item.short || item.label}
+                    <span className="inline-flex items-center rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-2 py-[3px] text-[8px] font-bold leading-none tracking-[0.12em] text-[#051812]">
                       STORY
                     </span>
                   </button>
                 ) : (
                   <a key={item.label} href={item.href} className={cls}>
-                    {item.label}
+                    {item.short || item.label}
                   </a>
                 )
               })}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="ml-auto flex shrink-0 items-center gap-3 lg:ml-0">
               <a
                 href={`tel:${CONTACT.tel[0]}`}
-                className="hidden items-center gap-2 text-[13px] font-semibold text-[#FAF6F0]/65 transition-colors hover:text-[#E6C675] xl:flex"
+                className="hidden items-center gap-2 whitespace-nowrap text-[13px] font-semibold text-[#FAF6F0]/65 transition-colors hover:text-[#E6C675] 2xl:flex"
               >
                 <Phone className="h-3.5 w-3.5 text-[#D49B35]" />
                 {CONTACT.phones[0]}
@@ -2098,6 +2159,7 @@ function Navbar({ lampOn, toggleLamp, view, onNavigate }) {
                 <Menu className="h-4 w-4" />
               </button>
             </div>
+
           </div>
         </div>
       </header>

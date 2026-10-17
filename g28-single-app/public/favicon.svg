@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A87724"/>
+      <stop offset="38%" stop-color="#D49B35"/>
+      <stop offset="68%" stop-color="#F2E2BE"/>
+      <stop offset="100%" stop-color="#D49B35"/>
+    </linearGradient>
+    <radialGradient id="favGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF6E2" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#D49B35" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="13" fill="#08251C"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="12.4" fill="none" stroke="#D49B35" stroke-opacity="0.35" stroke-width="1.5"/>
+
+  <g stroke="url(#favGold)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- roofline: left cap -> apex -> right slope -> vertical drop -->
+    <path d="M14 9 L22 9 L54 25 L54 45" stroke-width="3.4"/>
+    <!-- pendant cord -->
+    <line x1="22" y1="9" x2="22" y2="29" stroke-width="1.5"/>
+  </g>
+
+  <!-- pendant shade + bulb glow -->
+  <path d="M16.5 30 L27.5 30 L30 37 L14 37 Z" fill="url(#favGold)"/>
+  <circle cx="22" cy="40" r="2.4" fill="#F2E2BE"/>
+  <circle cx="22" cy="40" r="7" fill="url(#favGlow)" opacity="0.85"/>
+
+  <!-- G28 wordmark -->
+  <text x="32" y="58" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', 'Playfair Display', serif"
+        font-size="19" font-weight="700" fill="url(#favGold)">G28</text>
+</svg>
