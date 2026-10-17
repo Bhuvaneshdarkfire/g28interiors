@@ -71,6 +71,45 @@ The static `index.html` needs no build — just open it in a browser.
 
 ---
 
+## Admin — editing Work & Products
+
+The site ships with a built-in content editor for the two collections the client
+updates most often: **Work We Deliver** (projects) and **Products & Materials**.
+
+**Open it:** click the discreet `Admin` link in the footer, or go straight to
+`#admin`.
+
+**Default passphrase:** `g28@admin`
+
+From the panel you can add, edit, reorder and delete entries, then hit
+**View site** to see the change live.
+
+### How it stores data — read this
+
+This is a static site with no backend, so:
+
+- Edits are saved to **`localStorage` in that one browser**. They are **not**
+  shared with other visitors or other devices.
+- **Export / Import** moves content between machines — export a
+  `g28-content.json`, import it elsewhere. Use Export as your backup.
+- **Reset** discards all edits and restores the built-in defaults.
+
+**If you need edits to appear for every visitor**, export the JSON from the admin
+panel and send it over — the defaults in `src/App.jsx` can then be updated so the
+content ships with the site.
+
+### Security
+
+The passphrase is checked in the browser, which means it is a **content-editing
+gate, not real authentication** — anyone who reads the JavaScript bundle can see
+the check. It's appropriate for letting the client tweak their own copy without a
+CMS, and it keeps casual visitors out. Do not put anything confidential behind it.
+
+To change the passphrase, replace `DEFAULT_PASS_HASH` in `src/App.jsx` with the
+djb2 hash of your new passphrase.
+
+---
+
 ## Sections
 
 1. Floating glass navbar (with hanging objects + Founder's Story badge)
@@ -80,12 +119,12 @@ The static `index.html` needs no build — just open it in a browser.
 5. Our Values — 3-column bento with cursor spotlight + tilt
 6. **Scope of Work** — tabbed bento (Commercial & Corporate / Residential) of spotlight tilt cards with full checklists
 7. **Industries We Work With** — 8-sector interactive bento grid
-8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags
-9. **The Vinayaga Group Legacy** — 3-company architectural showcase
-10. **Brands We Deal With** — 11 custom stylised logo marks + infinite brand marquee
-11. Work That Delivers Results — 5-pillar filterable case studies with magnetic gold badge
-12. Transparent Execution Packages — conic gold shimmer + slot-machine price roll
-13. FAQ — category tabs + accordions
+8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags (admin-editable)
+9. **Brands We Deal With** — 11 custom stylised logo marks + infinite brand marquee
+10. Work That Delivers Results — 5-pillar filterable case studies (admin-editable)
+11. Transparent Execution Packages — conic gold shimmer + slot-machine price roll
+12. FAQ — category tabs + accordions
+13. **The Vinayaga Group Legacy** — 3-company architectural showcase
 14. Get In Touch — split-diagonal banner, inquiry form, footer
 
 ### Founder's Story page

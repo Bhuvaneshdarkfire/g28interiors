@@ -2929,7 +2929,7 @@ function Industries() {
    12c. MATERIALS & PRODUCTS WE USE  —  swatches + dealer specialties
    ========================================================================== */
 
-function Materials() {
+function Materials({ items = MATERIALS.items }) {
   return (
     <section id="materials" className="relative scroll-mt-24 overflow-hidden bg-[#FAF6F0] py-24 sm:py-28">
       <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
@@ -2938,8 +2938,8 @@ function Materials() {
         </div>
 
         <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" step={0.06}>
-          {MATERIALS.items.map((m) => {
-            const Icon = m.icon
+          {items.map((m) => {
+            const Icon = resolveIcon(m.iconName || m.icon)
             return (
               <SpotlightTiltCard
                 key={m.name}
@@ -3110,7 +3110,7 @@ function Brands() {
 
 function GroupCompanies() {
   return (
-    <section id="group" className="relative scroll-mt-24 overflow-hidden bg-[#FAF6F0] py-24 sm:py-28">
+    <section id="group" className="relative scroll-mt-24 overflow-hidden bg-[#F2ECE1] py-24 sm:py-28">
       <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
         <SectionHead tag="The ecosystem behind us" title={GROUP.heading} sub={GROUP.sub} tone="light" align="center" />
 
@@ -3290,12 +3290,12 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project }, ref) {
   )
 })
 
-function Projects() {
+function Projects({ items = PROJECTS.items }) {
   const [filter, setFilter] = useState('all')
 
   const visible = useMemo(
-    () => PROJECTS.items.filter((p) => filter === 'all' || p.cat === filter),
-    [filter]
+    () => items.filter((p) => filter === 'all' || p.cat === filter),
+    [filter, items]
   )
 
   return (
@@ -3924,8 +3924,17 @@ function Footer({ onNavigate }) {
           <p>
             © {BRAND.year} {BRAND.name}. All rights reserved.
           </p>
-          <p className="text-center sm:text-right">
-            {BRAND.tagline} · {BRAND.city}, Tamil Nadu
+          <p className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-end">
+            <span>
+              {BRAND.tagline} · {BRAND.city}, Tamil Nadu
+            </span>
+            <button
+              type="button"
+              onClick={() => onNavigate && onNavigate('admin')}
+              className="text-[12px] font-medium text-[#FAF6F0]/25 transition-colors duration-300 hover:text-[#E6C675]"
+            >
+              Admin
+            </button>
           </p>
         </div>
       </div>
@@ -4233,6 +4242,550 @@ function FounderStory({ onBack, lampOn, toggleLamp }) {
   )
 }
 
+/* ==========================================================================
+   20. CONTENT STORE  —  editable copy for Work + Products
+   --------------------------------------------------------------------------
+   A static site has no server, so edits are held in localStorage on this
+   device and layered over the defaults. Export/Import moves them between
+   machines. This is a content-editing gate, not a multi-user CMS.
+   ========================================================================== */
+
+const STORE_KEY = 'g28.content.v1'
+const PASS_KEY = 'g28.pass.v1'
+const SESSION_KEY = 'g28.session.v1'
+
+/* djb2 hash of the default passphrase — keeps it out of the bundle as plain text */
+const DEFAULT_PASS_HASH = '23f93587'
+
+const hashPass = (s) => {
+  let h = 5381
+  for (let i = 0; i < s.length; i++) h = (((h << 5) + h) ^ s.charCodeAt(i)) >>> 0
+  return h.toString(16)
+}
+
+const readJSON = (key, fallback) => {
+  try {
+    const raw = localStorage.getItem(key)
+    return raw ? JSON.parse(raw) : fallback
+  } catch {
+    return fallback
+  }
+}
+const writeJSON = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+    return true
+  } catch {
+    return false
+  }
+}
+
+function useContent() {
+  const [overrides, setOverrides] = useState(() => readJSON(STORE_KEY, {}))
+
+  const save = useCallback((next) => {
+    setOverrides(next)
+    writeJSON(STORE_KEY, next)
+  }, [])
+
+  const setCollection = useCallback(
+    (key, items) => save({ ...readJSON(STORE_KEY, {}), [key]: items }),
+    [save]
+  )
+
+  const reset = useCallback(() => {
+    try {
+      localStorage.removeItem(STORE_KEY)
+    } catch {}
+    setOverrides({})
+  }, [])
+
+  return {
+    projects: overrides.projects || PROJECTS.items,
+    materials: overrides.materials || MATERIALS.items,
+    isCustomised: Boolean(overrides.projects || overrides.materials),
+    setCollection,
+    reset
+  }
+}
+
+/* icon registry so a stored icon *name* can be resolved back to a component */
+const ICON_MAP = {
+  Layers,
+  Boxes,
+  Frame,
+  SquareStack,
+  PanelsTopLeft,
+  Blinds,
+  Warehouse,
+  Package,
+  Gem,
+  Ruler,
+  Hammer,
+  Wrench,
+  Sofa,
+  Table,
+  Armchair,
+  Lamp,
+  Lightbulb,
+  Building2,
+  Home,
+  Store
+}
+const resolveIcon = (icon, fallback = Package) =>
+  typeof icon === 'string' ? ICON_MAP[icon] || fallback : icon || fallback
+
+const PROJECT_CATS = [
+  { key: 'corporate', label: 'Corporate' },
+  { key: 'commercial', label: 'Commercial' },
+  { key: 'industrial', label: 'Industrial' },
+  { key: 'residential', label: 'Residential' }
+]
+
+/* ==========================================================================
+   20b. ADMIN LOGIN
+   ========================================================================== */
+
+function AdminLogin({ onAuth, onExit }) {
+  const [pass, setPass] = useState('')
+  const [err, setErr] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const submit = (e) => {
+    e.preventDefault()
+    setBusy(true)
+    const stored = localStorage.getItem(PASS_KEY) || DEFAULT_PASS_HASH
+    setTimeout(() => {
+      if (hashPass(pass) === stored) {
+        writeJSON(SESSION_KEY, { at: Date.now() })
+        onAuth()
+      } else {
+        setErr('Incorrect passphrase. Try again.')
+        setPass('')
+      }
+      setBusy(false)
+    }, 220)
+  }
+
+  return (
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#051812] px-5 py-24">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: isoPattern() }} />
+      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[#D49B35]/18 blur-[150px]" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ ...SPRING, duration: 0.6 }}
+        className="relative w-full max-w-[440px] rounded-2xl border border-[#D49B35]/25 bg-[#08251C]/80 p-8 backdrop-blur-xl sm:p-10"
+      >
+        <div className="flex flex-col items-center text-center">
+          <G28Logo size={30} />
+          <div className="mt-7 text-[10px] font-bold uppercase tracking-[0.28em] text-[#D49B35]">Content Admin</div>
+          <h1 className="g28-serif mt-3 text-[28px] font-bold leading-tight text-[#FAF6F0]">Sign in to edit</h1>
+          <p className="mt-3 text-[13px] font-medium leading-[1.6] text-[#B8B2A6]">
+            Manage the projects we deliver and the products we use.
+          </p>
+        </div>
+
+        <form onSubmit={submit} className="mt-8 flex flex-col gap-5">
+          <label className="block">
+            <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#D49B35]/85">Passphrase</span>
+            <input
+              type="password"
+              value={pass}
+              autoFocus
+              onChange={(e) => {
+                setPass(e.target.value)
+                setErr('')
+              }}
+              placeholder="••••••••"
+              className="g28-field mt-2"
+            />
+          </label>
+
+          {err && <p className="text-[13px] font-semibold text-[#E6C675]">{err}</p>}
+
+          <RollButton as="button" type="submit" tone="gold" className="w-full justify-center" icon={null}>
+            {busy ? 'Checking…' : 'Sign In'}
+          </RollButton>
+        </form>
+
+        <button
+          type="button"
+          onClick={onExit}
+          className="mt-6 w-full text-center text-[11px] font-bold uppercase tracking-[0.2em] text-[#FAF6F0]/45 transition-colors hover:text-[#E6C675]"
+        >
+          Back to site
+        </button>
+      </motion.div>
+    </div>
+  )
+}
+
+/* ==========================================================================
+   20c. ADMIN PANEL
+   ========================================================================== */
+
+function AdminField({ label, value, onChange, placeholder, type = 'text', rows }) {
+  return (
+    <label className="block">
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">{label}</span>
+      {rows ? (
+        <textarea
+          rows={rows}
+          value={value || ''}
+          placeholder={placeholder}
+          onChange={(e) => onChange(e.target.value)}
+          className="g28-field mt-1.5 resize-none"
+        />
+      ) : (
+        <input
+          type={type}
+          value={value || ''}
+          placeholder={placeholder}
+          onChange={(e) => onChange(e.target.value)}
+          className="g28-field mt-1.5"
+        />
+      )}
+    </label>
+  )
+}
+
+function AdminPanel({ content, onExit, onLogout }) {
+  const [tab, setTab] = useState('work')
+  const [editing, setEditing] = useState(null)
+  const [draft, setDraft] = useState(null)
+  const [note, setNote] = useState('')
+
+  const isWork = tab === 'work'
+  const items = isWork ? content.projects : content.materials
+
+  const flash = (msg) => {
+    setNote(msg)
+    setTimeout(() => setNote(''), 2200)
+  }
+
+  const startEdit = (i) => {
+    setEditing(i)
+    setDraft({ ...items[i] })
+  }
+  const cancel = () => {
+    setEditing(null)
+    setDraft(null)
+  }
+  const commit = () => {
+    const next = items.slice()
+    next[editing] = draft
+    content.setCollection(isWork ? 'projects' : 'materials', next)
+    cancel()
+    flash('Saved')
+  }
+  const remove = (i) => {
+    const next = items.filter((_, idx) => idx !== i)
+    content.setCollection(isWork ? 'projects' : 'materials', next)
+    cancel()
+    flash('Removed')
+  }
+  const move = (i, dir) => {
+    const j = i + dir
+    if (j < 0 || j >= items.length) return
+    const next = items.slice()
+    ;[next[i], next[j]] = [next[j], next[i]]
+    content.setCollection(isWork ? 'projects' : 'materials', next)
+  }
+  const add = () => {
+    const blank = isWork
+      ? { name: 'New Project', client: 'Client', service: 'Turnkey Interiors', area: '0 Sq. Ft.', cat: 'corporate', body: 'Describe the project…', image: '' }
+      : { name: 'New Material', body: 'Describe the material…', swatch: 'linear-gradient(135deg,#D8DDE2,#F2F5F7 34%,#A8B0B8 68%,#E4E9ED)', tone: '#3A444C', iconName: 'Package' }
+    const next = [...items, blank]
+    content.setCollection(isWork ? 'projects' : 'materials', next)
+    setEditing(next.length - 1)
+    setDraft({ ...blank })
+    flash('Added')
+  }
+
+  const exportJSON = () => {
+    const blob = new Blob([JSON.stringify({ projects: content.projects, materials: content.materials }, null, 2)], {
+      type: 'application/json'
+    })
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = 'g28-content.json'
+    a.click()
+    URL.revokeObjectURL(a.href)
+    flash('Exported g28-content.json')
+  }
+
+  const importJSON = (e) => {
+    const file = e.target.files && e.target.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result))
+        if (Array.isArray(parsed.projects)) content.setCollection('projects', parsed.projects)
+        if (Array.isArray(parsed.materials)) content.setCollection('materials', parsed.materials)
+        flash('Imported')
+      } catch {
+        flash('That file could not be read')
+      }
+    }
+    reader.readAsText(file)
+    e.target.value = ''
+  }
+
+  return (
+    <div className="min-h-screen bg-[#051812] pb-24">
+      {/* ---------------- bar ---------------- */}
+      <header className="sticky top-0 z-40 border-b border-[#FAF6F0]/10 bg-[#051812]/92 backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center gap-4 px-5 py-4 sm:px-6 lg:px-10">
+          <G28Logo size={22} />
+          <span className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[#051812]">
+            Admin
+          </span>
+          <div className="ml-auto flex flex-wrap items-center gap-2.5">
+            <button onClick={exportJSON} className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/75 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
+              Export
+            </button>
+            <label className="cursor-pointer rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/75 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
+              Import
+              <input type="file" accept="application/json" onChange={importJSON} className="hidden" />
+            </label>
+            <button
+              onClick={() => {
+                content.reset()
+                flash('Reset to defaults')
+              }}
+              className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/75 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+            >
+              Reset
+            </button>
+            <button onClick={onLogout} className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/75 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
+              Sign out
+            </button>
+            <button onClick={onExit} className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#051812]">
+              View site
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto w-full max-w-[1400px] px-5 pt-10 sm:px-6 lg:px-10">
+        {/* ---------------- tabs ---------------- */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="inline-flex items-center gap-1 rounded-full border border-[#FAF6F0]/12 bg-[#0D3528]/50 p-1.5">
+            {[
+              { key: 'work', label: 'Work We Deliver', n: content.projects.length },
+              { key: 'products', label: 'Products & Materials', n: content.materials.length }
+            ].map((t) => (
+              <button
+                key={t.key}
+                onClick={() => {
+                  setTab(t.key)
+                  cancel()
+                }}
+                className={`relative rounded-full px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-400 ${
+                  tab === t.key ? 'text-[#051812]' : 'text-[#FAF6F0]/60 hover:text-[#E6C675]'
+                }`}
+              >
+                {tab === t.key && (
+                  <motion.span layoutId="admin-pill" transition={SPRING} className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675]" />
+                )}
+                <span className="relative">
+                  {t.label} <span className="opacity-60">({t.n})</span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <button onClick={add} className="ml-auto rounded-full border border-[#D49B35]/45 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#E6C675] transition-colors hover:bg-[#D49B35] hover:text-[#051812]">
+            + Add {isWork ? 'Project' : 'Product'}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {note && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#D49B35]/40 bg-[#0D3528]/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#E6C675]"
+            >
+              <Check className="h-3.5 w-3.5" /> {note}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <p className="mt-6 max-w-[720px] text-[12.5px] font-medium leading-[1.7] text-[#B8B2A6]">
+          {isWork
+            ? 'These are the case studies shown in “Work That Delivers Results”. Category controls which filter tab each project appears under.'
+            : 'These are the material cards in “Materials & Products We Use”. Swatch is a CSS gradient, tone is the accent colour, icon picks the glyph.'}
+        </p>
+
+        {/* ---------------- list ---------------- */}
+        <div className="mt-8 flex flex-col gap-3">
+          {items.map((item, i) => {
+            const open = editing === i
+            return (
+              <div key={`${item.name}-${i}`} className={`overflow-hidden rounded-2xl border transition-colors duration-400 ${open ? 'border-[#D49B35]/50 bg-[#0D3528]/70' : 'border-[#FAF6F0]/[0.08] bg-[#08251C]/60'}`}>
+                <div className="flex flex-wrap items-center gap-4 p-5">
+                  {isWork ? (
+                    item.image ? (
+                      <img src={item.image} alt="" className="h-14 w-20 shrink-0 rounded-lg object-cover" />
+                    ) : (
+                      <span className="grid h-14 w-20 shrink-0 place-items-center rounded-lg border border-[#FAF6F0]/12 text-[9px] text-[#FAF6F0]/35">No image</span>
+                    )
+                  ) : (
+                    <span className="h-14 w-20 shrink-0 rounded-lg border border-white/15" style={{ background: item.swatch }} />
+                  )}
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <span className="g28-serif text-[18px] font-bold text-[#FAF6F0]">{item.name}</span>
+                      {isWork && (
+                        <span className="rounded-full border border-[#D49B35]/30 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#E6C675]">
+                          {item.cat}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-1 truncate text-[12px] font-medium text-[#B8B2A6]">
+                      {isWork ? `${item.client} · ${item.area}` : item.body}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <button onClick={() => move(i, -1)} aria-label="Move up" className="grid h-9 w-9 place-items-center rounded-full border border-[#FAF6F0]/15 text-[#FAF6F0]/60 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
+                      <ArrowUpRight className="h-3.5 w-3.5 -rotate-45" />
+                    </button>
+                    <button onClick={() => move(i, 1)} aria-label="Move down" className="grid h-9 w-9 place-items-center rounded-full border border-[#FAF6F0]/15 text-[#FAF6F0]/60 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
+                      <ArrowUpRight className="h-3.5 w-3.5 rotate-45" />
+                    </button>
+                    <button
+                      onClick={() => (open ? cancel() : startEdit(i))}
+                      className={`rounded-full px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.12em] transition-colors ${
+                        open ? 'bg-[#D49B35] text-[#051812]' : 'border border-[#FAF6F0]/15 text-[#FAF6F0]/70 hover:border-[#D49B35] hover:text-[#E6C675]'
+                      }`}
+                    >
+                      {open ? 'Close' : 'Edit'}
+                    </button>
+                    <button onClick={() => remove(i)} aria-label="Delete" className="grid h-9 w-9 place-items-center rounded-full border border-[#FAF6F0]/15 text-[#FAF6F0]/50 transition-colors hover:border-red-400/60 hover:text-red-300">
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {open && draft && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: EASE }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-[#FAF6F0]/10 p-5 sm:p-6">
+                        {isWork ? (
+                          <div className="grid gap-5 sm:grid-cols-2">
+                            <AdminField label="Project name" value={draft.name} onChange={(v) => setDraft({ ...draft, name: v })} />
+                            <AdminField label="Client" value={draft.client} onChange={(v) => setDraft({ ...draft, client: v })} />
+                            <AdminField label="Service" value={draft.service} onChange={(v) => setDraft({ ...draft, service: v })} />
+                            <AdminField label="Area" value={draft.area} onChange={(v) => setDraft({ ...draft, area: v })} />
+                            <label className="block">
+                              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Category</span>
+                              <select
+                                value={draft.cat}
+                                onChange={(e) => setDraft({ ...draft, cat: e.target.value })}
+                                className="g28-field mt-1.5 cursor-pointer"
+                              >
+                                {PROJECT_CATS.map((c) => (
+                                  <option key={c.key} value={c.key} className="text-[#08251C]">
+                                    {c.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <AdminField label="Image URL" value={draft.image} onChange={(v) => setDraft({ ...draft, image: v })} placeholder="https://…" />
+                            <div className="sm:col-span-2">
+                              <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => setDraft({ ...draft, body: v })} />
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="grid gap-5 sm:grid-cols-2">
+                            <AdminField label="Product name" value={draft.name} onChange={(v) => setDraft({ ...draft, name: v })} />
+                            <label className="block">
+                              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Icon</span>
+                              <select
+                                value={draft.iconName || 'Package'}
+                                onChange={(e) => setDraft({ ...draft, iconName: e.target.value })}
+                                className="g28-field mt-1.5 cursor-pointer"
+                              >
+                                {Object.keys(ICON_MAP).map((k) => (
+                                  <option key={k} value={k} className="text-[#08251C]">
+                                    {k}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <AdminField label="Swatch (CSS gradient)" value={draft.swatch} onChange={(v) => setDraft({ ...draft, swatch: v })} />
+                            <AdminField label="Accent tone (hex)" value={draft.tone} onChange={(v) => setDraft({ ...draft, tone: v })} placeholder="#3A444C" />
+                            <div className="sm:col-span-2">
+                              <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => setDraft({ ...draft, body: v })} />
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="mt-6 flex flex-wrap items-center gap-3">
+                          <button onClick={commit} className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#051812]">
+                            Save changes
+                          </button>
+                          <button onClick={cancel} className="rounded-full border border-[#FAF6F0]/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35]">
+                            Cancel
+                          </button>
+                          {draft.image !== undefined && draft.image && (
+                            <img src={draft.image} alt="" className="ml-auto h-16 w-24 rounded-lg object-cover" />
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ==========================================================================
+   20d. ADMIN GATE  —  routes #admin to login or panel
+   ========================================================================== */
+
+function AdminArea({ content, onExit }) {
+  const [authed, setAuthed] = useState(() => {
+    const s = readJSON(SESSION_KEY, null)
+    return Boolean(s && Date.now() - s.at < 1000 * 60 * 60 * 12)
+  })
+
+  const logout = () => {
+    try {
+      localStorage.removeItem(SESSION_KEY)
+    } catch {}
+    setAuthed(false)
+  }
+
+  if (!authed) return <AdminLogin onAuth={() => setAuthed(true)} onExit={onExit} />
+
+  return (
+    <AdminPanel
+      content={content}
+      onExit={onExit}
+      onLogout={logout}
+    />
+  )
+}
+
 export default function App() {
   const [lampOn, setLampOn] = useState(true)
   const toggleLamp = () => setLampOn((v) => !v)
@@ -4240,26 +4793,32 @@ export default function App() {
   /* one global pointer listener feeds every hanging object's pendulum */
   usePointerImpulse()
 
-  /* ---------------- view routing: main site <-> founder's story ---------------- */
+  /* ---------------- view routing: main site / founder's story / admin ---------------- */
   const [view, setView] = useState('main')
+
+  /* editable content: projects (work we deliver) + materials (products we use) */
+  const content = useContent()
 
   const navigate = (next) => {
     setView(next)
     window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
-  /* keep the hash in sync so the founder page is shareable / back-button friendly */
+  /* hash routing — #founder and #admin are shareable and back-button friendly */
   useEffect(() => {
-    const onHash = () => setView(window.location.hash === '#founder' ? 'founder' : 'main')
-    onHash()
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
+    const read = () => {
+      const h = window.location.hash
+      setView(h === '#founder' ? 'founder' : h === '#admin' ? 'admin' : 'main')
+    }
+    read()
+    window.addEventListener('hashchange', read)
+    return () => window.removeEventListener('hashchange', read)
   }, [])
 
   useEffect(() => {
-    const target = view === 'founder' ? '#founder' : '#'
-    if (window.location.hash !== target) {
-      history.replaceState(null, '', view === 'founder' ? '#founder' : window.location.pathname + window.location.search)
+    const want = view === 'founder' ? '#founder' : view === 'admin' ? '#admin' : ''
+    if (window.location.hash !== want) {
+      history.replaceState(null, '', want || window.location.pathname + window.location.search)
     }
   }, [view])
 
@@ -4313,7 +4872,9 @@ export default function App() {
 
       <Navbar lampOn={lampOn} toggleLamp={toggleLamp} view={view} onNavigate={navigate} />
 
-      {view === 'founder' ? (
+      {view === 'admin' ? (
+        <AdminArea content={content} onExit={() => navigate('main')} />
+      ) : view === 'founder' ? (
         <FounderStory onBack={() => navigate('main')} lampOn={lampOn} toggleLamp={toggleLamp} />
       ) : (
         <main>
@@ -4335,8 +4896,7 @@ export default function App() {
 
           {/* dark → ivory */}
           <Slash from="#08251C" to="#FAF6F0" />
-          <Materials />
-          <GroupCompanies />
+          <Materials items={content.materials} />
 
           {/* ivory → dark #051812 */}
           <Slash from="#FAF6F0" to="#051812" />
@@ -4344,9 +4904,10 @@ export default function App() {
 
           {/* dark → ivory */}
           <Slash from="#051812" to="#FAF6F0" />
-          <Projects />
+          <Projects items={content.projects} />
           <Packages />
           <Faq />
+          <GroupCompanies />
           <Contact lampOn={lampOn} toggleLamp={toggleLamp} />
 
           {/* contact banner → footer */}
