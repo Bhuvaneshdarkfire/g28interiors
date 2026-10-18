@@ -263,6 +263,7 @@ const NAV = [
   { label: 'Materials & Brands', short: 'Materials', href: '#materials', tier: 2 },
   { label: 'Group Companies', short: 'Group', href: '#group', tier: 2 },
   { label: 'Founder\u2019s Story', short: 'Founder', view: 'founder', badge: true, tier: 1 },
+  { label: 'Areas We Serve', short: 'Areas', href: '#areas', tier: 2 },
   { label: 'Contact', href: '#contact', tier: 1 }
 ]
 
@@ -297,13 +298,13 @@ const IMG = {
 const HERO = {
   badge: '©2026  •  PREMIER INTERIOR EXECUTION AGENCY  •  COIMBATORE',
   headline: [
-    'Workspace Interiors &',
-    'Turnkey Solutions —',
-    'Crafted to Elevate Your',
-    'Corporate Identity.'
+    'G28 Interiors —',
+    'Coimbatore Interiors &',
+    'Turnkey Fit-Out',
+    'Specialists.'
   ],
   sub:
-    "We don't do generic spaces. Every corporate office, executive suite, retail store, industrial unit and residence we touch gets an architectural layout built from scratch and executed with turnkey precision.",
+    "G28 Interiors is a Coimbatore interior design and turnkey execution company for modular kitchens, home interiors, wardrobes, office and commercial spaces. Every layout is drawn from scratch, built with factory-direct materials and handed over on a locked date.",
   primaryCta: 'Start Your Project',
   secondaryCta: 'View Our Portfolio',
   lampOn: 'Ambient lighting on',
@@ -332,7 +333,7 @@ const HERO = {
 }
 
 const CLIENTS = {
-  heading: 'Our Clients',
+  heading: 'Trusted by Businesses Across Coimbatore',
   sub: 'Trusted across corporate offices, retail flagships, industrial units, healthcare, hospitality and luxury residences.',
   list: [
     'APEX TECHNOLOGIES',
@@ -352,7 +353,7 @@ const CLIENTS = {
    THE 8-STEP TURNKEY PROCESS
 -------------------------------------------------------------------------- */
 const PROCESS = {
-  heading: 'Our Process',
+  heading: 'Our Interior Design & Turnkey Process in Coimbatore',
   sub: 'A disciplined eight-step execution framework that removes guesswork and delivers turnkey perfection on the promised date.',
   steps: [
     {
@@ -451,7 +452,7 @@ const VALUES = {
    SCOPE OF WORKS — tabbed bento of spotlight tilt cards
 -------------------------------------------------------------------------- */
 const SCOPE = {
-  heading: 'Scope of Work',
+  heading: 'Interior Design Services in Coimbatore',
   sub: 'Every specialised execution capability we deliver in-house — from a single partition to a complete turnkey fit-out.',
   tabs: [
     {
@@ -585,7 +586,7 @@ const SCOPE = {
    INDUSTRIES WE WORK WITH — 8 sectors
 -------------------------------------------------------------------------- */
 const INDUSTRIES = {
-  heading: 'Industries We Work With',
+  heading: 'Industries We Serve in Coimbatore',
   sub: 'Eight core sectors, one execution standard. Every environment has its own compliance, durability and hygiene demands — we build for them.',
   items: [
     {
@@ -659,7 +660,7 @@ const INDUSTRIES = {
    MATERIALS & PRODUCTS WE USE
 -------------------------------------------------------------------------- */
 const MATERIALS = {
-  heading: 'Materials & Products We Use',
+  heading: 'Interior Materials & Products We Use',
   sub: 'We are not a middleman. Because we run our own material dealerships, every specification below is sourced direct from the factory — genuine, traceable and priced without a layer of markup.',
   items: [
     {
@@ -744,7 +745,7 @@ const MATERIALS = {
    BRANDS WE DEAL WITH — 11 custom stylised logo marks
 -------------------------------------------------------------------------- */
 const BRANDS = {
-  heading: 'Brands We Deal With',
+  heading: 'Authorised Interior Material Brands in Coimbatore',
   badge: 'Direct Dealership & Authentic Supply',
   sub:
     'Backed by Vinayaga Traders and Vinayaga Aluminium Company, every project is built using 100% genuine, factory-sourced boards, profiles and ceiling systems.',
@@ -1016,7 +1017,7 @@ const FOUNDER = {
    PROJECTS — 5 pillars
 -------------------------------------------------------------------------- */
 const PROJECTS = {
-  heading: 'Work That Delivers Results',
+  heading: 'Interior Design Projects in Coimbatore',
   sub: 'A closer look at how we solve spatial problems, lift performance and hand over measurable outcomes — across every sector we serve.',
   filters: [
     { key: 'all', label: 'All — Turnkey Interiors' },
@@ -1121,7 +1122,7 @@ const PROJECTS = {
    PACKAGES — transparent execution packages
 -------------------------------------------------------------------------- */
 const PACKAGES = {
-  heading: 'Transparent Execution Packages',
+  heading: 'Interior Design Cost & Packages in Coimbatore',
   sub:
     'Clear scope, itemised BOQ, no hidden costs. Switch between a corporate fit-out and a full turnkey suite to compare exactly what is included.',
   toggle: { a: 'Corporate Fit-Out', b: 'Full Turnkey Suite' },
@@ -1167,10 +1168,22 @@ const PACKAGES = {
    FAQ — category tabs + accordions
 -------------------------------------------------------------------------- */
 const FAQ = {
-  heading: 'Frequently Asked Question',
+  heading: 'Interior Design FAQs — Coimbatore',
   sub: 'Straight answers on turnkey execution, timelines, budgets, materials and what happens after handover.',
   categories: ['General', 'Execution', 'Materials & Pricing', 'Handover & Support'],
   items: [
+    {
+      cat: 'General',
+      q: 'How much does interior design cost per square foot in Coimbatore?',
+      a:
+        'At G28 Interiors, corporate and home interiors in Coimbatore generally range from about ₹1,850 to ₹4,750 per square foot depending on scope and materials. The Essential Workspace package starts at ₹1,850/sq.ft, Executive Turnkey at ₹2,650/sq.ft and Bespoke Headquarters at ₹3,900/sq.ft. You receive an itemised Bill of Quantities before work begins, so there are no hidden costs.'
+    },
+    {
+      cat: 'General',
+      q: 'Which areas of Coimbatore does G28 Interiors serve?',
+      a:
+        'We serve all of Coimbatore — including RS Puram, Peelamedu, Saravanampatti, Race Course, Kalapatti, Ganapathy, Vadavalli, Kovaipudur and Avinashi Road. Our studio is at No. 1, Ramaiya Nagar, Trichy Main Road, Pappampatti Pirivu, Coimbatore – 641402, and we also execute projects across Tamil Nadu.'
+    },
     {
       cat: 'General',
       q: 'What exactly does "turnkey interior execution" mean at G28?',
@@ -1185,7 +1198,7 @@ const FAQ = {
     },
     {
       cat: 'Execution',
-      q: 'How long does a complete turnkey interior take?',
+      q: 'How long does a complete turnkey interior project take in Coimbatore?',
       a:
         'A 3,000–6,000 sq.ft. office typically runs 8–10 weeks from approved drawings. A 10,000–20,000 sq.ft. floorplate runs 12–16 weeks. Residential villas usually run 12–20 weeks depending on metal work and joinery scope. We lock the programme into the contract and share weekly progress reports.'
     },
@@ -1194,6 +1207,12 @@ const FAQ = {
       q: 'Who actually executes the work on site?',
       a:
         'Our own in-house teams. We do not sub-contract the core scope out to unknown parties — the same crew handles false ceiling, partitions, woodwork, metal works and installation, under a dedicated site engineer. That is what keeps quality consistent and accountability in one place.'
+    },
+    {
+      cat: 'Materials & Pricing',
+      q: 'Do you provide modular kitchens and wardrobes in Coimbatore?',
+      a:
+        'Yes. We design and install modular kitchens in marine ply, PVC or aluminium profiles with soft-close hardware, along with walk-in closets, sliding and hinged wardrobes, loft and utility storage. Because we are backed by our own material dealerships, every board and profile is factory-sourced and traceable.'
     },
     {
       cat: 'Materials & Pricing',
@@ -1258,7 +1277,8 @@ const FOOTER = {
         { label: 'Industrial Interiors', href: '#industries' },
         { label: 'Residential Interiors', href: '#scope' },
         { label: 'Materials & Brands', href: '#materials' },
-        { label: 'Group Companies', href: '#group' }
+        { label: 'Group Companies', href: '#group' },
+        { label: 'Areas We Serve', href: '#areas' }
       ]
     }
   ],
@@ -1268,6 +1288,31 @@ const FOOTER = {
     { label: 'LinkedIn', href: 'https://linkedin.com' },
     { label: 'Facebook', href: 'https://facebook.com' }
   ]
+}
+
+/* --------------------------------------------------------------------------
+   AREAS WE SERVE — local SEO landing block
+-------------------------------------------------------------------------- */
+const AREAS = {
+  heading: 'Areas We Serve in Coimbatore',
+  sub: 'Our studio sits on Trichy Main Road and our teams work across every major neighbourhood in Coimbatore — from RS Puram apartments to Saravanampatti IT offices and Kalapatti villas.',
+  list: [
+    { name: 'RS Puram', note: 'Apartments, retail & cafés' },
+    { name: 'Peelamedu', note: 'Offices, clinics & showrooms' },
+    { name: 'Saravanampatti', note: 'IT offices & corporate floors' },
+    { name: 'Race Course', note: 'Luxury homes & hospitality' },
+    { name: 'Kalapatti', note: 'Villas & industrial cabins' },
+    { name: 'Ganapathy', note: 'Homes, salons & studios' },
+    { name: 'Vadavalli', note: 'Residential & modular kitchens' },
+    { name: 'Kovaipudur', note: 'Independent homes & interiors' },
+    { name: 'Avinashi Road', note: 'Corporate & retail fit-outs' }
+  ],
+  studio: {
+    label: 'Studio',
+    address: 'No. 1, Ramaiya Nagar, Trichy Main Road, Pappampatti Pirivu, Coimbatore – 641402'
+  },
+  cta: 'Book a site visit',
+  beyond: 'Also executing across Tamil Nadu — Chennai, Erode, Tiruppur, Salem and beyond.'
 }
 
 /* ==========================================================================
@@ -2430,7 +2475,7 @@ function Hero({ lampOn, toggleLamp }) {
               <div className="relative overflow-hidden rounded-[3px] border border-[#D49B35]/20">
                 <motion.img
                   src={IMG.heroA}
-                  alt="Premium corporate office interior executed by G28 Interiors"
+                  alt="Premium corporate office interior design executed by G28 Interiors in Coimbatore"
                   style={{ y: imgY }}
                   className="h-[36vh] w-full object-cover sm:h-[44vh]"
                 />
@@ -2440,7 +2485,7 @@ function Hero({ lampOn, toggleLamp }) {
               <div className="relative mt-10 overflow-hidden rounded-[3px] border border-[#D49B35]/20">
                 <motion.img
                   src={IMG.heroB}
-                  alt="Executive cabin and collaborative workspace detail"
+                  alt="Executive cabin and collaborative workspace interior by G28 Interiors, Coimbatore"
                   style={{ y: imgY }}
                   className="h-[36vh] w-full object-cover sm:h-[44vh]"
                 />
@@ -2965,7 +3010,7 @@ function Industries({ items = INDUSTRIES.items }) {
                       {ind.image ? (
                         <img
                           src={ind.image}
-                          alt={ind.title}
+                          alt={`${ind.title} interior design and fit-out in Coimbatore by G28 Interiors`}
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(.22,1,.36,1)]"
                           style={{ transform: hovered ? 'scale(1.07)' : 'scale(1)' }}
@@ -3287,6 +3332,76 @@ function GroupCompanies({ items = GROUP.companies }) {
 }
 
 /* ==========================================================================
+   12f. AREAS WE SERVE IN COIMBATORE
+   ========================================================================== */
+
+function AreasWeServe() {
+  return (
+    <section id="areas" className="relative scroll-mt-24 overflow-hidden bg-[#F2ECE1] py-24 sm:py-28">
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+          {/* copy + studio card */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionHead tag="Local coverage" title={AREAS.heading} sub={AREAS.sub} tone="light" />
+
+            <Reveal delay={0.16}>
+              <div className="mt-9 flex items-start gap-4 rounded-2xl border border-[#08251C]/[0.08] bg-[#FAF6F0] p-6">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#08251C]">
+                  <MapPin className="h-4 w-4 text-[#E6C675]" />
+                </span>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#8F6218]">{AREAS.studio.label}</div>
+                  <address className="mt-2 max-w-[300px] text-[14px] font-medium not-italic leading-[1.7] text-[#08251C]/75">
+                    {AREAS.studio.address}
+                  </address>
+                  <a
+                    href={`tel:${CONTACT.tel[0]}`}
+                    className="mt-3 inline-flex items-center gap-2 text-[13px] font-bold text-[#8F6218] transition-colors hover:text-[#D49B35]"
+                  >
+                    <Phone className="h-3.5 w-3.5" />
+                    {CONTACT.phones[0]}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.22}>
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <RollButton href="#contact" tone="ink" className="!px-6 !py-3">
+                  {AREAS.cta}
+                </RollButton>
+                <span className="max-w-[260px] text-[12.5px] font-medium leading-[1.6] text-[#5F6B64]">
+                  {AREAS.beyond}
+                </span>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* locality grid */}
+          <Stagger className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" step={0.05}>
+            {AREAS.list.map((area) => (
+              <div
+                key={area.name}
+                className="group flex flex-col justify-between rounded-2xl border border-[#08251C]/[0.08] bg-[#FAF6F0] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-[#D49B35]/50"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#D49B35]/40">
+                    <MapPin className="h-3.5 w-3.5 text-[#8F6218]" />
+                  </span>
+                  <span className="g28-serif text-[26px] font-bold leading-none text-[#08251C]/10">&#9679;</span>
+                </div>
+                <h3 className="g28-serif mt-4 text-[19px] font-bold leading-tight text-[#08251C]">{area.name}</h3>
+                <p className="mt-1.5 text-[12px] font-medium leading-[1.5] text-[#5F6B64]">{area.note}</p>
+              </div>
+            ))}
+          </Stagger>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ==========================================================================
    13. PROJECTS  —  filterable editorial case studies
    ========================================================================== */
 
@@ -3350,7 +3465,7 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project, onOpen }, r
       >
         <img
           src={project.image}
-          alt={`${project.name} — ${project.client}`}
+          alt={`${project.service} at ${project.name}, ${project.client} in Coimbatore — interior design by G28 Interiors`}
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
         />
@@ -3401,18 +3516,13 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project, onOpen }, r
 })
 
 function Projects({ items = PROJECTS.items, onOpen }) {
-  /* every project is always on the page, grouped by its category — the tabs
-     are quick-jump anchors rather than a filter that hides work */
-  const groups = useMemo(
-    () =>
-      PROJECTS.filters
-        .filter((f) => f.key !== 'all')
-        .map((f) => ({ ...f, items: items.filter((p) => p.cat === f.key) }))
-        .filter((g) => g.items.length > 0),
-    [items]
-  )
+  /* category tabs only — there is no "All" tab, so the grid always shows one
+     category at a time, starting with the first one */
+  const cats = useMemo(() => PROJECTS.filters.filter((f) => f.key !== 'all'), [])
+  const [filter, setFilter] = useState(cats[0] ? cats[0].key : 'corporate')
 
-  const countFor = (key) => (key === 'all' ? items.length : items.filter((p) => p.cat === key).length)
+  const visible = useMemo(() => items.filter((p) => p.cat === filter), [filter, items])
+  const countFor = (key) => items.filter((p) => p.cat === key).length
 
   return (
     <section id="portfolio" className="scroll-mt-24 bg-[#FAF6F0] py-24 sm:py-28">
@@ -3421,45 +3531,42 @@ function Projects({ items = PROJECTS.items, onOpen }) {
           <SectionHead tag="Selected work" title={PROJECTS.heading} sub={PROJECTS.sub} tone="light" className="max-w-[620px]" />
         </div>
 
-        {/* quick-jump tabs — jump to a category instead of hiding the rest */}
+        {/* category tabs */}
         <Reveal delay={0.12}>
-          <div className="sticky top-24 z-20 mt-10 flex flex-wrap gap-2.5 rounded-full border border-[#08251C]/[0.08] bg-[#FAF6F0]/85 p-2 backdrop-blur-md">
-            {PROJECTS.filters.map((f) => (
-              <a
+          <div className="mt-10 flex flex-wrap gap-2.5">
+            {cats.map((f) => (
+              <button
                 key={f.key}
-                href={f.key === 'all' ? '#portfolio' : `#pf-${f.key}`}
-                className="group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#08251C]/70 transition-colors duration-400 hover:bg-[#08251C] hover:text-[#FAF6F0]"
+                type="button"
+                onClick={() => setFilter(f.key)}
+                className={`relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] transition-colors duration-500 ${
+                  filter === f.key ? 'text-[#FAF6F0]' : 'text-[#08251C]/70 hover:text-[#08251C]'
+                }`}
               >
-                {f.label}
-                <span className="rounded-full bg-[#08251C]/10 px-2 py-0.5 text-[9px] tabular-nums text-[#08251C]/60 transition-colors duration-400 group-hover:bg-[#FAF6F0]/20 group-hover:text-[#FAF6F0]/80">
+                {filter === f.key && (
+                  <motion.span layoutId="pf-pill" className="absolute inset-0 rounded-full bg-[#08251C]" transition={SPRING} />
+                )}
+                <span className="relative">{f.label}</span>
+                <span
+                  className={`relative rounded-full px-2 py-0.5 text-[9px] tabular-nums ${
+                    filter === f.key ? 'bg-[#FAF6F0]/20 text-[#FAF6F0]/80' : 'bg-[#08251C]/10 text-[#08251C]/60'
+                  }`}
+                >
                   {countFor(f.key)}
                 </span>
-              </a>
+              </button>
             ))}
           </div>
         </Reveal>
 
-        {/* every project, grouped by category */}
-        {groups.map((g) => (
-          <div key={g.key} id={`pf-${g.key}`} className="mt-16 scroll-mt-44 first:mt-14">
-            <Reveal>
-              <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#08251C]/[0.1] pb-4">
-                <h3 className="g28-serif text-[24px] font-bold leading-none text-[#08251C] sm:text-[30px]">
-                  {g.label}
-                </h3>
-                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8F6218]">
-                  {g.items.length} {g.items.length === 1 ? 'project' : 'projects'}
-                </span>
-              </div>
-            </Reveal>
-
-            <Stagger className="mt-7 grid gap-4 lg:grid-cols-2" step={0.08}>
-              {g.items.map((p) => (
-                <ProjectCard key={`${g.key}-${p.name}`} project={p} onOpen={onOpen} />
-              ))}
-            </Stagger>
-          </div>
-        ))}
+        {/* cards */}
+        <motion.div layout className="mt-10 grid gap-4 lg:grid-cols-2">
+          <AnimatePresence mode="popLayout">
+            {visible.map((p) => (
+              <ProjectCard key={p.name} project={p} onOpen={onOpen} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   )
@@ -3512,15 +3619,18 @@ function PackageCard({ plan, mode }) {
           <div className="mt-8">
             <div className="flex items-end gap-1.5">
               {/* slot-machine price roll */}
-              <span className="relative block h-[42px] overflow-hidden">
-                <AnimatePresence initial={false}>
+              {/* mode="popLayout" keeps the incoming price in normal flow so the
+                  slot keeps its intrinsic width — an absolutely positioned child
+                  alone would collapse the box to 0 and clip the number away */}
+              <span className="relative inline-block h-[42px] overflow-hidden align-bottom">
+                <AnimatePresence initial={false} mode="popLayout">
                   <motion.span
                     key={mode}
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.42, ease: EASE }}
-                    className={`g28-serif absolute left-0 top-0 whitespace-nowrap text-[40px] font-bold leading-none ${
+                    className={`g28-serif block whitespace-nowrap text-[40px] font-bold leading-none ${
                       popular ? 'text-[#FAF6F0]' : 'text-[#08251C]'
                     }`}
                   >
@@ -4752,7 +4862,11 @@ function MaterialModal({ material, onClose }) {
         <div className="p-4 sm:p-6">
           <div className="overflow-hidden rounded-xl border border-[#FAF6F0]/10">
             {material.image ? (
-              <img src={material.image} alt={material.name} className="aspect-[4/3] w-full object-cover" />
+              <img
+                src={material.image}
+                alt={`${material.name} supplied and installed by G28 Interiors, Coimbatore`}
+                className="aspect-[4/3] w-full object-cover"
+              />
             ) : (
               <div className="relative aspect-[4/3] w-full" style={{ background: material.swatch }}>
                 <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,.45)_0%,transparent_38%,rgba(0,0,0,.16)_100%)]" />
@@ -6188,6 +6302,9 @@ export default function App() {
           <Packages items={content.plans} />
           <Faq />
           <GroupCompanies items={content.group} />
+
+          {/* local SEO — Coimbatore service areas */}
+          <AreasWeServe />
           <Contact lampOn={lampOn} toggleLamp={toggleLamp} />
 
           {/* contact banner → footer */}

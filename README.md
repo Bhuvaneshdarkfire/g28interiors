@@ -22,6 +22,51 @@ structure of `g28-react/`.
 
 ---
 
+## SEO
+
+The site ships with production SEO for **g28interiors.in**:
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Title, meta description, keywords, canonical, robots, geo meta, OpenGraph + Twitter cards, and a JSON-LD `@graph` |
+| `public/robots.txt` | Allows all crawlers, points to the sitemap |
+| `public/sitemap.xml` | 9 URLs with priorities |
+| `vercel.json` | www → non-www 308 redirect, HTTPS enforcement, security + cache headers |
+
+### Structured data
+
+One `<script type="application/ld+json">` with a `@graph` containing:
+
+- **LocalBusiness / HomeAndConstructionBusiness / InteriorDesigner** — name, alternate
+  name, phones, address, geo, opening hours, `areaServed` (Coimbatore + 9
+  neighbourhoods), `hasOfferCatalog` (modular kitchen, home, office, commercial,
+  turnkey) and `aggregateRating`
+- **WebSite** and **BreadcrumbList**
+- **FAQPage** with 5 high-intent questions (cost per sq.ft, timeline, service areas,
+  what a turnkey package includes, modular kitchens & wardrobes) — the visible FAQ
+  section carries the same questions and answers
+
+### On-page
+
+- A single `<h1>` containing both target phrases: *"G28 Interiors — Coimbatore
+  Interiors & Turnkey Fit-Out Specialists."*
+- 13 keyword-targeted `<h2>`s (process, services, industries, materials, brands,
+  projects, cost & packages, FAQs, areas served)
+- An **Areas We Serve in Coimbatore** section covering RS Puram, Peelamedu,
+  Saravanampatti, Race Course, Kalapatti, Ganapathy, Vadavalli, Kovaipudur and
+  Avinashi Road
+- Locally descriptive `alt` text on project, industry and product images
+
+### Before you deploy
+
+1. **Add `public/og-image.jpg`** (1200×630) — the social preview image referenced by
+   the OG and Twitter tags. Without it, WhatsApp and Instagram previews show no image.
+2. **Verify the geo coordinates** in `index.html` (`10.912600, 76.951200`) against
+   your Google Business Profile — mismatched pins hurt local ranking.
+3. **Confirm the `sameAs` social URLs** point at your real profiles.
+4. Submit `https://g28interiors.in/sitemap.xml` in Google Search Console and Bing
+   Webmaster Tools, then request indexing for the homepage.
+
 ## Quick start
 
 ```bash

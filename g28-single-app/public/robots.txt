@@ -1,4 +1,21 @@
+# G28 Interiors — Coimbatore Interior Designers
+# https://g28interiors.in
+
 User-agent: *
 Allow: /
 
-Sitemap: https://g28interiors.com/sitemap.xml
+# Let Google fully render the site
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block nothing that matters, but keep the admin panel out of the index
+Disallow: /#admin
+
+Sitemap: https://g28interiors.in/sitemap.xml
+Host: https://g28interiors.in
