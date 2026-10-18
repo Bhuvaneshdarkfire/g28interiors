@@ -81,8 +81,17 @@ updates most often: **Work We Deliver** (projects) and **Products & Materials**.
 
 **Default passphrase:** `G28!Emerald$Turnkey#2026`
 
-From the panel you can add, edit, reorder and delete entries, then hit
-**View site** to see the change live.
+Six collections are editable from the panel — add, edit, reorder and delete
+entries, then hit **View site** to see the change live:
+
+| Tab | What it drives |
+| --- | --- |
+| **Work We Deliver** | the case studies, their category, gallery and cover |
+| **Products & Materials** | the material cards, swatches, specs and photos |
+| **Industries** | the eight sector cards, their photo, icon, copy and tags |
+| **Packages & Pricing** | the three tiers, **both prices**, inclusions and the "Popular" flag |
+| **Group Companies** | the three Vinayaga Group cards |
+| **Brands** | the eleven brand marks, names and categories |
 
 ### Image links — Google Drive, Dropbox and direct URLs
 
@@ -197,12 +206,14 @@ print(djb2('YourNewPassphrase'))"
 4. Our Process — **8-step** sticky stacking cards with auto-highlighting step pills
 5. Our Values — 3-column bento with cursor spotlight + tilt
 6. **Scope of Work** — tabbed bento (Commercial & Corporate / Residential) of spotlight tilt cards with full checklists
-7. **Industries We Work With** — 8-sector interactive bento grid
+7. **Industries We Work With** — 8-sector bento grid with sector photography
 8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags (admin-editable).
     Each card opens a **product detail popup** with specifications, description
     and supplying brands.
 9. **Brands We Deal With** — 11 custom stylised logo marks + infinite brand marquee
-10. Work That Delivers Results — 5-pillar filterable case studies (admin-editable).
+10. Work That Delivers Results — **every project is always shown, grouped by
+    category** (Corporate / Commercial / Industrial / Residential). The tab row
+    is quick-jump navigation with counts rather than a filter that hides work.
     Clicking any card opens a **project popup** with its full image gallery,
     arrow-key navigation, thumbnails and a full-screen lightbox.
 11. Transparent Execution Packages — conic gold shimmer + slot-machine price roll

@@ -285,7 +285,13 @@ const IMG = {
   team: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80',
   office3: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80',
   cafe2: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=1400&q=80',
-  restaurant: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1400&q=80'
+  restaurant: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1400&q=80',
+  classroom: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1400&q=80',
+  library: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1400&q=80',
+  hospital: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1400&q=80',
+  clinic: 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1400&q=80',
+  salon: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1400&q=80',
+  serviceOffice: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1400&q=80'
 }
 
 const HERO = {
@@ -584,49 +590,65 @@ const INDUSTRIES = {
   items: [
     {
       icon: GraduationCap,
+      iconName: 'GraduationCap',
       title: 'Educational Institutes',
+      image: IMG.classroom,
       body: 'Schools, colleges and training centres — smart classrooms, laboratories, libraries and durable, low-maintenance circulation areas.',
       tags: ['Smart Classrooms', 'Labs', 'Libraries']
     },
     {
       icon: Stethoscope,
+      iconName: 'Stethoscope',
       title: 'Hospitals & Healthcare',
+      image: IMG.hospital,
       body: 'Clinics, diagnostics and hospitals built around hygienic surfaces, easy-clean false ceilings and calm, legible reception zones.',
       tags: ['Hygienic Ceilings', 'Reception Zones', 'Diagnostics']
     },
     {
       icon: UtensilsCrossed,
+      iconName: 'UtensilsCrossed',
       title: 'Restaurants & Cafes',
+      image: IMG.restaurant,
       body: 'Theme interiors with acoustic ceilings, pergolas and custom seating engineered for footfall, comfort and ambience.',
       tags: ['Theme Interiors', 'Acoustic Ceilings', 'Pergolas']
     },
     {
       icon: ShoppingBag,
+      iconName: 'ShoppingBag',
       title: 'Retail Stores & Showrooms',
+      image: IMG.retail,
       body: 'High-impact display areas, entrance partitions and lighting that make product look expensive and draw people in.',
       tags: ['Display Areas', 'Entrance Partitions', 'Lighting']
     },
     {
       icon: Factory,
+      iconName: 'Factory',
       title: 'Production Industries',
+      image: IMG.factory,
       body: 'Industrial cabins, durable fibre cement partitions, heavy-duty racks and storages built for plant-floor conditions.',
       tags: ['Industrial Cabins', 'Fibre Cement Partitions', 'Racks & Storages']
     },
     {
       icon: Briefcase,
+      iconName: 'Briefcase',
       title: 'Service Sectors',
+      image: IMG.serviceOffice,
       body: 'IT offices, banks, consultancies and corporate workspaces planned for density, acoustics and brand presence.',
       tags: ['IT Offices', 'Banks', 'Consultancies']
     },
     {
       icon: Scissors,
+      iconName: 'Scissors',
       title: 'Parlors & Salons',
+      image: IMG.salon,
       body: 'Luxury mirrors, ambient lighting, reception counters and styling stations designed around the customer journey.',
       tags: ['Luxury Mirrors', 'Ambient Lighting', 'Styling Stations']
     },
     {
       icon: Home,
+      iconName: 'Home',
       title: 'Residentials',
+      image: IMG.residence,
       body: 'Villas and apartments — modular kitchens, wardrobes, metal staircases and full exterior elevations.',
       tags: ['Villas', 'Modular Kitchens', 'Metal Elevations']
     }
@@ -742,6 +764,7 @@ const BRANDS = {
   items: [
     {
       name: 'Gyproc Saint-Gobain',
+      logo: '',
       category: 'Gypsum & Plasterboard Systems',
       render: () => (
         <div className="flex items-center gap-3">
@@ -764,6 +787,7 @@ const BRANDS = {
     },
     {
       name: 'Knauf Ceiling Solutions',
+      logo: '',
       category: 'Acoustic & Mineral Fibre Ceilings',
       render: () => (
         <div className="text-left leading-none">
@@ -777,6 +801,7 @@ const BRANDS = {
     },
     {
       name: 'Globe Tech',
+      logo: '',
       category: 'Architectural & Interior Systems',
       render: () => (
         <div className="flex items-center gap-3">
@@ -791,6 +816,7 @@ const BRANDS = {
     },
     {
       name: 'Vnext by Visaka',
+      logo: '',
       category: 'Eco-Friendly Fibre Cement Boards',
       render: () => (
         <div className="flex flex-col items-center leading-none">
@@ -808,6 +834,7 @@ const BRANDS = {
     },
     {
       name: 'Ramco Hicem',
+      logo: '',
       category: 'Fibre Cement Boards',
       render: () => (
         <div className="flex flex-col items-start leading-none">
@@ -828,6 +855,7 @@ const BRANDS = {
     },
     {
       name: 'Ramco Hilux',
+      logo: '',
       category: 'Calcium Silicate Dry Walls & Ceilings',
       render: () => (
         <div className="flex flex-col items-start leading-none">
@@ -850,6 +878,7 @@ const BRANDS = {
     },
     {
       name: 'EcoPro',
+      logo: '',
       category: 'Multi-Use Fibre Cement Boards',
       render: () => (
         <div className="flex items-center gap-2.5">
@@ -866,6 +895,7 @@ const BRANDS = {
     },
     {
       name: 'Sonali',
+      logo: '',
       category: 'Aluminium & Interior Hardware',
       render: () => (
         <div className="text-center">
@@ -876,6 +906,7 @@ const BRANDS = {
     },
     {
       name: 'Eiti',
+      logo: '',
       category: 'Architectural Interior Solutions',
       render: () => (
         <div className="text-center">
@@ -886,6 +917,7 @@ const BRANDS = {
     },
     {
       name: 'Baydee',
+      logo: '',
       category: 'uPVC Profiles & Systems',
       render: () => (
         <div className="text-center">
@@ -896,6 +928,7 @@ const BRANDS = {
     },
     {
       name: 'Unicell',
+      logo: '',
       category: 'Ceiling & Partition Grids',
       render: () => (
         <div className="text-center">
@@ -916,6 +949,7 @@ const GROUP = {
   companies: [
     {
       icon: Store,
+      iconName: 'Store',
       name: 'Vinayaga Traders',
       role: 'Material Dealership',
       body:
@@ -925,6 +959,7 @@ const GROUP = {
     },
     {
       icon: Layers,
+      iconName: 'Layers',
       name: 'Vinayaga Aluminium Company',
       role: 'Aluminium Systems',
       body:
@@ -934,6 +969,7 @@ const GROUP = {
     },
     {
       icon: Building2,
+      iconName: 'Building2',
       name: 'G28 Interiors',
       role: 'Turnkey Execution & Design',
       body:
@@ -2902,7 +2938,7 @@ function ScopeOfWork() {
    12b. INDUSTRIES WE WORK WITH  —  8-card interactive bento
    ========================================================================== */
 
-function Industries() {
+function Industries({ items = INDUSTRIES.items }) {
   return (
     <section id="industries" className="relative scroll-mt-24 overflow-hidden bg-[#08251C] py-24 sm:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: isoPattern() }} />
@@ -2911,37 +2947,52 @@ function Industries() {
         <SectionHead tag="Sectors we serve" title={INDUSTRIES.heading} sub={INDUSTRIES.sub} align="center" />
 
         <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" step={0.07}>
-          {INDUSTRIES.items.map((ind) => {
-            const Icon = ind.icon
+          {items.map((ind, idx) => {
+            const Icon = resolveIcon(ind.iconName || ind.icon)
             return (
               <SpotlightTiltCard
-                key={ind.title}
+                key={`${ind.title}-${idx}`}
                 dark
                 radius="rounded-2xl"
                 glow={340}
                 lift={6}
-                className="h-full border border-[#FAF6F0]/[0.08] bg-[#0D3528]/55 p-6"
+                className="h-full overflow-hidden border border-[#FAF6F0]/[0.08] bg-[#0D3528]/55"
               >
                 {({ hovered }) => (
                   <>
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="grid h-12 w-12 place-items-center rounded-full border border-[#D49B35]/40 bg-[#051812]/60">
-                        <Icon className={`h-5 w-5 transition-colors duration-500 ${hovered ? 'text-[#E6C675]' : 'text-[#D49B35]'}`} />
+                    {/* sector photograph */}
+                    <div className="relative h-[132px] w-full overflow-hidden">
+                      {ind.image ? (
+                        <img
+                          src={ind.image}
+                          alt={ind.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(.22,1,.36,1)]"
+                          style={{ transform: hovered ? 'scale(1.07)' : 'scale(1)' }}
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-[#051812]" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0D3528] via-[#0D3528]/25 to-transparent" />
+                      <span className="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[#D49B35]/45 bg-[#051812]/80 backdrop-blur">
+                        <Icon className={`h-4 w-4 transition-colors duration-500 ${hovered ? 'text-[#E6C675]' : 'text-[#D49B35]'}`} />
                       </span>
-                      <span aria-hidden="true" className="g28-serif text-[34px] font-bold leading-none text-[#FAF6F0]/10">
-                        {String(INDUSTRIES.items.indexOf(ind) + 1).padStart(2, '0')}
+                      <span aria-hidden="true" className="g28-serif absolute right-4 top-3 text-[30px] font-bold leading-none text-[#FAF6F0]/25">
+                        {String(idx + 1).padStart(2, '0')}
                       </span>
                     </div>
 
-                    <h3 className="g28-serif mt-5 text-[19px] font-bold leading-tight text-[#FAF6F0]">{ind.title}</h3>
-                    <p className="mt-2.5 flex-1 text-[12.5px] font-medium leading-[1.65] text-[#B8B2A6]">{ind.body}</p>
+                    <div className="flex flex-1 flex-col p-6">
+                      <h3 className="g28-serif text-[19px] font-bold leading-tight text-[#FAF6F0]">{ind.title}</h3>
+                      <p className="mt-2.5 flex-1 text-[12.5px] font-medium leading-[1.65] text-[#B8B2A6]">{ind.body}</p>
 
-                    <div className="mt-5 flex flex-wrap gap-1.5">
-                      {ind.tags.map((tg) => (
-                        <span key={tg} className="rounded-full border border-[#D49B35]/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-[#E6C675]/80">
-                          {tg}
-                        </span>
-                      ))}
+                      <div className="mt-5 flex flex-wrap gap-1.5">
+                        {(ind.tags || []).map((tg) => (
+                          <span key={tg} className="rounded-full border border-[#D49B35]/25 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-[#E6C675]/80">
+                            {tg}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </>
                 )}
@@ -3065,7 +3116,7 @@ function Materials({ items = MATERIALS.items, onOpen }) {
    12d. BRANDS WE DEAL WITH  —  custom stylised logo marks
    ========================================================================== */
 
-function Brands() {
+function Brands({ items = BRANDS.items }) {
   return (
     <section id="brands" className="relative scroll-mt-24 overflow-hidden bg-[#08251C] py-24 sm:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: isoPattern() }} />
@@ -3109,9 +3160,9 @@ function Brands() {
       {/* logo grid */}
       <div className="relative mx-auto mt-14 w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
         <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" step={0.05}>
-          {BRANDS.items.map((brand) => (
+          {items.map((brand, bi) => (
             <SpotlightTiltCard
-              key={brand.name}
+              key={`${brand.name}-${bi}`}
               dark={false}
               radius="rounded-2xl"
               glow={320}
@@ -3120,7 +3171,20 @@ function Brands() {
             >
               {({ hovered }) => (
                 <div className="flex h-full flex-col justify-between p-6">
-                  <div className="flex flex-1 items-center justify-center py-2">{brand.render()}</div>
+                  <div className="flex flex-1 items-center justify-center py-2">
+                    {brand.logo ? (
+                      <img src={brand.logo} alt={brand.name} className="max-h-[64px] max-w-full object-contain" />
+                    ) : typeof brand.render === 'function' ? (
+                      brand.render()
+                    ) : (
+                      <div className="text-center">
+                        <div className="g28-serif text-xl font-bold uppercase tracking-[0.16em] text-[#08251C]">{brand.name}</div>
+                        {brand.category && (
+                          <div className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-neutral-500">{brand.category}</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                   <div className="flex items-center justify-between gap-3 border-t border-neutral-100 pt-3">
                     <span className="truncate text-[11px] text-neutral-500">{brand.category}</span>
                     <motion.span
@@ -3146,15 +3210,15 @@ function Brands() {
    12e. GROUP OF COMPANIES  —  the Vinayaga Group legacy
    ========================================================================== */
 
-function GroupCompanies() {
+function GroupCompanies({ items = GROUP.companies }) {
   return (
     <section id="group" className="relative scroll-mt-24 overflow-hidden bg-[#F2ECE1] py-24 sm:py-28">
       <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
         <SectionHead tag="The ecosystem behind us" title={GROUP.heading} sub={GROUP.sub} tone="light" align="center" />
 
         <Stagger className="mt-14 grid gap-5 lg:grid-cols-3" step={0.1}>
-          {GROUP.companies.map((c, i) => {
-            const Icon = c.icon
+          {items.map((c, i) => {
+            const Icon = resolveIcon(c.iconName || c.icon)
             return (
               <SpotlightTiltCard
                 key={c.name}
@@ -3337,12 +3401,18 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project, onOpen }, r
 })
 
 function Projects({ items = PROJECTS.items, onOpen }) {
-  const [filter, setFilter] = useState('all')
-
-  const visible = useMemo(
-    () => items.filter((p) => filter === 'all' || p.cat === filter),
-    [filter, items]
+  /* every project is always on the page, grouped by its category — the tabs
+     are quick-jump anchors rather than a filter that hides work */
+  const groups = useMemo(
+    () =>
+      PROJECTS.filters
+        .filter((f) => f.key !== 'all')
+        .map((f) => ({ ...f, items: items.filter((p) => p.cat === f.key) }))
+        .filter((g) => g.items.length > 0),
+    [items]
   )
+
+  const countFor = (key) => (key === 'all' ? items.length : items.filter((p) => p.cat === key).length)
 
   return (
     <section id="portfolio" className="scroll-mt-24 bg-[#FAF6F0] py-24 sm:py-28">
@@ -3351,35 +3421,45 @@ function Projects({ items = PROJECTS.items, onOpen }) {
           <SectionHead tag="Selected work" title={PROJECTS.heading} sub={PROJECTS.sub} tone="light" className="max-w-[620px]" />
         </div>
 
-        {/* filter tabs */}
+        {/* quick-jump tabs — jump to a category instead of hiding the rest */}
         <Reveal delay={0.12}>
-          <div className="mt-10 flex flex-wrap gap-2.5">
+          <div className="sticky top-24 z-20 mt-10 flex flex-wrap gap-2.5 rounded-full border border-[#08251C]/[0.08] bg-[#FAF6F0]/85 p-2 backdrop-blur-md">
             {PROJECTS.filters.map((f) => (
-              <button
+              <a
                 key={f.key}
-                type="button"
-                onClick={() => setFilter(f.key)}
-                className={`relative rounded-full px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] transition-colors duration-500 ${
-                  filter === f.key ? 'text-[#FAF6F0]' : 'text-[#08251C]/70 hover:text-[#08251C]'
-                }`}
+                href={f.key === 'all' ? '#portfolio' : `#pf-${f.key}`}
+                className="group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#08251C]/70 transition-colors duration-400 hover:bg-[#08251C] hover:text-[#FAF6F0]"
               >
-                {filter === f.key && (
-                  <motion.span layoutId="pf-pill" className="absolute inset-0 rounded-full bg-[#08251C]" transition={SPRING} />
-                )}
-                <span className="relative">{f.label}</span>
-              </button>
+                {f.label}
+                <span className="rounded-full bg-[#08251C]/10 px-2 py-0.5 text-[9px] tabular-nums text-[#08251C]/60 transition-colors duration-400 group-hover:bg-[#FAF6F0]/20 group-hover:text-[#FAF6F0]/80">
+                  {countFor(f.key)}
+                </span>
+              </a>
             ))}
           </div>
         </Reveal>
 
-        {/* cards */}
-        <motion.div layout className="mt-10 grid gap-4 lg:grid-cols-2">
-          <AnimatePresence mode="popLayout">
-            {visible.map((p) => (
-              <ProjectCard key={p.name} project={p} onOpen={onOpen} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        {/* every project, grouped by category */}
+        {groups.map((g) => (
+          <div key={g.key} id={`pf-${g.key}`} className="mt-16 scroll-mt-44 first:mt-14">
+            <Reveal>
+              <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#08251C]/[0.1] pb-4">
+                <h3 className="g28-serif text-[24px] font-bold leading-none text-[#08251C] sm:text-[30px]">
+                  {g.label}
+                </h3>
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8F6218]">
+                  {g.items.length} {g.items.length === 1 ? 'project' : 'projects'}
+                </span>
+              </div>
+            </Reveal>
+
+            <Stagger className="mt-7 grid gap-4 lg:grid-cols-2" step={0.08}>
+              {g.items.map((p) => (
+                <ProjectCard key={`${g.key}-${p.name}`} project={p} onOpen={onOpen} />
+              ))}
+            </Stagger>
+          </div>
+        ))}
       </div>
     </section>
   )
@@ -3497,7 +3577,7 @@ function PackageCard({ plan, mode }) {
   )
 }
 
-function Packages() {
+function Packages({ items = PACKAGES.plans }) {
   const [mode, setMode] = useState('a')
 
   return (
@@ -3531,8 +3611,8 @@ function Packages() {
         </div>
 
         <Stagger className="mt-14 grid items-stretch gap-4 lg:grid-cols-3" step={0.1}>
-          {PACKAGES.plans.map((plan) => (
-            <PackageCard key={plan.name} plan={plan} mode={mode} />
+          {items.map((plan, i) => (
+            <PackageCard key={`${plan.name}-${i}`} plan={plan} mode={mode} />
           ))}
         </Stagger>
 
@@ -4796,6 +4876,70 @@ const sanitizeMaterial = (m, i) => {
   }
 }
 
+/* --------------------------------------------------------------------------
+   SANITISERS for the editable collections
+--------------------------------------------------------------------------- */
+const ICON_NAME = (v) => (typeof v === 'string' && ICON_MAP[v] ? v : undefined)
+
+const sanitizeIndustry = (d, i) => {
+  if (!d || typeof d !== 'object' || Array.isArray(d)) return null
+  return {
+    iconName: ICON_NAME(d.iconName) || ICON_NAME(d.icon) || 'Building2',
+    icon: typeof d.icon !== 'string' ? d.icon : undefined,
+    title: str(d.title, `Sector ${i + 1}`),
+    body: str(d.body),
+    image: normalizeImageUrl(str(d.image)),
+    tags: Array.isArray(d.tags) ? d.tags.filter((t) => typeof t === 'string' && t) : []
+  }
+}
+
+const sanitizePlan = (p, i) => {
+  if (!p || typeof p !== 'object' || Array.isArray(p)) return null
+  const price = p.price && typeof p.price === 'object' ? p.price : {}
+  const feats = p.features && typeof p.features === 'object' ? p.features : {}
+  const arr = (v) => (Array.isArray(v) ? v.filter((x) => typeof x === 'string' && x) : [])
+  return {
+    name: str(p.name, `Plan ${i + 1}`),
+    note: str(p.note),
+    price: { a: str(price.a, '0'), b: str(price.b, '0') },
+    unit: str(p.unit, '/sq.ft'),
+    cta: str(p.cta, 'Request a Quote'),
+    popular: Boolean(p.popular),
+    features: { a: arr(feats.a), b: arr(feats.b) }
+  }
+}
+
+const sanitizeGroupCompany = (c, i) => {
+  if (!c || typeof c !== 'object' || Array.isArray(c)) return null
+  return {
+    iconName: ICON_NAME(c.iconName) || ICON_NAME(c.icon) || 'Building2',
+    icon: typeof c.icon !== 'string' ? c.icon : undefined,
+    name: str(c.name, `Company ${i + 1}`),
+    role: str(c.role, 'Group Company'),
+    body: str(c.body),
+    accent: str(c.accent, '#D49B35'),
+    points: Array.isArray(c.points) ? c.points.filter((x) => typeof x === 'string' && x) : []
+  }
+}
+
+/* brands keep their hand-drawn marks by name, so a saved brand still renders
+   its custom logo instead of falling back to plain type */
+const BRAND_RENDER_BY_NAME = {}
+BRANDS.items.forEach((b) => {
+  if (typeof b.render === 'function') BRAND_RENDER_BY_NAME[b.name] = b.render
+})
+
+const sanitizeBrand = (b, i) => {
+  if (!b || typeof b !== 'object' || Array.isArray(b)) return null
+  const name = str(b.name, `Brand ${i + 1}`)
+  return {
+    name,
+    category: str(b.category),
+    logo: normalizeImageUrl(str(b.logo)),
+    render: BRAND_RENDER_BY_NAME[name]
+  }
+}
+
 /* only fall back to the built-in defaults when the stored value is not an
    array at all — an intentionally emptied list stays empty */
 const normalizeCollection = (value, sanitize, fallback) =>
@@ -4831,7 +4975,13 @@ function useContent() {
   return {
     projects: normalizeCollection(overrides.projects, sanitizeProject, PROJECTS.items),
     materials: normalizeCollection(overrides.materials, sanitizeMaterial, MATERIALS.items),
-    isCustomised: Boolean(overrides.projects || overrides.materials),
+    industries: normalizeCollection(overrides.industries, sanitizeIndustry, INDUSTRIES.items),
+    plans: normalizeCollection(overrides.plans, sanitizePlan, PACKAGES.plans),
+    group: normalizeCollection(overrides.group, sanitizeGroupCompany, GROUP.companies),
+    brands: normalizeCollection(overrides.brands, sanitizeBrand, BRANDS.items),
+    isCustomised: Boolean(
+      overrides.projects || overrides.materials || overrides.industries || overrides.plans || overrides.group || overrides.brands
+    ),
     setCollection,
     reset
   }
@@ -5138,10 +5288,10 @@ function GalleryEditor({ images = [], onChange }) {
   )
 }
 
-function SpecsEditor({ specs = [], onChange }) {
+function SpecsEditor({ specs = [], onChange, label = 'Specifications' }) {
   return (
     <div className="sm:col-span-2">
-      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Specifications ({specs.length})</span>
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">{label} ({specs.length})</span>
       <div className="mt-2 flex flex-col gap-2">
         {specs.map((sp, i) => (
           <div key={i} className="flex items-center gap-2">
@@ -5325,6 +5475,213 @@ function PassphraseChanger({ onClose }) {
   )
 }
 
+/* ==========================================================================
+   20e. ADMIN COLLECTION EDITORS
+   ========================================================================== */
+
+const ADMIN_TABS = [
+  { key: 'work', label: 'Work We Deliver', coll: 'projects' },
+  { key: 'products', label: 'Products & Materials', coll: 'materials' },
+  { key: 'industries', label: 'Industries', coll: 'industries' },
+  { key: 'plans', label: 'Packages & Pricing', coll: 'plans' },
+  { key: 'group', label: 'Group Companies', coll: 'group' },
+  { key: 'brands', label: 'Brands', coll: 'brands' }
+]
+
+const blankFor = (tab) => {
+  switch (tab) {
+    case 'work':
+      return { name: 'New Project', client: 'Client', service: 'Turnkey Interiors', area: '0 Sq. Ft.', cat: 'corporate', body: 'Describe the project…', image: '', gallery: [] }
+    case 'products':
+      return { name: 'New Material', body: 'Describe the material…', swatch: 'linear-gradient(135deg,#D8DDE2,#F2F5F7 34%,#A8B0B8 68%,#E4E9ED)', tone: '#3A444C', iconName: 'Package', image: null, specs: [] }
+    case 'industries':
+      return { title: 'New Sector', iconName: 'Building2', body: 'Describe the sector…', image: '', tags: ['Tag one'] }
+    case 'plans':
+      return { name: 'New Package', note: 'Ideal for…', price: { a: '0', b: '0' }, unit: '/sq.ft', cta: 'Request a Quote', popular: false, features: { a: ['First inclusion'], b: ['First inclusion'] } }
+    case 'group':
+      return { name: 'New Company', iconName: 'Building2', role: 'Group Company', body: 'Describe the company…', accent: '#D49B35', points: ['First point'] }
+    default:
+      return { name: 'New Brand', category: 'Category', logo: '' }
+  }
+}
+
+const labelFor = (tab, item) =>
+  tab === 'industries' ? item.title : item.name || 'Untitled'
+
+/* --------------------------------------------------------------------------
+   per-collection field sets
+--------------------------------------------------------------------------- */
+function EditorFields({ tab, draft, setDraft }) {
+  const set = (patch) => setDraft({ ...draft, ...patch })
+
+  if (tab === 'work') {
+    return (
+      <div className="grid gap-5 sm:grid-cols-2">
+        <AdminField label="Project name" value={draft.name} onChange={(v) => set({ name: v })} />
+        <AdminField label="Client" value={draft.client} onChange={(v) => set({ client: v })} />
+        <AdminField label="Service" value={draft.service} onChange={(v) => set({ service: v })} />
+        <AdminField label="Area" value={draft.area} onChange={(v) => set({ area: v })} />
+        <label className="block">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Category</span>
+          <select value={draft.cat} onChange={(e) => set({ cat: e.target.value })} className="g28-field mt-1.5 cursor-pointer">
+            {PROJECT_CATS.map((c) => (
+              <option key={c.key} value={c.key} className="text-[#08251C]">{c.label}</option>
+            ))}
+          </select>
+        </label>
+        <div className="sm:col-span-2">
+          <ImagePicker label="Cover image" value={draft.image} onChange={(v) => set({ image: v })} />
+        </div>
+        <GalleryEditor images={draft.gallery || []} onChange={(v) => set({ gallery: v })} />
+        <div className="sm:col-span-2">
+          <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => set({ body: v })} />
+        </div>
+      </div>
+    )
+  }
+
+  if (tab === 'products') {
+    return (
+      <div className="grid gap-5 sm:grid-cols-2">
+        <AdminField label="Product name" value={draft.name} onChange={(v) => set({ name: v })} />
+        <label className="block">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Icon</span>
+          <select value={draft.iconName || 'Package'} onChange={(e) => set({ iconName: e.target.value })} className="g28-field mt-1.5 cursor-pointer">
+            {Object.keys(ICON_MAP).map((k) => (<option key={k} value={k} className="text-[#08251C]">{k}</option>))}
+          </select>
+        </label>
+        <AdminField label="Swatch (CSS gradient)" value={draft.swatch} onChange={(v) => set({ swatch: v })} />
+        <AdminField label="Accent tone (hex)" value={draft.tone} onChange={(v) => set({ tone: v })} placeholder="#3A444C" />
+        <div className="sm:col-span-2">
+          <ImagePicker label="Product photo (optional — falls back to the swatch)" value={draft.image || ''} onChange={(v) => set({ image: v })} />
+        </div>
+        <SpecsEditor specs={draft.specs || []} onChange={(v) => set({ specs: v })} />
+        <div className="sm:col-span-2">
+          <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => set({ body: v })} />
+        </div>
+      </div>
+    )
+  }
+
+  if (tab === 'industries') {
+    return (
+      <div className="grid gap-5 sm:grid-cols-2">
+        <AdminField label="Sector name" value={draft.title} onChange={(v) => set({ title: v })} />
+        <label className="block">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Icon</span>
+          <select value={draft.iconName || 'Building2'} onChange={(e) => set({ iconName: e.target.value })} className="g28-field mt-1.5 cursor-pointer">
+            {Object.keys(ICON_MAP).map((k) => (<option key={k} value={k} className="text-[#08251C]">{k}</option>))}
+          </select>
+        </label>
+        <div className="sm:col-span-2">
+          <ImagePicker label="Sector photo" value={draft.image} onChange={(v) => set({ image: v })} />
+        </div>
+        <div className="sm:col-span-2">
+          <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => set({ body: v })} />
+        </div>
+        <SpecsEditor label="Tags" specs={draft.tags || []} onChange={(v) => set({ tags: v })} />
+      </div>
+    )
+  }
+
+  if (tab === 'plans') {
+    return (
+      <div className="grid gap-5 sm:grid-cols-2">
+        <AdminField label="Package name" value={draft.name} onChange={(v) => set({ name: v })} />
+        <AdminField label="Who it suits" value={draft.note} onChange={(v) => set({ note: v })} />
+        <AdminField label="Price — Corporate Fit-Out" value={draft.price.a} onChange={(v) => set({ price: { ...draft.price, a: v } })} placeholder="2,650" />
+        <AdminField label="Price — Full Turnkey Suite" value={draft.price.b} onChange={(v) => set({ price: { ...draft.price, b: v } })} placeholder="3,350" />
+        <AdminField label="Unit" value={draft.unit} onChange={(v) => set({ unit: v })} placeholder="/sq.ft" />
+        <AdminField label="Button label" value={draft.cta} onChange={(v) => set({ cta: v })} />
+        <label className="flex items-center gap-3 sm:col-span-2">
+          <input type="checkbox" checked={!!draft.popular} onChange={(e) => set({ popular: e.target.checked })} className="h-4 w-4 accent-[#D49B35]" />
+          <span className="text-[12px] font-semibold text-[#FAF6F0]/80">Mark as the popular plan (dark card + gold shimmer)</span>
+        </label>
+        <SpecsEditor label="Inclusions — Corporate Fit-Out" specs={draft.features.a || []} onChange={(v) => set({ features: { ...draft.features, a: v } })} />
+        <SpecsEditor label="Inclusions — Full Turnkey Suite" specs={draft.features.b || []} onChange={(v) => set({ features: { ...draft.features, b: v } })} />
+      </div>
+    )
+  }
+
+  if (tab === 'group') {
+    return (
+      <div className="grid gap-5 sm:grid-cols-2">
+        <AdminField label="Company name" value={draft.name} onChange={(v) => set({ name: v })} />
+        <AdminField label="Role label" value={draft.role} onChange={(v) => set({ role: v })} placeholder="Material Dealership" />
+        <label className="block">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Icon</span>
+          <select value={draft.iconName || 'Building2'} onChange={(e) => set({ iconName: e.target.value })} className="g28-field mt-1.5 cursor-pointer">
+            {Object.keys(ICON_MAP).map((k) => (<option key={k} value={k} className="text-[#08251C]">{k}</option>))}
+          </select>
+        </label>
+        <AdminField label="Accent colour (hex)" value={draft.accent} onChange={(v) => set({ accent: v })} placeholder="#D49B35" />
+        <div className="sm:col-span-2">
+          <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => set({ body: v })} />
+        </div>
+        <SpecsEditor label="Bullet points" specs={draft.points || []} onChange={(v) => set({ points: v })} />
+      </div>
+    )
+  }
+
+  return (
+    <div className="grid gap-5 sm:grid-cols-2">
+      <AdminField label="Brand name" value={draft.name} onChange={(v) => set({ name: v })} />
+      <AdminField label="Category" value={draft.category} onChange={(v) => set({ category: v })} />
+      <div className="sm:col-span-2">
+        <ImagePicker label="Custom logo (optional — leave blank to use the built-in mark)" value={draft.logo} onChange={(v) => set({ logo: v })} />
+      </div>
+      <p className="text-[12px] font-medium leading-[1.7] text-[#B8B2A6] sm:col-span-2">
+        Brands saved with their original names keep their hand-drawn marks. Rename one and it falls
+        back to a typographic treatment unless you upload a custom logo.
+      </p>
+    </div>
+  )
+}
+
+/* --------------------------------------------------------------------------
+   row summary per collection
+--------------------------------------------------------------------------- */
+function RowSummary({ tab, item }) {
+  if (tab === 'work') return <>{item.client} &middot; {item.area}</>
+  if (tab === 'products') return <>{item.body}</>
+  if (tab === 'industries') return <>{item.body}</>
+  if (tab === 'plans') return <>₹{item.price.a} / ₹{item.price.b} {item.unit} &middot; {(item.features.a || []).length} inclusions</>
+  if (tab === 'group') return <>{item.role}</>
+  return <>{item.category}</>
+}
+
+function RowThumb({ tab, item }) {
+  if (tab === 'work') {
+    const src = galleryOf(item)[0]
+    return src ? <img src={src} alt="" className="h-14 w-20 shrink-0 rounded-lg object-cover" /> : (
+      <span className="grid h-14 w-20 shrink-0 place-items-center rounded-lg border border-[#FAF6F0]/12 text-[9px] text-[#FAF6F0]/35">No image</span>
+    )
+  }
+  if (tab === 'products') return <span className="h-14 w-20 shrink-0 rounded-lg border border-white/15" style={{ background: item.swatch }} />
+  if (tab === 'industries') {
+    return item.image ? <img src={item.image} alt="" className="h-14 w-20 shrink-0 rounded-lg object-cover" /> : (
+      <span className="grid h-14 w-20 shrink-0 place-items-center rounded-lg border border-[#FAF6F0]/12 text-[9px] text-[#FAF6F0]/35">No image</span>
+    )
+  }
+  if (tab === 'brands') {
+    return (
+      <span className="grid h-14 w-20 shrink-0 place-items-center overflow-hidden rounded-lg border border-[#FAF6F0]/12 bg-white">
+        {item.logo ? (
+          <img src={item.logo} alt="" className="max-h-[46px] max-w-[68px] object-contain" />
+        ) : (
+          <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-500">Mark</span>
+        )}
+      </span>
+    )
+  }
+  const Icon = resolveIcon(item.iconName)
+  return (
+    <span className="grid h-14 w-20 shrink-0 place-items-center rounded-lg border border-[#FAF6F0]/12">
+      <Icon className="h-5 w-5 text-[#D49B35]" />
+    </span>
+  )
+}
+
 function AdminPanel({ content, onExit, onLogout }) {
   const [tab, setTab] = useState('work')
   const [editing, setEditing] = useState(null)
@@ -5332,8 +5689,10 @@ function AdminPanel({ content, onExit, onLogout }) {
   const [note, setNote] = useState('')
   const [showPass, setShowPass] = useState(false)
 
+  const tabDef = ADMIN_TABS.find((t) => t.key === tab) || ADMIN_TABS[0]
+  const coll = tabDef.coll
+  const items = content[coll] || []
   const isWork = tab === 'work'
-  const items = isWork ? content.projects : content.materials
 
   const flash = (msg) => {
     setNote(msg)
@@ -5351,13 +5710,13 @@ function AdminPanel({ content, onExit, onLogout }) {
   const commit = () => {
     const next = items.slice()
     next[editing] = draft
-    content.setCollection(isWork ? 'projects' : 'materials', next)
+    content.setCollection(coll, next)
     cancel()
     flash('Saved')
   }
   const remove = (i) => {
     const next = items.filter((_, idx) => idx !== i)
-    content.setCollection(isWork ? 'projects' : 'materials', next)
+    content.setCollection(coll, next)
     cancel()
     flash('Removed')
   }
@@ -5366,14 +5725,12 @@ function AdminPanel({ content, onExit, onLogout }) {
     if (j < 0 || j >= items.length) return
     const next = items.slice()
     ;[next[i], next[j]] = [next[j], next[i]]
-    content.setCollection(isWork ? 'projects' : 'materials', next)
+    content.setCollection(coll, next)
   }
   const add = () => {
-    const blank = isWork
-      ? { name: 'New Project', client: 'Client', service: 'Turnkey Interiors', area: '0 Sq. Ft.', cat: 'corporate', body: 'Describe the project…', image: '', gallery: [] }
-      : { name: 'New Material', body: 'Describe the material…', swatch: 'linear-gradient(135deg,#D8DDE2,#F2F5F7 34%,#A8B0B8 68%,#E4E9ED)', tone: '#3A444C', iconName: 'Package', image: null, specs: [] }
+    const blank = blankFor(tab)
     const next = [...items, blank]
-    content.setCollection(isWork ? 'projects' : 'materials', next)
+    content.setCollection(coll, next)
     setEditing(next.length - 1)
     setDraft({ ...blank })
     flash('Added')
@@ -5463,10 +5820,7 @@ function AdminPanel({ content, onExit, onLogout }) {
         {/* ---------------- tabs ---------------- */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="inline-flex items-center gap-1 rounded-full border border-[#FAF6F0]/12 bg-[#0D3528]/50 p-1.5">
-            {[
-              { key: 'work', label: 'Work We Deliver', n: content.projects.length },
-              { key: 'products', label: 'Products & Materials', n: content.materials.length }
-            ].map((t) => (
+            {ADMIN_TABS.map((t) => (
               <button
                 key={t.key}
                 onClick={() => {
@@ -5481,14 +5835,14 @@ function AdminPanel({ content, onExit, onLogout }) {
                   <motion.span layoutId="admin-pill" transition={SPRING} className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675]" />
                 )}
                 <span className="relative">
-                  {t.label} <span className="opacity-60">({t.n})</span>
+                  {t.label} <span className="opacity-60">({(content[t.coll] || []).length})</span>
                 </span>
               </button>
             ))}
           </div>
 
           <button onClick={add} className="ml-auto rounded-full border border-[#D49B35]/45 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#E6C675] transition-colors hover:bg-[#D49B35] hover:text-[#051812]">
-            + Add {isWork ? 'Project' : 'Product'}
+            + Add {tabDef.label.split(' ')[0]}
           </button>
         </div>
 
@@ -5506,9 +5860,16 @@ function AdminPanel({ content, onExit, onLogout }) {
         </AnimatePresence>
 
         <p className="mt-6 max-w-[720px] text-[12.5px] font-medium leading-[1.7] text-[#B8B2A6]">
-          {isWork
-            ? 'These are the case studies shown in “Work That Delivers Results”. Category controls which filter tab each project appears under.'
-            : 'These are the material cards in “Materials & Products We Use”. Swatch is a CSS gradient, tone is the accent colour, icon picks the glyph.'}
+          {
+            {
+              work: 'These are the case studies in “Work That Delivers Results”. Category decides which group the project appears under.',
+              products: 'These are the cards in “Materials & Products We Use”. Swatch is a CSS gradient, tone is the accent colour.',
+              industries: 'These are the cards in “Industries We Work With”. Each one shows a sector photo, icon, description and tags.',
+              plans: 'These are the pricing tiers in “Transparent Execution Packages”. Both prices drive the toggle on the site.',
+              group: 'These are the cards in “The Vinayaga Group Legacy”.',
+              brands: 'These are the logos in “Brands We Deal With”.'
+            }[tab]
+          }
         </p>
 
         {/* ---------------- list ---------------- */}
@@ -5518,27 +5879,24 @@ function AdminPanel({ content, onExit, onLogout }) {
             return (
               <div key={`${item.name}-${i}`} className={`overflow-hidden rounded-2xl border transition-colors duration-400 ${open ? 'border-[#D49B35]/50 bg-[#0D3528]/70' : 'border-[#FAF6F0]/[0.08] bg-[#08251C]/60'}`}>
                 <div className="flex flex-wrap items-center gap-4 p-5">
-                  {isWork ? (
-                    galleryOf(item)[0] ? (
-                      <img src={galleryOf(item)[0]} alt="" className="h-14 w-20 shrink-0 rounded-lg object-cover" />
-                    ) : (
-                      <span className="grid h-14 w-20 shrink-0 place-items-center rounded-lg border border-[#FAF6F0]/12 text-[9px] text-[#FAF6F0]/35">No image</span>
-                    )
-                  ) : (
-                    <span className="h-14 w-20 shrink-0 rounded-lg border border-white/15" style={{ background: item.swatch }} />
-                  )}
+                  <RowThumb tab={tab} item={item} />
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2.5">
-                      <span className="g28-serif text-[18px] font-bold text-[#FAF6F0]">{item.name}</span>
+                      <span className="g28-serif text-[18px] font-bold text-[#FAF6F0]">{labelFor(tab, item)}</span>
                       {isWork && (
                         <span className="rounded-full border border-[#D49B35]/30 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#E6C675]">
                           {item.cat}
                         </span>
                       )}
+                      {tab === 'plans' && item.popular && (
+                        <span className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-[#051812]">
+                          Popular
+                        </span>
+                      )}
                     </div>
                     <div className="mt-1 truncate text-[12px] font-medium text-[#B8B2A6]">
-                      {isWork ? `${item.client} · ${item.area}` : item.body}
+                      <RowSummary tab={tab} item={item} />
                     </div>
                   </div>
 
@@ -5573,62 +5931,7 @@ function AdminPanel({ content, onExit, onLogout }) {
                       className="overflow-hidden"
                     >
                       <div className="border-t border-[#FAF6F0]/10 p-5 sm:p-6">
-                        {isWork ? (
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <AdminField label="Project name" value={draft.name} onChange={(v) => setDraft({ ...draft, name: v })} />
-                            <AdminField label="Client" value={draft.client} onChange={(v) => setDraft({ ...draft, client: v })} />
-                            <AdminField label="Service" value={draft.service} onChange={(v) => setDraft({ ...draft, service: v })} />
-                            <AdminField label="Area" value={draft.area} onChange={(v) => setDraft({ ...draft, area: v })} />
-                            <label className="block">
-                              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Category</span>
-                              <select
-                                value={draft.cat}
-                                onChange={(e) => setDraft({ ...draft, cat: e.target.value })}
-                                className="g28-field mt-1.5 cursor-pointer"
-                              >
-                                {PROJECT_CATS.map((c) => (
-                                  <option key={c.key} value={c.key} className="text-[#08251C]">
-                                    {c.label}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
-                            <div className="sm:col-span-2">
-                              <ImagePicker label="Cover image" value={draft.image} onChange={(v) => setDraft({ ...draft, image: v })} />
-                            </div>
-                            <GalleryEditor images={draft.gallery || []} onChange={(v) => setDraft({ ...draft, gallery: v })} />
-                            <div className="sm:col-span-2">
-                              <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => setDraft({ ...draft, body: v })} />
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="grid gap-5 sm:grid-cols-2">
-                            <AdminField label="Product name" value={draft.name} onChange={(v) => setDraft({ ...draft, name: v })} />
-                            <label className="block">
-                              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Icon</span>
-                              <select
-                                value={draft.iconName || 'Package'}
-                                onChange={(e) => setDraft({ ...draft, iconName: e.target.value })}
-                                className="g28-field mt-1.5 cursor-pointer"
-                              >
-                                {Object.keys(ICON_MAP).map((k) => (
-                                  <option key={k} value={k} className="text-[#08251C]">
-                                    {k}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
-                            <AdminField label="Swatch (CSS gradient)" value={draft.swatch} onChange={(v) => setDraft({ ...draft, swatch: v })} />
-                            <AdminField label="Accent tone (hex)" value={draft.tone} onChange={(v) => setDraft({ ...draft, tone: v })} placeholder="#3A444C" />
-                            <div className="sm:col-span-2">
-                              <ImagePicker label="Product photo (optional — falls back to the swatch)" value={draft.image || ''} onChange={(v) => setDraft({ ...draft, image: v })} />
-                            </div>
-                            <SpecsEditor specs={draft.specs || []} onChange={(v) => setDraft({ ...draft, specs: v })} />
-                            <div className="sm:col-span-2">
-                              <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => setDraft({ ...draft, body: v })} />
-                            </div>
-                          </div>
-                        )}
+                        <EditorFields tab={tab} draft={draft} setDraft={setDraft} />
 
                         <div className="mt-6 flex flex-wrap items-center gap-3">
                           <button onClick={commit} className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#051812]">
@@ -5869,7 +6172,7 @@ export default function App() {
           <ScopeOfWork />
 
           {/* dark #051812 → dark #08251C */}
-          <Industries />
+          <Industries items={content.industries} />
 
           {/* dark → ivory */}
           <Slash from="#08251C" to="#FAF6F0" />
@@ -5877,14 +6180,14 @@ export default function App() {
 
           {/* ivory → dark #051812 */}
           <Slash from="#FAF6F0" to="#051812" />
-          <Brands />
+          <Brands items={content.brands} />
 
           {/* dark → ivory */}
           <Slash from="#051812" to="#FAF6F0" />
           <Projects items={content.projects} onOpen={setOpenProject} />
-          <Packages />
+          <Packages items={content.plans} />
           <Faq />
-          <GroupCompanies />
+          <GroupCompanies items={content.group} />
           <Contact lampOn={lampOn} toggleLamp={toggleLamp} />
 
           {/* contact banner → footer */}
