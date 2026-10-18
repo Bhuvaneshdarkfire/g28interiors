@@ -141,10 +141,30 @@ body{
 .g28-serif{ font-family:'Cormorant Garamond','Playfair Display',Georgia,serif; }
 .g28-sans{ font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif; }
 
-/* --- gold gradient text --- */
-.g28-gold-text{
-  background:linear-gradient(100deg,#A87724 0%,#D49B35 26%,#F2E2BE 50%,#E6C675 74%,#A87724 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
+/* --- gold text ---
+   The solid champagne colour is the base. The gradient is layered on top only
+   where background-clip:text is actually supported, so the text can never end
+   up transparent-but-unpainted (which happens after a font swap, inside a
+   backdrop-filter ancestor, or on an element re-rendering every frame). */
+.g28-gold-text{ color:#D49B35; }
+.g28-gold-solid{ color:#D49B35; }
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .g28-gold-text{
+    background-image:linear-gradient(100deg,#A87724 0%,#D49B35 26%,#F2E2BE 50%,#E6C675 74%,#A87724 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+  }
+}
+
+/* --- rupee sign ---
+   Neither Plus Jakarta Sans nor Cormorant Garamond ships U+20B9 in the Google
+   Fonts latin subset, so the glyph is taken from a fallback. Name the fonts
+   most likely to carry it so it renders consistently instead of dropping out. */
+.g28-rupee{
+  font-family:'Segoe UI','Noto Sans','Noto Sans Devanagari',Roboto,'DejaVu Sans','Liberation Sans',Arial,sans-serif;
+  font-weight:600;
 }
 
 /* --- infinite marquee --- */
@@ -1176,7 +1196,7 @@ const FAQ = {
       cat: 'General',
       q: 'How much does interior design cost per square foot in Coimbatore?',
       a:
-        'At G28 Interiors, corporate and home interiors in Coimbatore generally range from about ₹1,850 to ₹4,750 per square foot depending on scope and materials. The Essential Workspace package starts at ₹1,850/sq.ft, Executive Turnkey at ₹2,650/sq.ft and Bespoke Headquarters at ₹3,900/sq.ft. You receive an itemised Bill of Quantities before work begins, so there are no hidden costs.'
+        "At G28 Interiors, corporate and home interiors in Coimbatore generally range from about \u20b91,850 to \u20b94,750 per square foot depending on scope and materials. The Essential Workspace package starts at \u20b91,850/sq.ft, Executive Turnkey at \u20b92,650/sq.ft and Bespoke Headquarters at \u20b93,900/sq.ft. You receive an itemised Bill of Quantities before work begins, so there are no hidden costs."
     },
     {
       cat: 'General',
@@ -1394,7 +1414,7 @@ function G28Logo({ tone = 'light', className = '', size = 30, showTagline = fals
       <span className="relative inline-block" style={{ fontSize: `${size}px` }}>
         <span
           className={`g28-serif block font-bold leading-[0.76] tracking-[0.01em] ${
-            cream ? 'g28-gold-text' : 'text-[#08251C]'
+            cream ? 'g28-gold-solid' : 'text-[#08251C]'
           }`}
         >
           G28
@@ -2535,9 +2555,9 @@ function Hero({ lampOn, toggleLamp }) {
                 <>
                   <div className="g28-serif text-[44px] font-bold leading-none text-[#FAF6F0] sm:text-[56px]">
                     {kpi.text ? (
-                      <span className="g28-gold-text">{kpi.text}</span>
+                      <span className="g28-gold-solid">{kpi.text}</span>
                     ) : (
-                      <Counter to={kpi.value} suffix={kpi.suffix} className="g28-gold-text" />
+                      <Counter to={kpi.value} suffix={kpi.suffix} className="g28-gold-solid" />
                     )}
                   </div>
                   <div className="mt-4 text-[13px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/85">{kpi.label}</div>
@@ -3634,7 +3654,7 @@ function PackageCard({ plan, mode }) {
                       popular ? 'text-[#FAF6F0]' : 'text-[#08251C]'
                     }`}
                   >
-                    ₹{plan.price[mode]}
+                    <span className="g28-rupee">&#8377;</span>{plan.price[mode]}
                   </motion.span>
                 </AnimatePresence>
               </span>
@@ -5759,7 +5779,7 @@ function RowSummary({ tab, item }) {
   if (tab === 'work') return <>{item.client} &middot; {item.area}</>
   if (tab === 'products') return <>{item.body}</>
   if (tab === 'industries') return <>{item.body}</>
-  if (tab === 'plans') return <>₹{item.price.a} / ₹{item.price.b} {item.unit} &middot; {(item.features.a || []).length} inclusions</>
+  if (tab === 'plans') return <><span className="g28-rupee">&#8377;</span>{item.price.a} / <span className="g28-rupee">&#8377;</span>{item.price.b} {item.unit} &middot; {(item.features.a || []).length} inclusions</>
   if (tab === 'group') return <>{item.role}</>
   return <>{item.category}</>
 }
@@ -6221,28 +6241,6 @@ export default function App() {
 
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
-
-  /* inject Google Fonts once */
-  useEffect(() => {
-    const id = 'g28-fonts'
-    if (document.getElementById(id)) return
-    const link = document.createElement('link')
-    link.id = id
-    link.rel = 'stylesheet'
-    link.href =
-      'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap'
-    document.head.appendChild(link)
-
-    const pre1 = document.createElement('link')
-    pre1.rel = 'preconnect'
-    pre1.href = 'https://fonts.googleapis.com'
-    const pre2 = document.createElement('link')
-    pre2.rel = 'preconnect'
-    pre2.href = 'https://fonts.gstatic.com'
-    pre2.crossOrigin = 'anonymous'
-    document.head.appendChild(pre1)
-    document.head.appendChild(pre2)
-  }, [])
 
   return (
     <div className="relative min-h-screen bg-[#051812]">

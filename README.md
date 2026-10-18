@@ -67,6 +67,27 @@ One `<script type="application/ld+json">` with a `@graph` containing:
 4. Submit `https://g28interiors.in/sitemap.xml` in Google Search Console and Bing
    Webmaster Tools, then request indexing for the homepage.
 
+## Rendering notes
+
+Two things that can make characters drop out, and how they are handled:
+
+**Gold gradient text.** `background-clip: text` needs `color: transparent`, so if the
+clip ever fails to paint — after a font swap, inside a `backdrop-filter` ancestor, or on
+an element re-rendering every frame — the text goes invisible. `.g28-gold-text` now sets
+a solid champagne colour first and layers the gradient only inside
+`@supports (background-clip: text)`. The brand wordmark and the animated KPI counters use
+`.g28-gold-solid` outright, since they sit under a `backdrop-filter` bar and re-render
+every frame respectively.
+
+**The rupee sign.** Neither Plus Jakarta Sans nor Cormorant Garamond ships U+20B9 in the
+Google Fonts latin subset — `document.fonts.check()` returns false for both. The glyph is
+therefore taken from a fallback, which is inconsistent. `.g28-rupee` names the fonts most
+likely to carry it (Segoe UI, Noto Sans, Roboto, DejaVu Sans) so `₹` renders the same way
+everywhere.
+
+Fonts are declared in `index.html` with preconnect + preload rather than injected from
+React, so they begin downloading before the app mounts.
+
 ## Quick start
 
 ```bash

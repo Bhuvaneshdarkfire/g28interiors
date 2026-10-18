@@ -67,9 +67,21 @@
     <link rel="apple-touch-icon" href="./favicon.svg" />
     <link rel="mask-icon" href="./favicon.svg" color="#D49B35" />
 
-    <!-- ================= FONTS ================= -->
+    <!-- ================= FONTS =================
+         Declared here rather than injected from React so they start downloading
+         before the app mounts. display=swap avoids invisible text, and the
+         preconnects cut the handshake time. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    />
 
     <!-- ================= STRUCTURED DATA ================= -->
     <script type="application/ld+json">
