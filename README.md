@@ -113,6 +113,29 @@ This is a static site with no backend, so:
 panel and send it over — the defaults in `src/App.jsx` can then be updated so the
 content ships with the site.
 
+### If the page ever shows a blank screen
+
+The most common cause is saved content from the admin panel that no longer
+matches the layout — for example after importing a file with the wrong shape,
+or data saved by an older version of the editor.
+
+This is now handled in three layers, so it cannot take the page down:
+
+1. **Every stored record is sanitised** before it reaches a component. A missing
+   field, a wrong type, a `null` entry or a non-array collection all fall back
+   to safe defaults.
+2. **An error boundary wraps the app.** If anything still throws, you get a
+   branded recovery screen showing the actual error, with **Reload** and
+   **Reset saved content & reload** buttons — never a white page.
+3. **The stylesheet is injected into `<head>` before React mounts**, so the dark
+   theme survives even a total render failure.
+
+To clear saved content manually, run this in the browser console and reload:
+
+```js
+localStorage.removeItem('g28.content.v1'); location.reload()
+```
+
 ### Security
 
 The passphrase is checked in the browser, which means it is a **content-editing

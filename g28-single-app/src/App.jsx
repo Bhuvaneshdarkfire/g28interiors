@@ -112,7 +112,7 @@ const VIEWPORT = { once: true, margin: '-80px' }
    2. GLOBAL STYLESHEET  (fonts, keyframes, base resets)
    ========================================================================== */
 
-const GLOBAL_CSS = `
+export const GLOBAL_CSS = `
 :root{
   --g28-deep:${T.deep};
   --g28-ink:${T.ink};
@@ -4690,8 +4690,53 @@ const writeJSON = (key, value) => {
   }
 }
 
+/* --------------------------------------------------------------------------
+   SANITISERS
+   Anything can end up in localStorage — an older schema, a hand-edited file,
+   an import of the wrong JSON. Every stored record is normalised before it
+   reaches a component, so bad data can never take the page down.
+--------------------------------------------------------------------------- */
+const CAT_KEYS = ['corporate', 'commercial', 'industrial', 'residential']
+const str = (v, fallback = '') => (typeof v === 'string' ? v : v == null ? fallback : String(v))
+
+const sanitizeProject = (p, i) => {
+  if (!p || typeof p !== 'object' || Array.isArray(p)) return null
+  return {
+    name: str(p.name, `Project ${i + 1}`),
+    client: str(p.client, 'Client'),
+    service: str(p.service, 'Turnkey Interiors'),
+    area: str(p.area, '—'),
+    cat: CAT_KEYS.includes(p.cat) ? p.cat : 'corporate',
+    body: str(p.body),
+    image: str(p.image),
+    gallery: Array.isArray(p.gallery) ? p.gallery.filter((g) => typeof g === 'string' && g) : []
+  }
+}
+
+const sanitizeMaterial = (m, i) => {
+  if (!m || typeof m !== 'object' || Array.isArray(m)) return null
+  return {
+    name: str(m.name, `Product ${i + 1}`),
+    body: str(m.body),
+    swatch: str(m.swatch, 'linear-gradient(135deg,#D8DDE2,#F2F5F7 34%,#A8B0B8 68%,#E4E9ED)'),
+    tone: str(m.tone, '#3A444C'),
+    iconName: typeof m.iconName === 'string' && ICON_MAP[m.iconName] ? m.iconName : typeof m.icon === 'string' && ICON_MAP[m.icon] ? m.icon : 'Package',
+    icon: typeof m.icon !== 'string' ? m.icon : undefined,
+    image: typeof m.image === 'string' && m.image ? m.image : null,
+    specs: Array.isArray(m.specs) ? m.specs.filter((x) => typeof x === 'string' && x) : []
+  }
+}
+
+/* only fall back to the built-in defaults when the stored value is not an
+   array at all — an intentionally emptied list stays empty */
+const normalizeCollection = (value, sanitize, fallback) =>
+  Array.isArray(value) ? value.map(sanitize).filter(Boolean) : fallback
+
 function useContent() {
-  const [overrides, setOverrides] = useState(() => readJSON(STORE_KEY, {}))
+  const [overrides, setOverrides] = useState(() => {
+    const raw = readJSON(STORE_KEY, {})
+    return raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}
+  })
 
   const save = useCallback((next) => {
     setOverrides(next)
@@ -4699,7 +4744,11 @@ function useContent() {
   }, [])
 
   const setCollection = useCallback(
-    (key, items) => save({ ...readJSON(STORE_KEY, {}), [key]: items }),
+    (key, items) => {
+      const raw = readJSON(STORE_KEY, {})
+      const base = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}
+      save({ ...base, [key]: items })
+    },
     [save]
   )
 
@@ -4711,8 +4760,8 @@ function useContent() {
   }, [])
 
   return {
-    projects: overrides.projects || PROJECTS.items,
-    materials: overrides.materials || MATERIALS.items,
+    projects: normalizeCollection(overrides.projects, sanitizeProject, PROJECTS.items),
+    materials: normalizeCollection(overrides.materials, sanitizeMaterial, MATERIALS.items),
     isCustomised: Boolean(overrides.projects || overrides.materials),
     setCollection,
     reset
@@ -5372,6 +5421,86 @@ function AdminArea({ content, onExit }) {
   )
 }
 
+/* ==========================================================================
+   22. ERROR BOUNDARY
+   A render error must never leave a blank white page. This catches anything
+   thrown below it and offers a way back — including clearing bad saved
+   content, which is the most likely cause.
+   ========================================================================== */
+
+export class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { error: null }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { error }
+  }
+
+  componentDidCatch(error, info) {
+    // eslint-disable-next-line no-console
+    console.error('[G28] render error', error, info)
+  }
+
+  render() {
+    if (!this.state.error) return this.props.children
+
+    const clearAndReload = () => {
+      try {
+        localStorage.removeItem('g28.content.v1')
+        localStorage.removeItem('g28.session.v1')
+      } catch {}
+      window.location.hash = ''
+      window.location.reload()
+    }
+
+    return (
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#051812] px-5 py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[#D49B35]/18 blur-[150px]" />
+        <div className="relative w-full max-w-[560px] rounded-2xl border border-[#D49B35]/25 bg-[#08251C]/85 p-8 text-center sm:p-10">
+          <div className="flex justify-center">
+            <G28Logo size={30} />
+          </div>
+          <h1 className="g28-serif mt-7 text-[26px] font-bold leading-tight text-[#FAF6F0]">
+            Something interrupted the page
+          </h1>
+          <p className="mx-auto mt-4 max-w-[420px] text-[14px] font-medium leading-[1.7] text-[#B8B2A6]">
+            This is usually caused by saved content from the admin panel that no longer matches
+            the current layout. Reloading normally fixes it — clearing the saved content restores
+            the built-in defaults.
+          </p>
+
+          <pre className="mt-6 max-h-[120px] overflow-auto rounded-lg border border-[#FAF6F0]/10 bg-[#051812]/70 p-4 text-left text-[11px] leading-[1.6] text-[#B8B2A6]">
+            {String((this.state.error && this.state.error.message) || this.state.error)}
+          </pre>
+
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="rounded-full border border-[#FAF6F0]/20 px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#FAF6F0]/80 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+            >
+              Reload
+            </button>
+            <button
+              type="button"
+              onClick={clearAndReload}
+              className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#051812]"
+            >
+              Reset saved content &amp; reload
+            </button>
+          </div>
+
+          <p className="mt-6 text-[11px] font-medium text-[#FAF6F0]/35">
+            Your exported g28-content.json is not affected.
+          </p>
+        </div>
+      </div>
+    )
+  }
+}
+
 export default function App() {
   const [lampOn, setLampOn] = useState(true)
   const toggleLamp = () => setLampOn((v) => !v)
@@ -5439,9 +5568,6 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#051812]">
-      {/* scoped global stylesheet */}
-      <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
-
       {/* scroll progress */}
       <motion.div
         style={{ scaleX: progress }}
