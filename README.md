@@ -84,6 +84,21 @@ updates most often: **Work We Deliver** (projects) and **Products & Materials**.
 From the panel you can add, edit, reorder and delete entries, then hit
 **View site** to see the change live.
 
+### Adding images from your device
+
+Both editors take images straight off your computer — no hosting needed:
+
+- **Cover image** (projects) and **Product photo** (materials): click
+  *Upload from device*, or paste a URL instead.
+- **Gallery** (projects): *+ Add images* accepts several files at once. Each
+  project's gallery is what shows in its popup. Reorder with the arrows,
+  remove with the ×.
+
+Uploads are **resized to 1500px wide and re-compressed to JPEG** in the browser
+before being stored, so a 5 MB phone photo becomes roughly 150–300 KB. The admin
+bar shows a running **storage meter** — browsers cap `localStorage` at about
+5 MB, so expect room for roughly 15–25 photos. Export before you get close.
+
 ### How it stores data — read this
 
 This is a static site with no backend, so:
@@ -119,9 +134,13 @@ djb2 hash of your new passphrase.
 5. Our Values — 3-column bento with cursor spotlight + tilt
 6. **Scope of Work** — tabbed bento (Commercial & Corporate / Residential) of spotlight tilt cards with full checklists
 7. **Industries We Work With** — 8-sector interactive bento grid
-8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags (admin-editable)
+8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags (admin-editable).
+    Each card opens a **product detail popup** with specifications, description
+    and supplying brands.
 9. **Brands We Deal With** — 11 custom stylised logo marks + infinite brand marquee
-10. Work That Delivers Results — 5-pillar filterable case studies (admin-editable)
+10. Work That Delivers Results — 5-pillar filterable case studies (admin-editable).
+    Clicking any card opens a **project popup** with its full image gallery,
+    arrow-key navigation, thumbnails and a full-screen lightbox.
 11. Transparent Execution Packages — conic gold shimmer + slot-machine price roll
 12. FAQ — category tabs + accordions
 13. **The Vinayaga Group Legacy** — 3-company architectural showcase

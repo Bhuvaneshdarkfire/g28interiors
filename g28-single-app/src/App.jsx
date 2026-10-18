@@ -280,7 +280,12 @@ const IMG = {
   industrial: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=80',
   factory: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1400&q=80',
   kitchen: 'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1400&q=80',
-  villa: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80'
+  villa: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80',
+  meeting: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?auto=format&fit=crop&w=1400&q=80',
+  team: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80',
+  office3: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80',
+  cafe2: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=1400&q=80',
+  restaurant: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1400&q=80'
 }
 
 const HERO = {
@@ -638,6 +643,8 @@ const MATERIALS = {
     {
       icon: Layers,
       name: 'Aluminium',
+      image: null,
+      specs: ['Heavy-duty & slim profiles', 'Powder-coated / anodised', 'Partition, ceiling & window systems'],
       body: 'Heavy-duty and slim architectural aluminium profiles for partitions, ceilings, railings and window systems.',
       swatch: 'linear-gradient(135deg,#D8DDE2 0%,#F2F5F7 28%,#A8B0B8 55%,#E4E9ED 78%,#B4BCC4 100%)',
       tone: '#3A444C'
@@ -645,6 +652,8 @@ const MATERIALS = {
     {
       icon: Boxes,
       name: 'Plywood',
+      image: null,
+      specs: ['Commercial & BWR / BWP', 'Marine-grade for wet areas', '18mm / 12mm / 6mm stock'],
       body: 'Commercial and BWR / BWP marine-grade plywood for wet areas, wardrobes, kitchens and heavy structural joinery.',
       swatch: 'linear-gradient(135deg,#C9A06A 0%,#E0BE8B 30%,#A97C46 62%,#D3AC79 100%)',
       tone: '#5A3E1E'
@@ -652,6 +661,8 @@ const MATERIALS = {
     {
       icon: Frame,
       name: 'Wood',
+      image: null,
+      specs: ['Seasoned & kiln-dried', 'Natural veneers', 'Solid timber for feature work'],
       body: 'Seasoned timber and natural wood veneers for bespoke furniture, panelling and feature detailing.',
       swatch: 'linear-gradient(135deg,#8A5A32 0%,#B07B47 32%,#5F3A1E 66%,#9A6738 100%)',
       tone: '#3A2110'
@@ -659,6 +670,8 @@ const MATERIALS = {
     {
       icon: SquareStack,
       name: 'MDF',
+      image: null,
+      specs: ['Moisture-resistant (HMR)', 'HDHMR for high-density work', 'Paint & laminate finish'],
       body: 'High-density moisture-resistant MDF and HDHMR boards for precision-machined, paint-finish joinery.',
       swatch: 'linear-gradient(135deg,#E8DCC6 0%,#F5EEDD 34%,#CDBEA1 68%,#EDE3CE 100%)',
       tone: '#6B5B3E'
@@ -666,6 +679,8 @@ const MATERIALS = {
     {
       icon: PanelsTopLeft,
       name: 'Gypsum',
+      image: null,
+      specs: ['Boards & plastering systems', 'Seamless designer ceilings', 'Dry-wall partition cores'],
       body: 'Premium gypsum boards and plastering systems for seamless designer ceilings and dry-wall partitions.',
       swatch: 'linear-gradient(135deg,#F2F0EC 0%,#FFFFFF 34%,#DCD8D1 68%,#F6F4F1 100%)',
       tone: '#5E5A52'
@@ -673,6 +688,8 @@ const MATERIALS = {
     {
       icon: Blinds,
       name: 'Glass',
+      image: null,
+      specs: ['Toughened / laminated', 'Frosted, fluted & acoustic', 'Railing & partition grades'],
       body: 'Toughened, frosted, fluted and acoustic glass panels for partitions, railings, cabins and facades.',
       swatch: 'linear-gradient(135deg,#BFD8DC 0%,#E4F1F3 32%,#93B4BA 66%,#D2E6EA 100%)',
       tone: '#2C4A50'
@@ -680,6 +697,8 @@ const MATERIALS = {
     {
       icon: Warehouse,
       name: 'UPVC & PVC',
+      image: null,
+      specs: ['Waterproof windows & doors', 'PVC interior wall panels', 'Low-maintenance surfaces'],
       body: 'Waterproof UPVC windows and doors, plus PVC interior panels for wet areas and low-maintenance surfaces.',
       swatch: 'linear-gradient(135deg,#E6E8EA 0%,#FAFBFC 34%,#C6CACE 68%,#EDEFF1 100%)',
       tone: '#4A4F55'
@@ -979,7 +998,8 @@ const PROJECTS = {
       cat: 'corporate',
       body:
         'A 320-seat technology floor delivered as a single turnkey contract — acoustic zoning for engineering pods, a glass-walled war room and a reception that reads as brand architecture.',
-      image: IMG.office1
+      image: IMG.office1,
+      gallery: [IMG.office1, IMG.office3, IMG.meeting, IMG.lounge, IMG.office2]
     },
     {
       name: 'Vanguard Executive Suites',
@@ -989,7 +1009,8 @@ const PROJECTS = {
       cat: 'corporate',
       body:
         'Nine partner cabins and two boardrooms detailed in walnut veneer, fluted glass and acoustic fabric — engineered so a confidential call never leaves the room.',
-      image: IMG.suite1
+      image: IMG.suite1,
+      gallery: [IMG.suite1, IMG.suite2, IMG.meeting, IMG.lounge]
     },
     {
       name: 'Aura Flagship Studio',
@@ -999,7 +1020,8 @@ const PROJECTS = {
       cat: 'commercial',
       body:
         'A double-height retail flagship where we rebuilt the lighting grid, sightlines and circulation so every product wall performs from the moment you walk in.',
-      image: IMG.retail
+      image: IMG.retail,
+      gallery: [IMG.retail, IMG.lounge, IMG.office2, IMG.suite2]
     },
     {
       name: 'Harbour Café & Bistro',
@@ -1009,7 +1031,8 @@ const PROJECTS = {
       cat: 'commercial',
       body:
         'A café interior built around acoustic baffle ceilings, custom banquette seating and a pergola-covered terrace that extended the usable floor by a third.',
-      image: IMG.cafe
+      image: IMG.cafe,
+      gallery: [IMG.cafe, IMG.cafe2, IMG.restaurant, IMG.lounge]
     },
     {
       name: 'Vertex Production Works',
@@ -1019,7 +1042,8 @@ const PROJECTS = {
       cat: 'industrial',
       body:
         'Plant-floor offices, control cabins and heavy-duty racking in fibre cement and powder-coated steel — specified for dust, vibration and continuous shift use.',
-      image: IMG.industrial
+      image: IMG.industrial,
+      gallery: [IMG.industrial, IMG.factory, IMG.office2, IMG.office3]
     },
     {
       name: 'Orbit Industrial Partitions',
@@ -1029,7 +1053,8 @@ const PROJECTS = {
       cat: 'industrial',
       body:
         'Durable fibre cement partitions dividing production bays from inspection zones, with load-rated storage and a fully sealed ceiling grid.',
-      image: IMG.factory
+      image: IMG.factory,
+      gallery: [IMG.factory, IMG.industrial, IMG.team, IMG.lounge]
     },
     {
       name: 'The Crest Residence',
@@ -1039,7 +1064,8 @@ const PROJECTS = {
       cat: 'residential',
       body:
         'A four-bedroom villa executed end to end — modular kitchen, walk-in wardrobes, a home theatre and imported stone detailing, handed over ahead of schedule.',
-      image: IMG.residence
+      image: IMG.residence,
+      gallery: [IMG.residence, IMG.villa, IMG.kitchen, IMG.suite1]
     },
     {
       name: 'Meridian Villa',
@@ -1049,7 +1075,8 @@ const PROJECTS = {
       cat: 'residential',
       body:
         'A bespoke metal staircase with toughened glass railing, an architectural pergola and a full facade elevation that changed the entire street presence.',
-      image: IMG.villa
+      image: IMG.villa,
+      gallery: [IMG.villa, IMG.residence, IMG.kitchen, IMG.office2]
     }
   ]
 }
@@ -1619,7 +1646,8 @@ function SpotlightTiltCard({
   maxTilt = 4,
   glow = 400,
   topLine = true,
-  lift = 6
+  lift = 6,
+  ...rest
 }) {
   const reduce = useReducedMotion()
   const ref = useRef(null)
@@ -1676,6 +1704,7 @@ function SpotlightTiltCard({
       whileHover={reduce ? undefined : { y: -lift }}
       transition={{ y: { duration: 0.35, ease: EASE } }}
       className={`group relative overflow-hidden ${radius} ${className}`}
+      {...rest}
     >
       {/* cursor-tracking gold spotlight */}
       <motion.div
@@ -2929,7 +2958,7 @@ function Industries() {
    12c. MATERIALS & PRODUCTS WE USE  —  swatches + dealer specialties
    ========================================================================== */
 
-function Materials({ items = MATERIALS.items }) {
+function Materials({ items = MATERIALS.items, onOpen }) {
   return (
     <section id="materials" className="relative scroll-mt-24 overflow-hidden bg-[#FAF6F0] py-24 sm:py-28">
       <div className="relative mx-auto w-full max-w-[1400px] px-5 sm:px-6 lg:px-10">
@@ -2947,7 +2976,16 @@ function Materials({ items = MATERIALS.items }) {
                 radius="rounded-2xl"
                 glow={340}
                 lift={5}
-                className="h-full overflow-hidden border border-[#08251C]/[0.07] bg-[#F2ECE1]"
+                role="button"
+                tabIndex={0}
+                onClick={() => onOpen && onOpen(m)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    onOpen && onOpen(m)
+                  }
+                }}
+                className="h-full cursor-pointer overflow-hidden border border-[#08251C]/[0.07] bg-[#F2ECE1]"
               >
                 {({ hovered }) => (
                   <>
@@ -3191,7 +3229,7 @@ function GroupCompanies() {
 /* ---------- portfolio card: clip reveal + magnetic gold badge ----------
    forwardRef is required: AnimatePresence mode="popLayout" must be able to
    attach a ref to its direct child in order to measure it.                */
-const ProjectCard = React.forwardRef(function ProjectCard({ project }, ref) {
+const ProjectCard = React.forwardRef(function ProjectCard({ project, onOpen }, ref) {
   const reduce = useReducedMotion()
   const mediaRef = useRef(null)
   const [hover, setHover] = useState(false)
@@ -3216,9 +3254,17 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project }, ref) {
   }
 
   return (
-    <motion.a
+    <motion.div
       ref={ref}
-      href="#contact"
+      role="button"
+      tabIndex={0}
+      onClick={() => onOpen && onOpen(project)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onOpen && onOpen(project)
+        }
+      }}
       layout
       initial={{ opacity: 0, y: 30, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -3280,17 +3326,17 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project }, ref) {
           <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5F6B64]">{project.service}</span>
 
           <span className="relative inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[#8F6218]">
-            See the Work
+            View Project
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1" />
             <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-[#D49B35] to-[#E6C675] transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full" />
           </span>
         </div>
       </div>
-    </motion.a>
+    </motion.div>
   )
 })
 
-function Projects({ items = PROJECTS.items }) {
+function Projects({ items = PROJECTS.items, onOpen }) {
   const [filter, setFilter] = useState('all')
 
   const visible = useMemo(
@@ -3330,7 +3376,7 @@ function Projects({ items = PROJECTS.items }) {
         <motion.div layout className="mt-10 grid gap-4 lg:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {visible.map((p) => (
-              <ProjectCard key={p.name} project={p} />
+              <ProjectCard key={p.name} project={p} onOpen={onOpen} />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -4243,6 +4289,370 @@ function FounderStory({ onBack, lampOn, toggleLamp }) {
 }
 
 /* ==========================================================================
+   21. IMAGE HELPERS + DETAIL MODALS
+   ========================================================================== */
+
+/* Resize + compress a picked file so it can live in localStorage.
+   Photos straight off a phone are 4–8 MB; this brings them to ~150–300 KB. */
+function fileToDataUrl(file, maxW = 1500, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith('image/')) {
+      reject(new Error('Not an image'))
+      return
+    }
+    const reader = new FileReader()
+    reader.onerror = () => reject(new Error('Could not read file'))
+    reader.onload = () => {
+      const img = new Image()
+      img.onerror = () => reject(new Error('Could not decode image'))
+      img.onload = () => {
+        const scale = Math.min(1, maxW / img.width)
+        const canvas = document.createElement('canvas')
+        canvas.width = Math.max(1, Math.round(img.width * scale))
+        canvas.height = Math.max(1, Math.round(img.height * scale))
+        const ctx = canvas.getContext('2d')
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+        resolve(canvas.toDataURL('image/jpeg', quality))
+      }
+      img.src = String(reader.result)
+    }
+    reader.readAsDataURL(file)
+  })
+}
+
+/* rough localStorage usage so the admin can see how much room is left */
+function storageUsed() {
+  try {
+    let bytes = 0
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i)
+      bytes += (k.length + (localStorage.getItem(k) || '').length) * 2
+    }
+    return bytes
+  } catch {
+    return 0
+  }
+}
+const fmtBytes = (b) => (b > 1024 * 1024 ? (b / (1024 * 1024)).toFixed(1) + ' MB' : Math.round(b / 1024) + ' KB')
+
+const galleryOf = (p) => (p && p.gallery && p.gallery.length ? p.gallery : p && p.image ? [p.image] : [])
+
+/* --------------------------------------------------------------------------
+   shared modal shell
+--------------------------------------------------------------------------- */
+function Modal({ children, onClose, className = '' }) {
+  /* keep the latest handler in a ref so the effect runs once on mount and
+     cleans up once on unmount — otherwise the body scroll lock is restored
+     against a stale value on every re-render */
+  const closeRef = useRef(onClose)
+  closeRef.current = onClose
+
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeRef.current()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [])
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto p-3 sm:p-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.28, ease: EASE }}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="absolute inset-0 bg-[#051812]/88 backdrop-blur-md" onClick={onClose} />
+      <motion.div
+        initial={{ opacity: 0, y: 26, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.99 }}
+        transition={SPRING}
+        className={`relative my-auto w-full rounded-2xl border border-[#D49B35]/25 bg-[#08251C] shadow-[0_60px_120px_-40px_rgba(0,0,0,.95)] ${className}`}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* --------------------------------------------------------------------------
+   PROJECT MODAL — every image of a single project
+--------------------------------------------------------------------------- */
+function ProjectModal({ project, onClose }) {
+  const gallery = galleryOf(project)
+  const [active, setActive] = useState(0)
+  const [lightbox, setLightbox] = useState(false)
+
+  const go = useCallback(
+    (dir) => setActive((i) => (gallery.length ? (i + dir + gallery.length) % gallery.length : 0)),
+    [gallery.length]
+  )
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') go(1)
+      if (e.key === 'ArrowLeft') go(-1)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [go])
+
+  const catLabel = (PROJECT_CATS.find((c) => c.key === project.cat) || {}).label || project.cat
+
+  return (
+    <Modal onClose={onClose} className="max-w-[1180px]">
+      {/* bar */}
+      <div className="sticky top-0 z-10 flex items-center gap-4 rounded-t-2xl border-b border-[#FAF6F0]/10 bg-[#08251C]/95 px-5 py-4 backdrop-blur-xl sm:px-7">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h2 className="g28-serif truncate text-[20px] font-bold text-[#FAF6F0] sm:text-[24px]">{project.name}</h2>
+            <span className="rounded-full border border-[#D49B35]/35 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-[#E6C675]">
+              {catLabel}
+            </span>
+          </div>
+          <p className="mt-1 truncate text-[12.5px] font-medium text-[#B8B2A6]">
+            {project.client} &middot; {project.area}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#FAF6F0]/20 text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="grid gap-0 lg:grid-cols-[1.35fr_0.65fr]">
+        {/* ---------------- gallery ---------------- */}
+        <div className="p-4 sm:p-6">
+          {gallery.length ? (
+            <>
+              <button
+                type="button"
+                onClick={() => setLightbox(true)}
+                className="group relative block w-full overflow-hidden rounded-xl border border-[#FAF6F0]/10"
+                aria-label="Open full size"
+              >
+                <img
+                  src={gallery[active]}
+                  alt={`${project.name} — image ${active + 1}`}
+                  className="aspect-[16/10] w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.03]"
+                />
+                <span className="pointer-events-none absolute right-4 top-4 rounded-full border border-[#D49B35]/40 bg-[#051812]/85 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#E6C675] backdrop-blur">
+                  {active + 1} / {gallery.length}
+                </span>
+                <span className="pointer-events-none absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-[#FAF6F0]/90 text-[#08251C] opacity-0 transition-opacity duration-400 group-hover:opacity-100">
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+
+                {gallery.length > 1 && (
+                  <>
+                    <span
+                      role="button"
+                      tabIndex={-1}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        go(-1)
+                      }}
+                      className="absolute left-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-[#FAF6F0]/25 bg-[#051812]/70 text-[#FAF6F0] backdrop-blur transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+                    >
+                      <ArrowRight className="h-4 w-4 rotate-180" />
+                    </span>
+                    <span
+                      role="button"
+                      tabIndex={-1}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        go(1)
+                      }}
+                      className="absolute right-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-[#FAF6F0]/25 bg-[#051812]/70 text-[#FAF6F0] backdrop-blur transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </>
+                )}
+              </button>
+
+              {/* thumbnails */}
+              {gallery.length > 1 && (
+                <div className="mt-4 flex gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+                  {gallery.map((src, i) => (
+                    <button
+                      key={`${src}-${i}`}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-label={`Image ${i + 1}`}
+                      className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border transition-all duration-400 ${
+                        i === active ? 'border-[#D49B35] opacity-100' : 'border-[#FAF6F0]/12 opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img src={src} alt="" className="h-full w-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="grid aspect-[16/10] w-full place-items-center rounded-xl border border-[#FAF6F0]/10 text-[13px] text-[#FAF6F0]/40">
+              No images added yet
+            </div>
+          )}
+        </div>
+
+        {/* ---------------- details ---------------- */}
+        <div className="border-t border-[#FAF6F0]/10 p-5 sm:p-7 lg:border-l lg:border-t-0">
+          <div className="grid grid-cols-2 gap-5">
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Client</div>
+              <div className="mt-1.5 text-[14px] font-semibold text-[#FAF6F0]">{project.client}</div>
+            </div>
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Area</div>
+              <div className="mt-1.5 text-[14px] font-semibold text-[#FAF6F0]">{project.area}</div>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Scope delivered</div>
+            <div className="mt-1.5 text-[14px] font-semibold text-[#FAF6F0]">{project.service}</div>
+          </div>
+
+          <div className="mt-6 h-px w-full bg-gradient-to-r from-[#D49B35]/50 to-transparent" />
+
+          <p className="mt-6 text-[14px] font-medium leading-[1.8] text-[#B8B2A6]">{project.body}</p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <RollButton href="#contact" tone="gold" onClick={onClose} className="!px-6 !py-3">
+              Start a project like this
+            </RollButton>
+            <RollButton href={CONTACT.whatsapp} tone="ghostDark" icon={MessageCircle} className="!px-6 !py-3">
+              WhatsApp
+            </RollButton>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------------- full-screen lightbox ---------------- */}
+      <AnimatePresence>
+        {lightbox && gallery.length > 0 && (
+          <motion.div
+            className="fixed inset-0 z-[95] flex items-center justify-center bg-[#051812]/97 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightbox(false)}
+          >
+            <img src={gallery[active]} alt="" className="max-h-[88vh] max-w-full rounded-lg object-contain" />
+            <span className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full border border-[#D49B35]/40 bg-[#051812]/85 px-4 py-2 text-[11px] font-bold tracking-[0.18em] text-[#E6C675]">
+              {active + 1} / {gallery.length}
+            </span>
+            <button
+              type="button"
+              onClick={() => setLightbox(false)}
+              aria-label="Close"
+              className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-[#FAF6F0]/25 text-[#FAF6F0] transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Modal>
+  )
+}
+
+/* --------------------------------------------------------------------------
+   MATERIAL / PRODUCT MODAL
+--------------------------------------------------------------------------- */
+function MaterialModal({ material, onClose }) {
+  const Icon = resolveIcon(material.iconName || material.icon)
+  const specs = material.specs || []
+
+  return (
+    <Modal onClose={onClose} className="max-w-[900px]">
+      <div className="sticky top-0 z-10 flex items-center gap-4 rounded-t-2xl border-b border-[#FAF6F0]/10 bg-[#08251C]/95 px-5 py-4 backdrop-blur-xl sm:px-7">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#D49B35]/40 bg-[#051812]/60">
+          <Icon className="h-4.5 w-4.5 text-[#E6C675]" />
+        </span>
+        <div className="min-w-0">
+          <h2 className="g28-serif truncate text-[20px] font-bold text-[#FAF6F0] sm:text-[24px]">{material.name}</h2>
+          <p className="mt-0.5 text-[12px] font-bold uppercase tracking-[0.16em] text-[#D49B35]/85">Factory sourced</p>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="ml-auto grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#FAF6F0]/20 text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="grid gap-0 sm:grid-cols-[0.9fr_1.1fr]">
+        <div className="p-4 sm:p-6">
+          <div className="overflow-hidden rounded-xl border border-[#FAF6F0]/10">
+            {material.image ? (
+              <img src={material.image} alt={material.name} className="aspect-[4/3] w-full object-cover" />
+            ) : (
+              <div className="relative aspect-[4/3] w-full" style={{ background: material.swatch }}>
+                <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,.45)_0%,transparent_38%,rgba(0,0,0,.16)_100%)]" />
+                <span
+                  className="absolute bottom-4 left-4 h-2.5 w-2.5 rounded-full"
+                  style={{ background: material.tone }}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="border-t border-[#FAF6F0]/10 p-5 sm:p-7 sm:border-l sm:border-t-0">
+          <p className="text-[14px] font-medium leading-[1.8] text-[#B8B2A6]">{material.body}</p>
+
+          {specs.length > 0 && (
+            <>
+              <div className="mt-7 text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Specifications</div>
+              <ul className="mt-4 flex flex-col gap-3">
+                {specs.map((sp) => (
+                  <li key={sp} className="flex items-start gap-3 text-[13.5px] font-medium leading-[1.6] text-[#FAF6F0]/80">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#D49B35]" />
+                    {sp}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          <div className="mt-7 h-px w-full bg-gradient-to-r from-[#D49B35]/50 to-transparent" />
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {['Saint-Gobain Gyproc', 'Knauf', 'Ramco', 'Vnext', 'EcoPro'].slice(0, 4).map((b) => (
+              <span key={b} className="rounded-full border border-[#FAF6F0]/15 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#FAF6F0]/55">
+                {b}
+              </span>
+            ))}
+          </div>
+
+          <RollButton href="#contact" tone="gold" onClick={onClose} className="mt-7 w-full justify-center !px-6 !py-3">
+            Enquire about {material.name}
+          </RollButton>
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
+/* ==========================================================================
    20. CONTENT STORE  —  editable copy for Work + Products
    --------------------------------------------------------------------------
    A static site has no server, so edits are held in localStorage on this
@@ -4451,6 +4861,171 @@ function AdminField({ label, value, onChange, placeholder, type = 'text', rows }
   )
 }
 
+/* --------------------------------------------------------------------------
+   ADMIN IMAGE CONTROLS — pick from the device (auto-resized) or paste a URL
+--------------------------------------------------------------------------- */
+function ImagePicker({ label, value, onChange }) {
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState('')
+
+  const onFile = async (e) => {
+    const file = e.target.files && e.target.files[0]
+    if (!file) return
+    setBusy(true)
+    setErr('')
+    try {
+      onChange(await fileToDataUrl(file))
+    } catch {
+      setErr('Could not read that file')
+    }
+    setBusy(false)
+    e.target.value = ''
+  }
+
+  return (
+    <div>
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">{label}</span>
+      <div className="mt-2 flex items-start gap-3">
+        {value ? (
+          <img src={value} alt="" className="h-20 w-28 shrink-0 rounded-lg border border-[#FAF6F0]/12 object-cover" />
+        ) : (
+          <span className="grid h-20 w-28 shrink-0 place-items-center rounded-lg border border-dashed border-[#FAF6F0]/20 text-[9px] uppercase tracking-widest text-[#FAF6F0]/35">
+            None
+          </span>
+        )}
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <label className="cursor-pointer rounded-full border border-[#D49B35]/45 px-4 py-2.5 text-center text-[10px] font-bold uppercase tracking-[0.14em] text-[#E6C675] transition-colors hover:bg-[#D49B35] hover:text-[#051812]">
+            {busy ? 'Processing…' : 'Upload from device'}
+            <input type="file" accept="image/*" onChange={onFile} className="hidden" />
+          </label>
+          <input
+            value={value && !String(value).startsWith('data:') ? value : ''}
+            placeholder="…or paste an image URL"
+            onChange={(e) => onChange(e.target.value)}
+            className="g28-field !py-2 text-[12px]"
+          />
+          {value && (
+            <button
+              type="button"
+              onClick={() => onChange('')}
+              className="self-start text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/45 transition-colors hover:text-[#E6C675]"
+            >
+              Remove image
+            </button>
+          )}
+          {err && <span className="text-[11px] font-semibold text-[#E6C675]">{err}</span>}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function GalleryEditor({ images = [], onChange }) {
+  const [busy, setBusy] = useState(false)
+
+  const addFiles = async (e) => {
+    const files = Array.from(e.target.files || [])
+    if (!files.length) return
+    setBusy(true)
+    const added = []
+    for (const f of files) {
+      try {
+        added.push(await fileToDataUrl(f))
+      } catch {}
+    }
+    onChange([...images, ...added])
+    setBusy(false)
+    e.target.value = ''
+  }
+
+  const remove = (i) => onChange(images.filter((_, idx) => idx !== i))
+  const move = (i, dir) => {
+    const j = i + dir
+    if (j < 0 || j >= images.length) return
+    const next = images.slice()
+    ;[next[i], next[j]] = [next[j], next[i]]
+    onChange(next)
+  }
+
+  return (
+    <div className="sm:col-span-2">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">
+          Gallery — every image shown in the popup ({images.length})
+        </span>
+        <label className="cursor-pointer rounded-full border border-[#D49B35]/45 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#E6C675] transition-colors hover:bg-[#D49B35] hover:text-[#051812]">
+          {busy ? 'Processing…' : '+ Add images'}
+          <input type="file" accept="image/*" multiple onChange={addFiles} className="hidden" />
+        </label>
+      </div>
+
+      {images.length === 0 ? (
+        <p className="mt-3 rounded-lg border border-dashed border-[#FAF6F0]/15 px-4 py-6 text-center text-[12px] text-[#FAF6F0]/40">
+          No gallery images yet — the popup will fall back to the cover image.
+        </p>
+      ) : (
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {images.map((src, i) => (
+            <div key={`${i}-${src.slice(-16)}`} className="group relative overflow-hidden rounded-lg border border-[#FAF6F0]/12">
+              <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
+              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-1 bg-[#051812]/85 px-2 py-1.5 backdrop-blur">
+                <button type="button" onClick={() => move(i, -1)} aria-label="Move left" className="grid h-6 w-6 place-items-center rounded text-[#FAF6F0]/70 hover:text-[#E6C675]">
+                  <ArrowRight className="h-3 w-3 rotate-180" />
+                </button>
+                <span className="text-[9px] font-bold text-[#FAF6F0]/50">{i + 1}</span>
+                <button type="button" onClick={() => move(i, 1)} aria-label="Move right" className="grid h-6 w-6 place-items-center rounded text-[#FAF6F0]/70 hover:text-[#E6C675]">
+                  <ArrowRight className="h-3 w-3" />
+                </button>
+                <button type="button" onClick={() => remove(i)} aria-label="Remove" className="grid h-6 w-6 place-items-center rounded text-[#FAF6F0]/60 hover:text-red-300">
+                  <X className="h-3 w-3" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function SpecsEditor({ specs = [], onChange }) {
+  return (
+    <div className="sm:col-span-2">
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Specifications ({specs.length})</span>
+      <div className="mt-2 flex flex-col gap-2">
+        {specs.map((sp, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <input
+              value={sp}
+              onChange={(e) => {
+                const next = specs.slice()
+                next[i] = e.target.value
+                onChange(next)
+              }}
+              className="g28-field !py-2 flex-1 text-[13px]"
+            />
+            <button
+              type="button"
+              onClick={() => onChange(specs.filter((_, idx) => idx !== i))}
+              aria-label="Remove spec"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#FAF6F0]/15 text-[#FAF6F0]/50 transition-colors hover:border-red-400/60 hover:text-red-300"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={() => onChange([...specs, ''])}
+          className="self-start rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+        >
+          + Add specification
+        </button>
+      </div>
+    </div>
+  )
+}
+
 function AdminPanel({ content, onExit, onLogout }) {
   const [tab, setTab] = useState('work')
   const [editing, setEditing] = useState(null)
@@ -4495,8 +5070,8 @@ function AdminPanel({ content, onExit, onLogout }) {
   }
   const add = () => {
     const blank = isWork
-      ? { name: 'New Project', client: 'Client', service: 'Turnkey Interiors', area: '0 Sq. Ft.', cat: 'corporate', body: 'Describe the project…', image: '' }
-      : { name: 'New Material', body: 'Describe the material…', swatch: 'linear-gradient(135deg,#D8DDE2,#F2F5F7 34%,#A8B0B8 68%,#E4E9ED)', tone: '#3A444C', iconName: 'Package' }
+      ? { name: 'New Project', client: 'Client', service: 'Turnkey Interiors', area: '0 Sq. Ft.', cat: 'corporate', body: 'Describe the project…', image: '', gallery: [] }
+      : { name: 'New Material', body: 'Describe the material…', swatch: 'linear-gradient(135deg,#D8DDE2,#F2F5F7 34%,#A8B0B8 68%,#E4E9ED)', tone: '#3A444C', iconName: 'Package', image: null, specs: [] }
     const next = [...items, blank]
     content.setCollection(isWork ? 'projects' : 'materials', next)
     setEditing(next.length - 1)
@@ -4544,6 +5119,10 @@ function AdminPanel({ content, onExit, onLogout }) {
             Admin
           </span>
           <div className="ml-auto flex flex-wrap items-center gap-2.5">
+            <span className="mr-1 hidden items-center gap-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/40 sm:flex">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#D49B35]" />
+              {fmtBytes(storageUsed())} used
+            </span>
             <button onClick={exportJSON} className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/75 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
               Export
             </button>
@@ -4630,8 +5209,8 @@ function AdminPanel({ content, onExit, onLogout }) {
               <div key={`${item.name}-${i}`} className={`overflow-hidden rounded-2xl border transition-colors duration-400 ${open ? 'border-[#D49B35]/50 bg-[#0D3528]/70' : 'border-[#FAF6F0]/[0.08] bg-[#08251C]/60'}`}>
                 <div className="flex flex-wrap items-center gap-4 p-5">
                   {isWork ? (
-                    item.image ? (
-                      <img src={item.image} alt="" className="h-14 w-20 shrink-0 rounded-lg object-cover" />
+                    galleryOf(item)[0] ? (
+                      <img src={galleryOf(item)[0]} alt="" className="h-14 w-20 shrink-0 rounded-lg object-cover" />
                     ) : (
                       <span className="grid h-14 w-20 shrink-0 place-items-center rounded-lg border border-[#FAF6F0]/12 text-[9px] text-[#FAF6F0]/35">No image</span>
                     )
@@ -4704,7 +5283,10 @@ function AdminPanel({ content, onExit, onLogout }) {
                                 ))}
                               </select>
                             </label>
-                            <AdminField label="Image URL" value={draft.image} onChange={(v) => setDraft({ ...draft, image: v })} placeholder="https://…" />
+                            <div className="sm:col-span-2">
+                              <ImagePicker label="Cover image" value={draft.image} onChange={(v) => setDraft({ ...draft, image: v })} />
+                            </div>
+                            <GalleryEditor images={draft.gallery || []} onChange={(v) => setDraft({ ...draft, gallery: v })} />
                             <div className="sm:col-span-2">
                               <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => setDraft({ ...draft, body: v })} />
                             </div>
@@ -4728,6 +5310,10 @@ function AdminPanel({ content, onExit, onLogout }) {
                             </label>
                             <AdminField label="Swatch (CSS gradient)" value={draft.swatch} onChange={(v) => setDraft({ ...draft, swatch: v })} />
                             <AdminField label="Accent tone (hex)" value={draft.tone} onChange={(v) => setDraft({ ...draft, tone: v })} placeholder="#3A444C" />
+                            <div className="sm:col-span-2">
+                              <ImagePicker label="Product photo (optional — falls back to the swatch)" value={draft.image || ''} onChange={(v) => setDraft({ ...draft, image: v })} />
+                            </div>
+                            <SpecsEditor specs={draft.specs || []} onChange={(v) => setDraft({ ...draft, specs: v })} />
                             <div className="sm:col-span-2">
                               <AdminField label="Description" rows={3} value={draft.body} onChange={(v) => setDraft({ ...draft, body: v })} />
                             </div>
@@ -4798,6 +5384,10 @@ export default function App() {
 
   /* editable content: projects (work we deliver) + materials (products we use) */
   const content = useContent()
+
+  /* detail modals */
+  const [openProject, setOpenProject] = useState(null)
+  const [openMaterial, setOpenMaterial] = useState(null)
 
   const navigate = (next) => {
     setView(next)
@@ -4870,7 +5460,7 @@ export default function App() {
         }}
       />
 
-      <Navbar lampOn={lampOn} toggleLamp={toggleLamp} view={view} onNavigate={navigate} />
+      {view !== 'admin' && <Navbar lampOn={lampOn} toggleLamp={toggleLamp} view={view} onNavigate={navigate} />}
 
       {view === 'admin' ? (
         <AdminArea content={content} onExit={() => navigate('main')} />
@@ -4896,7 +5486,7 @@ export default function App() {
 
           {/* dark → ivory */}
           <Slash from="#08251C" to="#FAF6F0" />
-          <Materials items={content.materials} />
+          <Materials items={content.materials} onOpen={setOpenMaterial} />
 
           {/* ivory → dark #051812 */}
           <Slash from="#FAF6F0" to="#051812" />
@@ -4904,7 +5494,7 @@ export default function App() {
 
           {/* dark → ivory */}
           <Slash from="#051812" to="#FAF6F0" />
-          <Projects items={content.projects} />
+          <Projects items={content.projects} onOpen={setOpenProject} />
           <Packages />
           <Faq />
           <GroupCompanies />
@@ -4916,7 +5506,15 @@ export default function App() {
         </main>
       )}
 
-      <WhatsAppFab />
+      {view !== 'admin' && <WhatsAppFab />}
+
+      {/* ---------------- detail modals ---------------- */}
+      <AnimatePresence>
+        {openProject && <ProjectModal key="project" project={openProject} onClose={() => setOpenProject(null)} />}
+      </AnimatePresence>
+      <AnimatePresence>
+        {openMaterial && <MaterialModal key="material" material={openMaterial} onClose={() => setOpenMaterial(null)} />}
+      </AnimatePresence>
     </div>
   )
 }
