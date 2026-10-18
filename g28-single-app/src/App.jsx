@@ -4338,6 +4338,75 @@ const fmtBytes = (b) => (b > 1024 * 1024 ? (b / (1024 * 1024)).toFixed(1) + ' MB
 const galleryOf = (p) => (p && p.gallery && p.gallery.length ? p.gallery : p && p.image ? [p.image] : [])
 
 /* --------------------------------------------------------------------------
+   IMAGE URL NORMALISER
+   Share links from Drive/Dropbox point at a viewer page, not an image, so an
+   <img> tag can never render them. This rewrites the common share formats into
+   direct-image URLs. Applied on read (so existing saved links self-heal) and
+   as you paste.
+--------------------------------------------------------------------------- */
+function normalizeImageUrl(raw) {
+  const url = String(raw == null ? '' : raw).trim()
+  if (!url) return ''
+
+  // Google Drive:  /file/d/<id>/view  ·  open?id=<id>  ·  uc?id=<id>  ·  ?id=<id>
+  if (/(drive|docs)\.google\.com/.test(url)) {
+    const m =
+      url.match(/\/file\/d\/([A-Za-z0-9_-]{10,})/) ||
+      url.match(/\/d\/([A-Za-z0-9_-]{10,})/) ||
+      url.match(/[?&]id=([A-Za-z0-9_-]{10,})/)
+    if (m) return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1600`
+  }
+
+  // Dropbox: swap the download flag for the raw file
+  if (/dropbox\.com/.test(url)) {
+    return url.replace(/([?&])dl=[01]/, '$1raw=1').replace(/([?&])raw=1/, '$1raw=1')
+  }
+
+  return url
+}
+
+const isDriveShareLink = (u) => /(drive|docs)\.google\.com/.test(String(u || ''))
+
+/* previews an image URL and reports whether it actually resolves */
+function ImagePreview({ src, className = '', alt = '' }) {
+  const [state, setState] = useState('idle')
+
+  useEffect(() => {
+    setState(src ? 'loading' : 'idle')
+  }, [src])
+
+  if (!src) {
+    return (
+      <span className={`grid place-items-center rounded-lg border border-dashed border-[#FAF6F0]/20 text-[9px] uppercase tracking-widest text-[#FAF6F0]/35 ${className}`}>
+        None
+      </span>
+    )
+  }
+
+  return (
+    <span className={`relative block overflow-hidden rounded-lg border border-[#FAF6F0]/12 ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        className="h-full w-full object-cover"
+        onLoad={() => setState('ok')}
+        onError={() => setState('failed')}
+      />
+      {state === 'failed' && (
+        <span className="absolute inset-0 grid place-items-center bg-[#051812]/92 px-2 text-center text-[9px] font-bold uppercase leading-tight tracking-widest text-[#E6C675]">
+          Can&apos;t load
+        </span>
+      )}
+      {state === 'loading' && (
+        <span className="absolute inset-0 grid place-items-center bg-[#051812]/70 text-[9px] uppercase tracking-widest text-[#FAF6F0]/50">
+          …
+        </span>
+      )}
+    </span>
+  )
+}
+
+/* --------------------------------------------------------------------------
    shared modal shell
 --------------------------------------------------------------------------- */
 function Modal({ children, onClose, className = '' }) {
@@ -4665,7 +4734,7 @@ const PASS_KEY = 'g28.pass.v1'
 const SESSION_KEY = 'g28.session.v1'
 
 /* djb2 hash of the default passphrase — keeps it out of the bundle as plain text */
-const DEFAULT_PASS_HASH = '23f93587'
+const DEFAULT_PASS_HASH = '733e4bb4'
 
 const hashPass = (s) => {
   let h = 5381
@@ -4708,8 +4777,8 @@ const sanitizeProject = (p, i) => {
     area: str(p.area, '—'),
     cat: CAT_KEYS.includes(p.cat) ? p.cat : 'corporate',
     body: str(p.body),
-    image: str(p.image),
-    gallery: Array.isArray(p.gallery) ? p.gallery.filter((g) => typeof g === 'string' && g) : []
+    image: normalizeImageUrl(str(p.image)),
+    gallery: Array.isArray(p.gallery) ? p.gallery.filter((g) => typeof g === 'string' && g).map(normalizeImageUrl) : []
   }
 }
 
@@ -4722,7 +4791,7 @@ const sanitizeMaterial = (m, i) => {
     tone: str(m.tone, '#3A444C'),
     iconName: typeof m.iconName === 'string' && ICON_MAP[m.iconName] ? m.iconName : typeof m.icon === 'string' && ICON_MAP[m.icon] ? m.icon : 'Package',
     icon: typeof m.icon !== 'string' ? m.icon : undefined,
-    image: typeof m.image === 'string' && m.image ? m.image : null,
+    image: typeof m.image === 'string' && m.image ? normalizeImageUrl(m.image) : null,
     specs: Array.isArray(m.specs) ? m.specs.filter((x) => typeof x === 'string' && x) : []
   }
 }
@@ -4935,24 +5004,28 @@ function ImagePicker({ label, value, onChange }) {
     <div>
       <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">{label}</span>
       <div className="mt-2 flex items-start gap-3">
-        {value ? (
-          <img src={value} alt="" className="h-20 w-28 shrink-0 rounded-lg border border-[#FAF6F0]/12 object-cover" />
-        ) : (
-          <span className="grid h-20 w-28 shrink-0 place-items-center rounded-lg border border-dashed border-[#FAF6F0]/20 text-[9px] uppercase tracking-widest text-[#FAF6F0]/35">
-            None
-          </span>
-        )}
+        <ImagePreview src={value} className="h-20 w-28 shrink-0" />
+
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <label className="cursor-pointer rounded-full border border-[#D49B35]/45 px-4 py-2.5 text-center text-[10px] font-bold uppercase tracking-[0.14em] text-[#E6C675] transition-colors hover:bg-[#D49B35] hover:text-[#051812]">
             {busy ? 'Processing…' : 'Upload from device'}
             <input type="file" accept="image/*" onChange={onFile} className="hidden" />
           </label>
+
           <input
             value={value && !String(value).startsWith('data:') ? value : ''}
-            placeholder="…or paste an image URL"
-            onChange={(e) => onChange(e.target.value)}
+            placeholder="…or paste an image URL (Drive share links work)"
+            onChange={(e) => onChange(normalizeImageUrl(e.target.value))}
             className="g28-field !py-2 text-[12px]"
           />
+
+          {isDriveShareLink(value) && (
+            <span className="text-[10.5px] font-medium leading-snug text-[#B8B2A6]">
+              Drive link converted to a direct image URL. Make sure the file is shared as
+              <strong className="text-[#E6C675]"> “Anyone with the link”</strong>, otherwise it stays blank.
+            </span>
+          )}
+
           {value && (
             <button
               type="button"
@@ -4971,6 +5044,7 @@ function ImagePicker({ label, value, onChange }) {
 
 function GalleryEditor({ images = [], onChange }) {
   const [busy, setBusy] = useState(false)
+  const [urlDraft, setUrlDraft] = useState('')
 
   const addFiles = async (e) => {
     const files = Array.from(e.target.files || [])
@@ -5008,6 +5082,33 @@ function GalleryEditor({ images = [], onChange }) {
         </label>
       </div>
 
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <input
+          value={urlDraft}
+          placeholder="Paste an image URL or Drive share link, then press Add"
+          onChange={(e) => setUrlDraft(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && urlDraft.trim()) {
+              e.preventDefault()
+              onChange([...images, normalizeImageUrl(urlDraft)])
+              setUrlDraft('')
+            }
+          }}
+          className="g28-field !py-2 min-w-[220px] flex-1 text-[12px]"
+        />
+        <button
+          type="button"
+          onClick={() => {
+            if (!urlDraft.trim()) return
+            onChange([...images, normalizeImageUrl(urlDraft)])
+            setUrlDraft('')
+          }}
+          className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]"
+        >
+          Add URL
+        </button>
+      </div>
+
       {images.length === 0 ? (
         <p className="mt-3 rounded-lg border border-dashed border-[#FAF6F0]/15 px-4 py-6 text-center text-[12px] text-[#FAF6F0]/40">
           No gallery images yet — the popup will fall back to the cover image.
@@ -5016,7 +5117,7 @@ function GalleryEditor({ images = [], onChange }) {
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {images.map((src, i) => (
             <div key={`${i}-${src.slice(-16)}`} className="group relative overflow-hidden rounded-lg border border-[#FAF6F0]/12">
-              <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
+              <ImagePreview src={src} className="aspect-[4/3] w-full !rounded-none !border-0" />
               <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-1 bg-[#051812]/85 px-2 py-1.5 backdrop-blur">
                 <button type="button" onClick={() => move(i, -1)} aria-label="Move left" className="grid h-6 w-6 place-items-center rounded text-[#FAF6F0]/70 hover:text-[#E6C675]">
                   <ArrowRight className="h-3 w-3 rotate-180" />
@@ -5075,11 +5176,161 @@ function SpecsEditor({ specs = [], onChange }) {
   )
 }
 
+/* --------------------------------------------------------------------------
+   PASSPHRASE CHANGER
+   Lets the owner rotate the admin passphrase without editing code. The hash is
+   stored in localStorage; the default lives in DEFAULT_PASS_HASH.
+--------------------------------------------------------------------------- */
+const scorePass = (p) => {
+  let s = 0
+  if (p.length >= 12) s++
+  if (p.length >= 16) s++
+  if (/[a-z]/.test(p) && /[A-Z]/.test(p)) s++
+  if (/\d/.test(p)) s++
+  if (/[^A-Za-z0-9]/.test(p)) s++
+  return Math.min(s, 4)
+}
+const STRENGTH = [
+  { label: 'Too short', color: '#8A5A5A' },
+  { label: 'Weak', color: '#B4552F' },
+  { label: 'Fair', color: '#D49B35' },
+  { label: 'Good', color: '#C9C25B' },
+  { label: 'Strong', color: '#6FBF8B' }
+]
+
+function PassphraseChanger({ onClose }) {
+  const [cur, setCur] = useState('')
+  const [next, setNext] = useState('')
+  const [confirm, setConfirm] = useState('')
+  const [msg, setMsg] = useState(null)
+
+  const usingCustom = Boolean(localStorage.getItem(PASS_KEY))
+  const score = scorePass(next)
+
+  const submit = (e) => {
+    e.preventDefault()
+    const stored = localStorage.getItem(PASS_KEY) || DEFAULT_PASS_HASH
+    if (hashPass(cur) !== stored) {
+      setMsg({ ok: false, t: 'Current passphrase is incorrect.' })
+      return
+    }
+    if (next.length < 12) {
+      setMsg({ ok: false, t: 'Use at least 12 characters.' })
+      return
+    }
+    if (next !== confirm) {
+      setMsg({ ok: false, t: 'The two new passphrases do not match.' })
+      return
+    }
+    try {
+      localStorage.setItem(PASS_KEY, hashPass(next))
+    } catch {
+      setMsg({ ok: false, t: 'Could not save — browser storage is unavailable.' })
+      return
+    }
+    setMsg({ ok: true, t: 'Passphrase updated. Use it next time you sign in.' })
+    setCur('')
+    setNext('')
+    setConfirm('')
+  }
+
+  const restore = () => {
+    try {
+      localStorage.removeItem(PASS_KEY)
+    } catch {}
+    setMsg({ ok: true, t: 'Reverted to the built-in default passphrase.' })
+  }
+
+  return (
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: 'auto', opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ duration: 0.4, ease: EASE }}
+      className="overflow-hidden"
+    >
+      <div className="mx-auto w-full max-w-[1400px] px-5 pt-6 sm:px-6 lg:px-10">
+        <form onSubmit={submit} className="rounded-2xl border border-[#D49B35]/30 bg-[#0D3528]/60 p-6 sm:p-7">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <h3 className="g28-serif text-[20px] font-bold text-[#FAF6F0]">Change admin passphrase</h3>
+              <p className="mt-1.5 text-[12.5px] font-medium text-[#B8B2A6]">
+                {usingCustom ? 'A custom passphrase is currently active.' : 'The built-in default is currently active.'}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35]"
+            >
+              Close
+            </button>
+          </div>
+
+          <div className="mt-6 grid gap-5 sm:grid-cols-3">
+            <label className="block">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Current</span>
+              <input type="password" value={cur} onChange={(e) => setCur(e.target.value)} className="g28-field mt-1.5" placeholder="••••••••" />
+            </label>
+            <label className="block">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">New passphrase</span>
+              <input type="password" value={next} onChange={(e) => setNext(e.target.value)} className="g28-field mt-1.5" placeholder="at least 12 characters" />
+            </label>
+            <label className="block">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D49B35]/85">Confirm new</span>
+              <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="g28-field mt-1.5" placeholder="repeat it" />
+            </label>
+          </div>
+
+          {next && (
+            <div className="mt-5 flex items-center gap-3">
+              <div className="flex flex-1 gap-1.5">
+                {[0, 1, 2, 3].map((i) => (
+                  <span
+                    key={i}
+                    className="h-1.5 flex-1 rounded-full transition-colors duration-400"
+                    style={{ background: i < score ? STRENGTH[score].color : 'rgba(250,246,240,.12)' }}
+                  />
+                ))}
+              </div>
+              <span className="w-20 text-right text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: STRENGTH[score].color }}>
+                {STRENGTH[score].label}
+              </span>
+            </div>
+          )}
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <button type="submit" className="rounded-full bg-gradient-to-r from-[#D49B35] to-[#E6C675] px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#051812]">
+              Update passphrase
+            </button>
+            <button
+              type="button"
+              onClick={restore}
+              className="rounded-full border border-[#FAF6F0]/20 px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/70 transition-colors hover:border-[#D49B35]"
+            >
+              Use default instead
+            </button>
+            {msg && (
+              <span className={`text-[12px] font-semibold ${msg.ok ? 'text-[#6FBF8B]' : 'text-[#E6C675]'}`}>{msg.t}</span>
+            )}
+          </div>
+
+          <p className="mt-5 max-w-[720px] text-[11.5px] font-medium leading-[1.7] text-[#FAF6F0]/40">
+            Stored as a hash in this browser only. Because this is a static site the check runs client-side,
+            so treat it as a gate that keeps casual visitors out — not as server-grade authentication.
+          </p>
+        </form>
+      </div>
+    </motion.div>
+  )
+}
+
 function AdminPanel({ content, onExit, onLogout }) {
   const [tab, setTab] = useState('work')
   const [editing, setEditing] = useState(null)
   const [draft, setDraft] = useState(null)
   const [note, setNote] = useState('')
+  const [showPass, setShowPass] = useState(false)
 
   const isWork = tab === 'work'
   const items = isWork ? content.projects : content.materials
@@ -5188,6 +5439,14 @@ function AdminPanel({ content, onExit, onLogout }) {
             >
               Reset
             </button>
+            <button
+              onClick={() => setShowPass((v) => !v)}
+              className={`rounded-full border px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] transition-colors ${
+                showPass ? 'border-[#D49B35] bg-[#D49B35] text-[#051812]' : 'border-[#FAF6F0]/20 text-[#FAF6F0]/75 hover:border-[#D49B35] hover:text-[#E6C675]'
+              }`}
+            >
+              Passphrase
+            </button>
             <button onClick={onLogout} className="rounded-full border border-[#FAF6F0]/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FAF6F0]/75 transition-colors hover:border-[#D49B35] hover:text-[#E6C675]">
               Sign out
             </button>
@@ -5197,6 +5456,8 @@ function AdminPanel({ content, onExit, onLogout }) {
           </div>
         </div>
       </header>
+
+      <AnimatePresence>{showPass && <PassphraseChanger onClose={() => setShowPass(false)} />}</AnimatePresence>
 
       <div className="mx-auto w-full max-w-[1400px] px-5 pt-10 sm:px-6 lg:px-10">
         {/* ---------------- tabs ---------------- */}

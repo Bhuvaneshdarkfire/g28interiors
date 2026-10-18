@@ -79,10 +79,35 @@ updates most often: **Work We Deliver** (projects) and **Products & Materials**.
 **Open it:** click the discreet `Admin` link in the footer, or go straight to
 `#admin`.
 
-**Default passphrase:** `g28@admin`
+**Default passphrase:** `G28!Emerald$Turnkey#2026`
 
 From the panel you can add, edit, reorder and delete entries, then hit
 **View site** to see the change live.
+
+### Image links — Google Drive, Dropbox and direct URLs
+
+Paste any of these and they just work:
+
+| You paste | What gets stored |
+| --- | --- |
+| `https://drive.google.com/file/d/<ID>/view?usp=drive_link` | `https://drive.google.com/thumbnail?id=<ID>&sz=w1600` |
+| `https://drive.google.com/open?id=<ID>` | same conversion |
+| `https://www.dropbox.com/s/…?dl=0` | `…?raw=1` |
+| `https://images.example.com/photo.jpg` | used as-is |
+
+A Drive **share** link points at a viewer page, not an image, so a browser can
+never render it directly — the link is rewritten automatically as you paste it,
+and again whenever saved content is read, so older links self-heal.
+
+**Two things must be true for a Drive image to show:**
+
+1. The file is shared as **“Anyone with the link”** — otherwise it stays blank.
+2. You paste the **share link**, not the file's preview URL from the browser bar
+   after opening it in Drive (both work, but the share link is the reliable one).
+
+If a link still won't load, the picker shows a **“Can't load”** badge on the
+preview so you can see the problem before saving. Uploading the file directly is
+always the most reliable option.
 
 ### Adding images from your device
 
@@ -143,8 +168,24 @@ gate, not real authentication** — anyone who reads the JavaScript bundle can s
 the check. It's appropriate for letting the client tweak their own copy without a
 CMS, and it keeps casual visitors out. Do not put anything confidential behind it.
 
-To change the passphrase, replace `DEFAULT_PASS_HASH` in `src/App.jsx` with the
-djb2 hash of your new passphrase.
+### Changing the passphrase
+
+Open the admin panel and click **Passphrase** in the top bar. Enter the current
+passphrase, then the new one twice. A strength meter rates it as you type
+(minimum 12 characters). **Use default instead** reverts to the built-in one.
+
+The hash is stored in that browser only, so each device keeps its own
+passphrase. To change the shipped default for everyone, replace
+`DEFAULT_PASS_HASH` in `src/App.jsx` with the djb2 hash of your new passphrase:
+
+```bash
+python3 -c "
+def djb2(s):
+    h=5381
+    for c in s: h=((h<<5)+h)^ord(c); h&=0xFFFFFFFF
+    return format(h,'x')
+print(djb2('YourNewPassphrase'))"
+```
 
 ---
 
