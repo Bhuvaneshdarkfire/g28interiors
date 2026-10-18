@@ -316,15 +316,15 @@ const IMG = {
 }
 
 const HERO = {
-  badge: '©2026  •  PREMIER INTERIOR EXECUTION AGENCY  •  COIMBATORE',
+  badge: '©2026  •  PREMIER INTERIOR EXECUTION AGENCY  •  TAMIL NADU',
   headline: [
     'G28 Interiors —',
-    'Coimbatore Interiors &',
+    'Workspace Interiors &',
     'Turnkey Fit-Out',
     'Specialists.'
   ],
   sub:
-    "G28 Interiors is a Coimbatore interior design and turnkey execution company for modular kitchens, home interiors, wardrobes, office and commercial spaces. Every layout is drawn from scratch, built with factory-direct materials and handed over on a locked date.",
+    "G28 Interiors is an interior design and turnkey execution company for modular kitchens, home interiors, wardrobes, office and commercial spaces. Every layout is drawn from scratch, built with factory-direct materials and handed over on a locked date.",
   primaryCta: 'Start Your Project',
   secondaryCta: 'View Our Portfolio',
   lampOn: 'Ambient lighting on',
@@ -353,7 +353,7 @@ const HERO = {
 }
 
 const CLIENTS = {
-  heading: 'Trusted by Businesses Across Coimbatore',
+  heading: 'Trusted by Businesses Across Tamil Nadu',
   sub: 'Trusted across corporate offices, retail flagships, industrial units, healthcare, hospitality and luxury residences.',
   list: [
     'APEX TECHNOLOGIES',
