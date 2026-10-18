@@ -373,7 +373,7 @@ const CLIENTS = {
    THE 8-STEP TURNKEY PROCESS
 -------------------------------------------------------------------------- */
 const PROCESS = {
-  heading: 'Our Interior Design & Turnkey Process in Coimbatore',
+  heading: 'Our Interior Design & Turnkey Process in Tamil Nadu',
   sub: 'A disciplined eight-step execution framework that removes guesswork and delivers turnkey perfection on the promised date.',
   steps: [
     {
@@ -472,7 +472,7 @@ const VALUES = {
    SCOPE OF WORKS — tabbed bento of spotlight tilt cards
 -------------------------------------------------------------------------- */
 const SCOPE = {
-  heading: 'Interior Design Services in Coimbatore',
+  heading: 'Interior Design Services in Tamil Nadu',
   sub: 'Every specialised execution capability we deliver in-house — from a single partition to a complete turnkey fit-out.',
   tabs: [
     {
@@ -606,7 +606,7 @@ const SCOPE = {
    INDUSTRIES WE WORK WITH — 8 sectors
 -------------------------------------------------------------------------- */
 const INDUSTRIES = {
-  heading: 'Industries We Serve in Coimbatore',
+  heading: 'Industries We Serve in Tamil Nadu',
   sub: 'Eight core sectors, one execution standard. Every environment has its own compliance, durability and hygiene demands — we build for them.',
   items: [
     {
@@ -765,7 +765,7 @@ const MATERIALS = {
    BRANDS WE DEAL WITH — 11 custom stylised logo marks
 -------------------------------------------------------------------------- */
 const BRANDS = {
-  heading: 'Authorised Interior Material Brands in Coimbatore',
+  heading: 'Authorised Interior Material Brands in Tamil Nadu',
   badge: 'Direct Dealership & Authentic Supply',
   sub:
     'Backed by Vinayaga Traders and Vinayaga Aluminium Company, every project is built using 100% genuine, factory-sourced boards, profiles and ceiling systems.',
@@ -1037,7 +1037,7 @@ const FOUNDER = {
    PROJECTS — 5 pillars
 -------------------------------------------------------------------------- */
 const PROJECTS = {
-  heading: 'Interior Design Projects in Coimbatore',
+  heading: 'Interior Design Projects in Tamil Nadu',
   sub: 'A closer look at how we solve spatial problems, lift performance and hand over measurable outcomes — across every sector we serve.',
   filters: [
     { key: 'all', label: 'All — Turnkey Interiors' },
@@ -1142,7 +1142,7 @@ const PROJECTS = {
    PACKAGES — transparent execution packages
 -------------------------------------------------------------------------- */
 const PACKAGES = {
-  heading: 'Interior Design Cost & Packages in Coimbatore',
+  heading: 'Interior Design Cost & Packages in Tamil Nadu',
   sub:
     'Clear scope, itemised BOQ, no hidden costs. Switch between a corporate fit-out and a full turnkey suite to compare exactly what is included.',
   toggle: { a: 'Corporate Fit-Out', b: 'Full Turnkey Suite' },
@@ -1188,7 +1188,7 @@ const PACKAGES = {
    FAQ — category tabs + accordions
 -------------------------------------------------------------------------- */
 const FAQ = {
-  heading: 'Interior Design FAQs — Coimbatore',
+  heading: 'Interior Design FAQs — Tamil Nadu',
   sub: 'Straight answers on turnkey execution, timelines, budgets, materials and what happens after handover.',
   categories: ['General', 'Execution', 'Materials & Pricing', 'Handover & Support'],
   items: [
@@ -1314,8 +1314,8 @@ const FOOTER = {
    AREAS WE SERVE — local SEO landing block
 -------------------------------------------------------------------------- */
 const AREAS = {
-  heading: 'Areas We Serve in Coimbatore',
-  sub: 'Our studio sits on Trichy Main Road and our teams work across every major neighbourhood in Coimbatore — from RS Puram apartments to Saravanampatti IT offices and Kalapatti villas.',
+  heading: 'Areas We Serve in Tamil Nadu',
+  sub: 'Our studio sits on Trichy Main Road in Coimbatore and our teams work every major neighbourhood here — from RS Puram apartments to Saravanampatti IT offices and Kalapatti villas — alongside projects across Tamil Nadu.',
   list: [
     { name: 'RS Puram', note: 'Apartments, retail & cafés' },
     { name: 'Peelamedu', note: 'Offices, clinics & showrooms' },
