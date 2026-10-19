@@ -54,6 +54,7 @@ import {
   Hammer,
   HardHat,
   Home,
+  Instagram,
   Lamp,
   Landmark,
   Layers,
@@ -271,7 +272,9 @@ const CONTACT = {
   tel: ['+919080204473', '+919790075736'],
   email: 'g28interiors@gmail.com',
   address: 'No. 1, Ramaiya Nagar, Trichy Main Road, Pappampatti Pirivu, Coimbatore – 641402',
-  whatsapp: 'https://wa.me/919080204473'
+  whatsapp: 'https://wa.me/919080204473',
+  instagram: 'https://www.instagram.com/g28.interior',
+  instagramHandle: '@g28.interior'
 }
 
 /* Founder's Story link carries a gold badge in the navbar */
@@ -770,19 +773,167 @@ const BRANDS = {
   sub:
     'Backed by Vinayaga Traders and Vinayaga Aluminium Company, every project is built using 100% genuine, factory-sourced boards, profiles and ceiling systems.',
   marquee: [
+    'SONALI',
     'GYPROC SAINT-GOBAIN',
     'KNAUF',
+    'RAMCO HILUX',
+    'RAMCO HILUXLITE',
+    'RAMCO HIDEN',
+    'RAMCO HICEM',
+    'RAMCO GREENCOR',
+    'RAMCO POWEROOF',
+    'RAMCO SMARTBUILD',
     'GLOBE TECH',
     'VNEXT BY VISAKA',
-    'RAMCO HICEM',
-    'RAMCO HILUX',
     'ECOPRO',
-    'SONALI',
     'EITI',
     'BAYDEE',
     'UNICELL'
   ],
   items: [
+    {
+      name: 'Sonali',
+      logo: '',
+      category: 'Aluminium Profiles & Interior Hardware',
+      render: () => (
+        <div className="flex flex-col items-center leading-none">
+          <div className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-[#E9EDF2] via-white to-[#C8D2DE]">
+            <svg viewBox="0 0 48 48" className="h-12 w-12">
+              <defs>
+                <clipPath id="sonali-clip"><circle cx="24" cy="24" r="24" /></clipPath>
+              </defs>
+              <g clipPath="url(#sonali-clip)" stroke="#1F4A8C" strokeWidth="5.5" fill="none" strokeLinecap="butt">
+                <path d="M8 40 L30 12" />
+                <path d="M15 44 L37 16" />
+                <path d="M10 24 L24 10 H40" />
+                <path d="M22 44 L44 22" />
+              </g>
+            </svg>
+          </div>
+          <div className="mt-2 flex items-start gap-0.5">
+            <span className="text-xl font-black uppercase tracking-[0.16em] text-[#1F4A8C]">SONALI</span>
+            <span className="mt-0.5 text-[8px] font-bold text-[#1F4A8C]/70">&#174;</span>
+          </div>
+          <div className="mt-0.5 text-[8.5px] font-bold uppercase tracking-[0.22em] text-neutral-500">Aluminium Profiles</div>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco HiluxLite',
+      logo: '',
+      category: 'Ultra Light Ceiling Tile',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black tracking-wider text-[#1B3664]">RAMCO</span>
+              <div className="mt-0.5 grid grid-cols-4 gap-0.5">
+                {[...Array(12)].map((_, i) => (
+                  <span key={i} className="h-1 w-1.5 bg-[#1B3664]" />
+                ))}
+              </div>
+            </div>
+            <span className="text-2xl font-black tracking-tight text-[#1B3664]">
+              HILUX<span className="font-light text-[#4E7FB8]">LITE</span>
+            </span>
+          </div>
+          <span className="mt-1 text-[8px] font-bold uppercase tracking-wider text-[#1B3664]">
+            Ultra Light <span className="font-semibold text-neutral-800">Ceiling Tile</span>
+          </span>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco Hiden',
+      logo: '',
+      category: 'High Density Board',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black tracking-wider text-[#1B3664]">RAMCO</span>
+              <div className="mt-0.5 grid grid-cols-3 gap-0.5">
+                {[...Array(9)].map((_, i) => (
+                  <span key={i} className="h-1 w-2 bg-[#1B3664]" />
+                ))}
+              </div>
+            </div>
+            <span className="text-2xl font-black tracking-tight text-[#1B3664]">
+              <span className="text-[#E8873A]">HI</span>DEN
+            </span>
+          </div>
+          <span className="mt-1 text-[8px] font-bold uppercase tracking-wider text-neutral-700">
+            High Density Board
+          </span>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco GreenCor',
+      logo: '',
+      category: 'New Age Roofing',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black tracking-wider text-[#1B3664]">RAMCO</span>
+              <div className="mt-0.5 grid grid-cols-3 gap-0.5">
+                {[...Array(6)].map((_, i) => (
+                  <span key={i} className="h-1 w-2 bg-[#3E9E4E]" />
+                ))}
+              </div>
+            </div>
+            <span className="text-xl font-black uppercase tracking-tight text-[#3E9E4E]">GREENCOR</span>
+          </div>
+          <span className="mt-1 text-[8px] font-bold uppercase tracking-[0.14em] text-neutral-700">
+            New Age Roofing
+          </span>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco Poweroof',
+      logo: '',
+      category: 'Fibre Cement Sheet',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="g28-serif text-[22px] font-bold italic leading-none text-[#1B3664]">Ramco</div>
+          <div className="mt-0.5 text-lg font-black uppercase leading-none tracking-tight text-[#C8232C]">POWEROOF</div>
+          <span className="mt-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-neutral-700">
+            Fibre Cement Sheet
+          </span>
+        </div>
+      )
+    },
+    {
+      name: 'Ramco SmartBuild',
+      logo: '',
+      category: 'Tech Services',
+      render: () => (
+        <div className="flex flex-col items-start leading-none">
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black tracking-wider text-[#1B3664]">RAMCO</span>
+              <div className="mt-0.5 grid grid-cols-3 gap-0.5">
+                {[...Array(6)].map((_, i) => (
+                  <span key={i} className="h-1 w-2 bg-[#1B3664]" />
+                ))}
+              </div>
+            </div>
+            <span className="text-lg font-black tracking-tight">
+              <span className="text-[#C8232C]">Smart</span>
+              <span className="text-[#1B3664]">Build</span>
+            </span>
+            <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0">
+              <path d="M10 2 L18 9 H15 V18 H5 V9 H2 Z" fill="#C8232C" />
+            </svg>
+          </div>
+          <span className="mt-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-neutral-700">
+            Tech Services
+          </span>
+        </div>
+      )
+    },
     {
       name: 'Gyproc Saint-Gobain',
       logo: '',
@@ -911,17 +1062,6 @@ const BRANDS = {
             <div>Multi-Use Fibre</div>
             <div>Cement Boards</div>
           </div>
-        </div>
-      )
-    },
-    {
-      name: 'Sonali',
-      logo: '',
-      category: 'Aluminium & Interior Hardware',
-      render: () => (
-        <div className="text-center">
-          <div className="text-xl font-black uppercase tracking-[0.2em] text-[#08251C]">SONALI</div>
-          <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.25em] text-[#D49B35]">Premium Profiles</div>
         </div>
       )
     },
@@ -1142,17 +1282,15 @@ const PROJECTS = {
    PACKAGES — transparent execution packages
 -------------------------------------------------------------------------- */
 const PACKAGES = {
-  heading: 'Interior Design Cost & Packages in Tamil Nadu',
+  heading: 'Execution Packages & Inclusions in Tamil Nadu',
   sub:
-    'Clear scope, itemised BOQ, no hidden costs. Switch between a corporate fit-out and a full turnkey suite to compare exactly what is included.',
+    'Clear scope, itemised BOQ and no hidden costs. Switch between a corporate fit-out and a full turnkey suite to compare exactly what is included — then get your quote on WhatsApp.',
   toggle: { a: 'Corporate Fit-Out', b: 'Full Turnkey Suite' },
   plans: [
     {
       name: 'Essential Workspace',
       note: 'Ideal for startups & compact offices',
-      price: { a: '1,850', b: '2,450' },
-      unit: '/sq.ft',
-      cta: 'Request a Quote',
+      cta: 'Get Quote on WhatsApp',
       features: {
         a: ['Space planning & layout drawings', 'Modular workstations', 'False ceiling & lighting grid', 'Flooring & painting', 'Basic electrical & data points'],
         b: ['Everything in Corporate Fit-Out', 'Reception & lounge detailing', 'Meeting room acoustics', 'Custom storage & filing', 'Dedicated site supervision']
@@ -1161,9 +1299,7 @@ const PACKAGES = {
     {
       name: 'Executive Turnkey',
       note: 'Ideal for growing enterprises',
-      price: { a: '2,650', b: '3,350' },
-      unit: '/sq.ft',
-      cta: 'Request a Quote',
+      cta: 'Get Quote on WhatsApp',
       popular: true,
       features: {
         a: ['Complete turnkey execution', 'Custom executive cabins', 'Acoustic conference rooms', 'Photoreal 3D visualisation', 'Itemised BOQ & schedule'],
@@ -1173,9 +1309,7 @@ const PACKAGES = {
     {
       name: 'Bespoke Headquarters',
       note: 'Ideal for large floorplates & HQs',
-      price: { a: '3,900', b: '4,750' },
-      unit: '/sq.ft',
-      cta: 'Request a Quote',
+      cta: 'Get Quote on WhatsApp',
       features: {
         a: ['Unlimited scope & zones', 'Premium imported finishes', 'Designer gypsum ceilings', 'Custom furniture programme', 'Snagging, QC & warranty pack'],
         b: ['Everything in Corporate Fit-Out', 'Workplace automation & access', 'Landscape & facade coordination', 'Brand experience design', 'Post-completion support plan']
@@ -1304,7 +1438,7 @@ const FOOTER = {
   ],
   socials: [
     { label: 'WhatsApp', href: CONTACT.whatsapp },
-    { label: 'Instagram', href: 'https://instagram.com' },
+    { label: 'Instagram', href: CONTACT.instagram },
     { label: 'LinkedIn', href: 'https://linkedin.com' },
     { label: 'Facebook', href: 'https://facebook.com' }
   ]
@@ -1589,9 +1723,9 @@ const BTN_TONES = {
   ghostLight: 'border border-[#08251C]/20 text-[#08251C] hover:border-[#08251C]/60'
 }
 
-function RollButton({ children, href = '#', tone = 'gold', className = '', onClick, type, as = 'a', icon = ArrowUpRight, ariaLabel }) {
+function RollButton({ children, href = '#', tone = 'gold', className = '', onClick, type, as = 'a', icon = ArrowUpRight, ariaLabel, target, rel }) {
   const Comp = as === 'button' ? motion.button : motion.a
-  const extra = as === 'button' ? { type: type || 'button' } : { href }
+  const extra = as === 'button' ? { type: type || 'button' } : { href, target, rel }
   return (
     <Comp
       {...extra}
@@ -2373,6 +2507,15 @@ function Navbar({ lampOn, toggleLamp, view, onNavigate }) {
                     <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#D49B35]" />
                     <span className="text-[14px] leading-relaxed">{CONTACT.address}</span>
                   </p>
+                  <a
+                    href={CONTACT.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-[#FAF6F0]/75 transition-colors hover:text-[#E6C675]"
+                  >
+                    <Instagram className="mt-0.5 h-4 w-4 text-[#D49B35]" />
+                    <span className="text-[15px] font-semibold">{CONTACT.instagramHandle}</span>
+                  </a>
                 </motion.div>
               </div>
             </div>
@@ -3637,38 +3780,32 @@ function PackageCard({ plan, mode }) {
           </div>
 
           <div className="mt-8">
-            <div className="flex items-end gap-1.5">
-              {/* slot-machine price roll */}
-              {/* mode="popLayout" keeps the incoming price in normal flow so the
-                  slot keeps its intrinsic width — an absolutely positioned child
-                  alone would collapse the box to 0 and clip the number away */}
-              <span className="relative inline-block h-[42px] overflow-hidden align-bottom">
-                <AnimatePresence initial={false} mode="popLayout">
-                  <motion.span
-                    key={mode}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.42, ease: EASE }}
-                    className={`g28-serif block whitespace-nowrap text-[40px] font-bold leading-none ${
-                      popular ? 'text-[#FAF6F0]' : 'text-[#08251C]'
-                    }`}
-                  >
-                    <span className="g28-rupee">&#8377;</span>{plan.price[mode]}
-                  </motion.span>
-                </AnimatePresence>
+            {/* no published per-sq.ft rate — every package is quoted individually
+                from the itemised BOQ, and the quote is requested on WhatsApp */}
+            <div className={`flex items-center gap-2.5 ${popular ? 'text-[#E6C675]' : 'text-[#8F6218]'}`}>
+              <Ruler className="h-4 w-4 shrink-0" />
+              <span className="text-[12px] font-bold uppercase tracking-[0.14em]">
+                Quoted per project
               </span>
-              <span className={`pb-1 text-[13px] font-semibold ${popular ? 'text-[#B8B2A6]' : 'text-[#5F6B64]'}`}>{plan.unit}</span>
             </div>
+            <p className={`mt-3 text-[12.5px] font-medium leading-[1.6] ${popular ? 'text-[#B8B2A6]' : 'text-[#5F6B64]'}`}>
+              Priced from your measured area, scope and finish selection — itemised in the BOQ.
+            </p>
 
-            <RollButton
-              href="#contact"
-              tone={popular ? 'gold' : 'ink'}
-              className="mt-6 w-full justify-center"
-              icon={ArrowRight}
+            <a
+              href={`${CONTACT.whatsapp}?text=${encodeURIComponent(
+                `Hi G28 Interiors, I'd like a quote for the ${plan.name} package.\nProject type: \nApprox. area (sq.ft): \nLocation: `
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group/btn mt-6 inline-flex w-full items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] transition-colors duration-500 ${
+                popular ? 'bg-[#25D366] text-[#051812] hover:brightness-110' : 'bg-[#08251C] text-[#FAF6F0] hover:bg-[#0D3528]'
+              }`}
             >
+              <MessageCircle className="h-4 w-4" />
               {plan.cta}
-            </RollButton>
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+            </a>
           </div>
         </div>
 
@@ -3995,6 +4132,16 @@ function Contact({ lampOn, toggleLamp }) {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <RollButton href={CONTACT.whatsapp} tone="ink" icon={MessageCircle}>
                 Chat on WhatsApp
+              </RollButton>
+              <RollButton
+                href={CONTACT.instagram}
+                tone="ghostLight"
+                icon={Instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="!px-6 !py-3"
+              >
+                {CONTACT.instagramHandle}
               </RollButton>
               <RollLink href="#packages" tone="goldDeep">
                 Compare Packages
@@ -4489,6 +4636,15 @@ function FounderStory({ onBack, lampOn, toggleLamp }) {
               <a href={`mailto:${CONTACT.email}`} className="inline-flex items-center gap-2 transition-colors hover:text-[#E6C675]">
                 <Mail className="h-3.5 w-3.5 text-[#D49B35]" />
                 {CONTACT.email}
+              </a>
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 transition-colors hover:text-[#E6C675]"
+              >
+                <Instagram className="h-3.5 w-3.5 text-[#D49B35]" />
+                {CONTACT.instagramHandle}
               </a>
             </div>
           </Reveal>
@@ -5631,7 +5787,7 @@ const blankFor = (tab) => {
     case 'industries':
       return { title: 'New Sector', iconName: 'Building2', body: 'Describe the sector…', image: '', tags: ['Tag one'] }
     case 'plans':
-      return { name: 'New Package', note: 'Ideal for…', price: { a: '0', b: '0' }, unit: '/sq.ft', cta: 'Request a Quote', popular: false, features: { a: ['First inclusion'], b: ['First inclusion'] } }
+      return { name: 'New Package', note: 'Ideal for…', cta: 'Get Quote on WhatsApp', popular: false, features: { a: ['First inclusion'], b: ['First inclusion'] } }
     case 'group':
       return { name: 'New Company', iconName: 'Building2', role: 'Group Company', body: 'Describe the company…', accent: '#D49B35', points: ['First point'] }
     default:
@@ -5723,10 +5879,11 @@ function EditorFields({ tab, draft, setDraft }) {
       <div className="grid gap-5 sm:grid-cols-2">
         <AdminField label="Package name" value={draft.name} onChange={(v) => set({ name: v })} />
         <AdminField label="Who it suits" value={draft.note} onChange={(v) => set({ note: v })} />
-        <AdminField label="Price — Corporate Fit-Out" value={draft.price.a} onChange={(v) => set({ price: { ...draft.price, a: v } })} placeholder="2,650" />
-        <AdminField label="Price — Full Turnkey Suite" value={draft.price.b} onChange={(v) => set({ price: { ...draft.price, b: v } })} placeholder="3,350" />
-        <AdminField label="Unit" value={draft.unit} onChange={(v) => set({ unit: v })} placeholder="/sq.ft" />
         <AdminField label="Button label" value={draft.cta} onChange={(v) => set({ cta: v })} />
+        <p className="self-end pb-3 text-[11.5px] font-medium leading-[1.6] text-[#B8B2A6]">
+          Rates are not published. Each package is quoted from the itemised BOQ and requested on
+          WhatsApp, so there is nothing to price here.
+        </p>
         <label className="flex items-center gap-3 sm:col-span-2">
           <input type="checkbox" checked={!!draft.popular} onChange={(e) => set({ popular: e.target.checked })} className="h-4 w-4 accent-[#D49B35]" />
           <span className="text-[12px] font-semibold text-[#FAF6F0]/80">Mark as the popular plan (dark card + gold shimmer)</span>
@@ -5779,7 +5936,7 @@ function RowSummary({ tab, item }) {
   if (tab === 'work') return <>{item.client} &middot; {item.area}</>
   if (tab === 'products') return <>{item.body}</>
   if (tab === 'industries') return <>{item.body}</>
-  if (tab === 'plans') return <><span className="g28-rupee">&#8377;</span>{item.price.a} / <span className="g28-rupee">&#8377;</span>{item.price.b} {item.unit} &middot; {(item.features.a || []).length} inclusions</>
+  if (tab === 'plans') return <>{(item.features.a || []).length} fit-out inclusions &middot; {(item.features.b || []).length} turnkey inclusions</>
   if (tab === 'group') return <>{item.role}</>
   return <>{item.category}</>
 }

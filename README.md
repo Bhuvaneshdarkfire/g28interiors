@@ -67,6 +67,22 @@ One `<script type="application/ld+json">` with a `@graph` containing:
 4. Submit `https://g28interiors.in/sitemap.xml` in Google Search Console and Bing
    Webmaster Tools, then request indexing for the homepage.
 
+## Brands & pricing
+
+**Brands (16).** Sonali leads the list as an authorised aluminium-profile dealer,
+followed by the Ramco family carried on the dealership certificate — Hilux,
+HiluxLite, Hiden, Hicem, GreenCor, Poweroof and SmartBuild — then Gyproc
+Saint-Gobain, Knauf, Globe Tech, Vnext by Visaka, EcoPro, Eiti, Baydee and
+Unicell. Each mark is hand-built in JSX (typography + inline SVG) rather than a
+bitmap, so it stays sharp at any size and can be swapped for a real logo upload
+from the admin.
+
+**Pricing.** No per-square-foot rates are published anywhere on the site. Each
+package shows its scope and inclusions, marked *"Quoted per project"*, and the
+button opens WhatsApp with the package name pre-filled so the enquiry lands with
+the area and project type already requested. The admin's package editor has no
+price fields for the same reason.
+
 ## Rendering notes
 
 Two things that can make characters drop out, and how they are handled:
@@ -157,7 +173,7 @@ entries, then hit **View site** to see the change live:
 | **Industries** | the eight sector cards, their photo, icon, copy and tags |
 | **Packages & Pricing** | the three tiers, **both prices**, inclusions and the "Popular" flag |
 | **Group Companies** | the three Vinayaga Group cards |
-| **Brands** | the eleven brand marks, names and categories |
+| **Brands** | the sixteen brand marks, names and categories |
 
 ### Image links — Google Drive, Dropbox and direct URLs
 
@@ -276,7 +292,7 @@ print(djb2('YourNewPassphrase'))"
 8. **Materials & Products We Use** — 7 material swatch cards + dealer speciality tags (admin-editable).
     Each card opens a **product detail popup** with specifications, description
     and supplying brands.
-9. **Brands We Deal With** — 11 custom stylised logo marks + infinite brand marquee
+9. **Brands We Deal With** — 16 custom stylised logo marks + infinite brand marquee
 10. Work That Delivers Results — **every project is always shown, grouped by
     category** (Corporate / Commercial / Industrial / Residential). The tab row
     is quick-jump navigation with counts rather than a filter that hides work.
